@@ -2,12 +2,12 @@
   "name": "Prime Outing 2025 - Official Website",
   "short_name": "Prime Outing 2025",
   "description": "Join us for an unforgettable team outing experience to the beautiful hills of Dehradun. Prime Outing 2025 is designed to strengthen team bonds, create lasting memories, and provide the perfect break from work routine.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#F8CB2E",
   "theme_color": "#EE5007",
   "orientation": "portrait-primary",
-  "scope": "/",
+  "scope": "./",
   "lang": "en",
   "icons": [
     {
@@ -62,7 +62,7 @@
       "name": "Event Schedule",
       "short_name": "Schedule",
       "description": "View the event schedule and timeline",
-      "url": "/#schedule",
+      "url": "./#schedule",
       "icons": [
         {
           "src": "images/icon-96x96.png",
@@ -74,7 +74,7 @@
       "name": "About Event",
       "short_name": "About",
       "description": "Learn more about Prime Outing 2025",
-      "url": "/#about",
+      "url": "./#about",
       "icons": [
         {
           "src": "images/icon-96x96.png",
