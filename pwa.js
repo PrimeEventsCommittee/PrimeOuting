@@ -23,7 +23,9 @@ class PWAManager {
   async registerServiceWorker() {
     if ('serviceWorker' in navigator) {
       try {
-        const registration = await navigator.serviceWorker.register('/sw.js');
+        const registration = await navigator.serviceWorker.register('./sw.js', {
+          scope: './'
+        });
         console.log('Service Worker registered successfully:', registration.scope);
         
         // Handle updates
@@ -49,19 +51,40 @@ class PWAManager {
   }
 
   handleInstallPrompt() {
+    // Store deferredPrompt for later use
     window.addEventListener('beforeinstallprompt', (e) => {
       console.log('PWA: Install prompt triggered');
       e.preventDefault();
       this.deferredPrompt = e;
+      
+      // Show install button immediately on Android
       this.showInstallButton();
+      
+      // For Android, also try to trigger user engagement
+      if (/Android/i.test(navigator.userAgent)) {
+        console.log('PWA: Android detected, preparing install prompt');
+        setTimeout(() => {
+          this.showInstallButton();
+        }, 2000); // Show after 2 seconds
+      }
     });
 
+    // Handle successful installation
     window.addEventListener('appinstalled', () => {
       console.log('PWA: App was installed');
       this.isInstalled = true;
       this.hideInstallButton();
       this.showInstalledMessage();
+      this.deferredPrompt = null;
     });
+    
+    // For browsers that don't support beforeinstallprompt (some Android browsers)
+    if (!('beforeinstallprompt' in window) && /Android/i.test(navigator.userAgent)) {
+      console.log('PWA: Android browser without beforeinstallprompt, showing manual instruction');
+      setTimeout(() => {
+        this.showManualInstallInstructions();
+      }, 5000);
+    }
   }
 
   checkInstallStatus() {
@@ -196,6 +219,74 @@ class PWAManager {
     setTimeout(() => {
       notification.remove();
     }, 10000);
+  }
+
+  showManualInstallInstructions() {
+    // Show manual install instructions for Android users
+    const instructionModal = document.createElement('div');
+    instructionModal.className = 'position-fixed w-100 h-100 d-flex align-items-center justify-content-center';
+    instructionModal.style.cssText = `
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 2000;
+    `;
+    
+    instructionModal.innerHTML = `
+      <div style="
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 400px;
+        margin: 20px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      ">
+        <h3 style="color: #EE5007; margin-bottom: 20px;">📱 Install Prime Outing 2025</h3>
+        <p style="margin-bottom: 20px; line-height: 1.6;">
+          To install this app on your Android device:
+        </p>
+        <ol style="text-align: left; margin-bottom: 25px;">
+          <li>Tap the menu button (⋮) in your browser</li>
+          <li>Look for "Add to Home screen" or "Install app"</li>
+          <li>Tap it and follow the prompts</li>
+        </ol>
+        <div style="margin: 20px 0;">
+          <button onclick="this.parentElement.parentElement.parentElement.remove()" 
+                  style="
+                    background: #EE5007;
+                    color: white;
+                    border: none;
+                    padding: 12px 25px;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    margin-right: 10px;
+                  ">
+            Got it!
+          </button>
+          <button onclick="window.pwaManager.promptInstall(); this.parentElement.parentElement.parentElement.remove()"
+                  style="
+                    background: #F8CB2E;
+                    color: black;
+                    border: none;
+                    padding: 12px 25px;
+                    border-radius: 25px;
+                    cursor: pointer;
+                  ">
+            Try Auto Install
+          </button>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(instructionModal);
+    
+    // Auto-remove after 15 seconds
+    setTimeout(() => {
+      if (instructionModal.parentElement) {
+        instructionModal.remove();
+      }
+    }, 15000);
   }
 
   // Share functionality
