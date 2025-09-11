@@ -76,6 +76,12 @@ class PWAConfig {
             "src": this.getFullPath("images/icon-48x48.png"),
             "sizes": "48x48",
             "type": "image/png"
+          },
+          {
+            "src": this.getFullPath("images/PrimePWA.jpg"),
+            "sizes": "any",
+            "type": "image/jpeg",
+            "purpose": "any"
           }
         ],
         "screenshots": [
