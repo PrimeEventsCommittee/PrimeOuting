@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Debug Tool - Prime Outing 2025</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #F8CB2E, #EE5007);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #EE5007;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #F8CB2E;
+            background: #f8f9fa;
+        }
+        
+        .section h3 {
+            color: #EE5007;
+            margin-top: 0;
+        }
+        
+        .test-result {
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        
+        .pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        button {
+            background: #EE5007;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background: #c01f27;
+        }
+        
+        .debug-btn {
+            background: #F8CB2E;
+            color: black;
+        }
+        
+        .debug-btn:hover {
+            background: #e6b829;
+        }
+        
+        pre {
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        
+        .icon-test {
+            display: inline-block;
+            margin: 5px;
+            text-align: center;
+        }
+        
+        .icon-test img {
+            border: 2px solid #EE5007;
+            border-radius: 8px;
+            background: white;
+            padding: 5px;
+        }
+        
+        .icon-test .label {
+            font-size: 11px;
+            margin-top: 5px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 PWA Debug Tool</h1>
+        <p style="text-align: center; color: #666;">Diagnose and fix PWA installation issues</p>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="runAllTests()">🧪 Run All Tests</button>
+            <button class="debug-btn" onclick="testIcons()">🖼️ Test Icons</button>
+            <button class="debug-btn" onclick="testManifest()">📋 Test Manifest</button>
+            <button class="debug-btn" onclick="testServiceWorker()">⚙️ Test Service Worker</button>
+        </div>
+        
+        <div class="section">
+            <h3>📋 Manifest Test Results</h3>
+            <div id="manifestResults">
+                <div class="info">Click "Test Manifest" to check your manifest.json file</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🖼️ Icon Test Results</h3>
+            <div id="iconResults">
+                <div class="info">Click "Test Icons" to verify all required icons exist</div>
+            </div>
+            <div id="iconPreviews" style="margin-top: 15px;"></div>
+        </div>
+        
+        <div class="section">
+            <h3>⚙️ Service Worker Test Results</h3>
+            <div id="swResults">
+                <div class="info">Click "Test Service Worker" to check registration</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🤖 PWA Install Test Results</h3>
+            <div id="installResults">
+                <div class="info">Click "Run All Tests" to check PWA installation readiness</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🔧 Quick Fixes</h3>
+            <div>
+                <button onclick="window.open('missing-icon-generator.html', '_blank')">
+                    🖼️ Generate Missing Icons
+                </button>
+                <button onclick="downloadFixedManifest()">
+                    📋 Download Fixed Manifest
+                </button>
+                <button onclick="showInstallInstructions()">
+                    📱 Show Manual Install Guide
+                </button>
+                <button onclick="startLocalServer()" class="debug-btn">
+                    🖥️ Start Local Server Instructions
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let testResults = {
+            manifest: {},
+            icons: {},
+            serviceWorker: {},
+            install: {}
+        };
+        
+        async function runAllTests() {
+            await testManifest();
+            await testIcons();
+            await testServiceWorker();
+            await testInstall();
+        }
+        
+        async function testManifest() {
+            const resultsDiv = document.getElementById('manifestResults');
+            resultsDiv.innerHTML = '<div class="info">Testing manifest.json...</div>';
+            
+            // Check if running locally (file:// protocol)
+            const isLocal = window.location.protocol === 'file:';
+            
+            if (isLocal) {
+                resultsDiv.innerHTML = `
+                    <div class="warning">⚠️ Running locally - cannot test manifest loading due to browser security</div>
+                    <div class="info">📄 Manifest file exists in directory (manifest.json)</div>
+                    <div class="info">🌐 Deploy to GitHub Pages or local server to test manifest loading</div>
+                    <div class="pass">✅ To test locally, use: <code>python -m http.server 8000</code> or similar</div>
+                `;
+                return;
+            }
+            
+            try {
+                // Try multiple possible paths
+                const paths = ['./manifest.json', '/manifest.json', 'manifest.json'];
+                let manifestData = null;
+                let workingPath = null;
+                
+                for (const path of paths) {
+                    try {
+                        const response = await fetch(path);
+                        if (response.ok) {
+                            manifestData = await response.json();
+                            workingPath = path;
+                            break;
+                        }
+                    } catch (e) {
+                        console.log(`Failed to load from ${path}:`, e);
+                    }
+                }
+                
+                if (!manifestData) {
+                    resultsDiv.innerHTML = '<div class="fail">❌ Manifest file not found at any expected location</div>';
+                    return;
+                }
+                
+                let results = [];
+                results.push(`<div class="pass">✅ Manifest loaded from: ${workingPath}</div>`);
+                
+                // Test required fields
+                const required = ['name', 'short_name', 'start_url', 'display', 'icons'];
+                for (const field of required) {
+                    if (manifestData[field]) {
+                        results.push(`<div class="pass">✅ ${field}: ${typeof manifestData[field] === 'object' ? 'Present' : manifestData[field]}</div>`);
+                    } else {
+                        results.push(`<div class="fail">❌ Missing required field: ${field}</div>`);
+                    }
+                }
+                
+                // Test icons specifically
+                if (manifestData.icons && manifestData.icons.length > 0) {
+                    const hasRequiredSizes = manifestData.icons.some(icon => icon.sizes === '192x192') &&
+                                            manifestData.icons.some(icon => icon.sizes === '512x512');
+                    
+                    if (hasRequiredSizes) {
+                        results.push(`<div class="pass">✅ Required icon sizes present (192x192, 512x512)</div>`);
+                    } else {
+                        results.push(`<div class="fail">❌ Missing required icon sizes (192x192 and/or 512x512)</div>`);
+                    }
+                    
+                    results.push(`<div class="info">📊 Total icons defined: ${manifestData.icons.length}</div>`);
+                } else {
+                    results.push(`<div class="fail">❌ No icons defined in manifest</div>`);
+                }
+                
+                resultsDiv.innerHTML = results.join('');
+                testResults.manifest = manifestData;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="fail">❌ Error testing manifest: ${error.message}</div>`;
+                console.error('Manifest test error:', error);
+            }
+        }
+        
+        async function testIcons() {
+            const resultsDiv = document.getElementById('iconResults');
+            const previewDiv = document.getElementById('iconPreviews');
+            resultsDiv.innerHTML = '<div class="info">Testing icon files...</div>';
+            previewDiv.innerHTML = '';
+            
+            // Check if running locally (file:// protocol)
+            const isLocal = window.location.protocol === 'file:';
+            
+            if (isLocal) {
+                resultsDiv.innerHTML = `
+                    <div class="warning">⚠️ Running locally - cannot test icon loading due to browser security</div>
+                    <div class="info">📁 Expected icon files in images/ folder:</div>
+                    <div class="info">• icon-48x48.png</div>
+                    <div class="info">• icon-96x96.png (⚠️ May be missing - use missing-icon-generator.html)</div>
+                    <div class="info">• icon-144x144.png</div>
+                    <div class="info">• icon-192x192.png</div>
+                    <div class="info">• icon-512x512.png</div>
+                    <div class="pass">✅ To test locally, use: <code>python -m http.server 8000</code> or similar</div>
+                `;
+                return;
+            }
+            
+            const requiredIcons = [
+                { size: '48x48', path: './images/icon-48x48.png' },
+                { size: '96x96', path: './images/icon-96x96.png' },
+                { size: '144x144', path: './images/icon-144x144.png' },
+                { size: '192x192', path: './images/icon-192x192.png' },
+                { size: '512x512', path: './images/icon-512x512.png' }
+            ];
+            
+            let results = [];
+            let allPass = true;
+            
+            for (const icon of requiredIcons) {
+                try {
+                    const response = await fetch(icon.path);
+                    if (response.ok) {
+                        results.push(`<div class="pass">✅ ${icon.size}: Found</div>`);
+                        
+                        // Add preview
+                        const iconTest = document.createElement('div');
+                        iconTest.className = 'icon-test';
+                        iconTest.innerHTML = `
+                            <img src="${icon.path}" width="32" height="32" alt="${icon.size}">
+                            <div class="label">${icon.size}</div>
+                        `;
+                        previewDiv.appendChild(iconTest);
+                    } else {
+                        results.push(`<div class="fail">❌ ${icon.size}: Not found (${response.status})</div>`);
+                        allPass = false;
+                    }
+                } catch (error) {
+                    results.push(`<div class="fail">❌ ${icon.size}: Error loading (${error.message})</div>`);
+                    allPass = false;
+                }
+            }
+            
+            if (allPass) {
+                results.unshift('<div class="pass">🎉 All required icons found!</div>');
+            } else {
+                results.unshift('<div class="warning">⚠️ Some icons are missing - this will cause install issues</div>');
+            }
+            
+            resultsDiv.innerHTML = results.join('');
+            testResults.icons = { allPass, requiredIcons };
+        }
+        
+        async function testServiceWorker() {
+            const resultsDiv = document.getElementById('swResults');
+            resultsDiv.innerHTML = '<div class="info">Testing service worker...</div>';
+            
+            let results = [];
+            
+            if ('serviceWorker' in navigator) {
+                results.push('<div class="pass">✅ Service Worker support available</div>');
+                
+                try {
+                    const registration = await navigator.serviceWorker.getRegistration();
+                    if (registration) {
+                        results.push(`<div class="pass">✅ Service Worker registered</div>`);
+                        results.push(`<div class="info">📊 Scope: ${registration.scope}</div>`);
+                        
+                        if (registration.active) {
+                            results.push(`<div class="pass">✅ Service Worker active</div>`);
+                        } else {
+                            results.push(`<div class="warning">⚠️ Service Worker not active</div>`);
+                        }
+                    } else {
+                        results.push(`<div class="fail">❌ Service Worker not registered</div>`);
+                    }
+                } catch (error) {
+                    results.push(`<div class="fail">❌ Error checking Service Worker: ${error.message}</div>`);
+                }
+            } else {
+                results.push('<div class="fail">❌ Service Worker not supported in this browser</div>');
+            }
+            
+            resultsDiv.innerHTML = results.join('');
+        }
+        
+        async function testInstall() {
+            const resultsDiv = document.getElementById('installResults');
+            let results = [];
+            
+            // Check if already installed
+            if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+                results.push('<div class="pass">✅ App is already installed and running in standalone mode</div>');
+            } else {
+                results.push('<div class="info">📱 App not currently installed</div>');
+            }
+            
+            // Check for install prompt
+            if (window.pwaManager && window.pwaManager.deferredPrompt) {
+                results.push('<div class="pass">✅ Install prompt available</div>');
+            } else {
+                results.push('<div class="warning">⚠️ Install prompt not available (this is normal on some browsers)</div>');
+            }
+            
+            // Check HTTPS
+            if (location.protocol === 'https:' || location.hostname === 'localhost') {
+                results.push('<div class="pass">✅ Secure context (HTTPS or localhost)</div>');
+            } else {
+                results.push('<div class="fail">❌ Not served over HTTPS - PWA install will not work</div>');
+            }
+            
+            // Browser compatibility
+            const isChrome = /Chrome/.test(navigator.userAgent);
+            const isEdge = /Edg/.test(navigator.userAgent);
+            const isSamsung = /SamsungBrowser/.test(navigator.userAgent);
+            
+            if (isChrome || isEdge || isSamsung) {
+                results.push('<div class="pass">✅ Browser supports PWA install prompts</div>');
+            } else {
+                results.push('<div class="warning">⚠️ Browser may have limited PWA install support</div>');
+            }
+            
+            resultsDiv.innerHTML = results.join('');
+        }
+        
+        function downloadFixedManifest() {
+            const fixedManifest = {
+                "name": "Prime Outing 2025 - Official Website",
+                "short_name": "Prime Outing 2025",
+                "description": "Join us for an unforgettable team outing experience to the beautiful hills of Dehradun.",
+                "start_url": "./",
+                "id": "./",
+                "display": "standalone",
+                "background_color": "#F8CB2E",
+                "theme_color": "#EE5007",
+                "orientation": "portrait-primary",
+                "scope": "./",
+                "lang": "en",
+                "icons": [
+                    {
+                        "src": "./images/icon-192x192.png",
+                        "sizes": "192x192",
+                        "type": "image/png",
+                        "purpose": "any"
+                    },
+                    {
+                        "src": "./images/icon-192x192.png",
+                        "sizes": "192x192",
+                        "type": "image/png",
+                        "purpose": "maskable"
+                    },
+                    {
+                        "src": "./images/icon-512x512.png",
+                        "sizes": "512x512",
+                        "type": "image/png",
+                        "purpose": "any"
+                    },
+                    {
+                        "src": "./images/icon-512x512.png",
+                        "sizes": "512x512",
+                        "type": "image/png",
+                        "purpose": "maskable"
+                    },
+                    {
+                        "src": "./images/icon-144x144.png",
+                        "sizes": "144x144",
+                        "type": "image/png",
+                        "purpose": "any"
+                    },
+                    {
+                        "src": "./images/icon-96x96.png",
+                        "sizes": "96x96",
+                        "type": "image/png",
+                        "purpose": "any"
+                    },
+                    {
+                        "src": "./images/icon-48x48.png",
+                        "sizes": "48x48",
+                        "type": "image/png",
+                        "purpose": "any"
+                    }
+                ]
+            };
+            
+            const blob = new Blob([JSON.stringify(fixedManifest, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'manifest.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function showInstallInstructions() {
+            alert(`📱 Manual Install Instructions:
+            
+Android Chrome:
+1. Tap the menu button (⋮)
+2. Select "Add to Home screen" or "Install app"
+3. Follow the prompts
+
+iPhone Safari:
+1. Tap the Share button
+2. Select "Add to Home Screen"
+3. Tap "Add"
+
+Desktop Chrome:
+1. Look for the install icon in the address bar
+2. Or use menu → More tools → Create shortcut`);
+        }
+        
+        function startLocalServer() {
+            const instructions = `🖥️ Local Server Setup Instructions:
+
+Option 1 - Python (if installed):
+1. Open PowerShell in your project folder
+2. Run: python -m http.server 8000
+3. Open: http://localhost:8000
+
+Option 2 - Node.js (if installed):
+1. Install: npm install -g http-server
+2. Run: http-server -p 8000
+3. Open: http://localhost:8000
+
+Option 3 - VS Code Live Server:
+1. Install "Live Server" extension
+2. Right-click index.html
+3. Select "Open with Live Server"
+
+Why? PWA testing requires HTTP/HTTPS protocol, not file:// protocol for security reasons.`;
+            
+            alert(instructions);
+        }
+    </script>
+</body>
+</html>
