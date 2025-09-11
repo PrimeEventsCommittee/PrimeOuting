@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Generator for Prime Outing 2025</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #F8CB2E, #EE5007);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-preview {
+            margin: 20px;
+            text-align: center;
+        }
+        canvas {
+            border: 2px solid #fff;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .download-btn {
+            background: #fff;
+            color: #EE5007;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            background: #EE5007;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .instructions {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            max-width: 600px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prime Outing 2025 - Icon Generator</h1>
+    
+    <div class="instructions">
+        <p><strong>Instructions:</strong> Click the download buttons below to save the icons to your images folder. These icons will make your Prime Outing 2025 website installable as a Progressive Web App!</p>
+    </div>
+    
+    <div class="icon-preview">
+        <h3 style="color: white;">48x48 Icon</h3>
+        <canvas id="icon48" width="48" height="48"></canvas>
+        <br>
+        <button class="download-btn" onclick="downloadIcon('icon48', 'icon-48x48.png')">Download 48x48</button>
+    </div>
+    
+    <div class="icon-preview">
+        <h3 style="color: white;">96x96 Icon</h3>
+        <canvas id="icon96" width="96" height="96"></canvas>
+        <br>
+        <button class="download-btn" onclick="downloadIcon('icon96', 'icon-96x96.png')">Download 96x96</button>
+    </div>
+    
+    <div class="icon-preview">
+        <h3 style="color: white;">144x144 Icon</h3>
+        <canvas id="icon144" width="144" height="144"></canvas>
+        <br>
+        <button class="download-btn" onclick="downloadIcon('icon144', 'icon-144x144.png')">Download 144x144</button>
+    </div>
+    
+    <div class="icon-preview">
+        <h3 style="color: white;">192x192 Icon</h3>
+        <canvas id="icon192" width="192" height="192"></canvas>
+        <br>
+        <button class="download-btn" onclick="downloadIcon('icon192', 'icon-192x192.png')">Download 192x192</button>
+    </div>
+    
+    <div class="icon-preview">
+        <h3 style="color: white;">512x512 Icon</h3>
+        <canvas id="icon512" width="512" height="512"></canvas>
+        <br>
+        <button class="download-btn" onclick="downloadIcon('icon512', 'icon-512x512.png')">Download 512x512</button>
+    </div>
+
+    <script>
+        function createIcon(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const size = canvas.width;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#F8CB2E');
+            gradient.addColorStop(1, '#EE5007');
+            
+            // Draw background circle
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            
+            // Add border
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            
+            // Draw text "PO"
+            ctx.fillStyle = '#fff';
+            ctx.font = `bold ${size * 0.35}px Poppins, Arial, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('PO', size/2, size/2 - size * 0.05);
+            
+            // Draw year "2025"
+            ctx.fillStyle = '#fff';
+            ctx.font = `${size * 0.15}px Poppins, Arial, sans-serif`;
+            ctx.fillText('2025', size/2, size/2 + size * 0.25);
+            
+            // Add subtle shadow to text
+            ctx.shadowColor = 'rgba(0,0,0,0.3)';
+            ctx.shadowBlur = 2;
+            ctx.shadowOffsetX = 1;
+            ctx.shadowOffsetY = 1;
+        }
+        
+        function downloadIcon(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Generate all icons when page loads
+        window.onload = function() {
+            createIcon('icon48');
+            createIcon('icon96');
+            createIcon('icon144');
+            createIcon('icon192');
+            createIcon('icon512');
+        };
+    </script>
+</body>
+</html>
