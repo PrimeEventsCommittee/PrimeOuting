@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing Icon Generator - Generate icon-96x96.png</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #F8CB2E, #EE5007);
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        h1 {
+            color: #EE5007;
+            margin-bottom: 20px;
+        }
+        
+        .upload-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px dashed #F8CB2E;
+            border-radius: 10px;
+            background: #fefbf3;
+        }
+        
+        input[type="file"] {
+            margin: 10px 0;
+            padding: 10px;
+            border: 2px solid #EE5007;
+            border-radius: 5px;
+            width: 100%;
+        }
+        
+        button {
+            background: #EE5007;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background: #c01f27;
+        }
+        
+        .download-btn {
+            background: #F8CB2E;
+            color: black;
+        }
+        
+        .download-btn:hover {
+            background: #e6b829;
+        }
+        
+        canvas {
+            border: 3px solid #F8CB2E;
+            border-radius: 50%;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .icon-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #EE5007;
+        }
+        
+        .status {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .alert {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Missing Icon Generator</h1>
+        
+        <div class="alert">
+            <strong>Issue Detected:</strong> Your PWA is missing <code>icon-96x96.png</code> which is referenced in the manifest but doesn't exist. This is causing install problems.
+        </div>
+        
+        <div class="upload-section">
+            <h3>Upload Your PrimePWA.jpg</h3>
+            <p>Select your original image to generate the missing icon and fix all icon issues.</p>
+            <input type="file" id="imageUpload" accept="image/*">
+            <button onclick="processImage()">🚀 Generate Missing Icons</button>
+        </div>
+        
+        <div id="status" class="status" style="display: none;"></div>
+        
+        <div class="preview-grid">
+            <div class="icon-card">
+                <h4>Missing: 96×96</h4>
+                <canvas id="icon96" width="96" height="96"></canvas>
+                <button class="download-btn" onclick="downloadIcon('icon96', 'icon-96x96.png')">
+                    Download Missing Icon
+                </button>
+            </div>
+            
+            <div class="icon-card">
+                <h4>Verify: 192×192</h4>
+                <canvas id="icon192" width="96" height="96"></canvas>
+                <button class="download-btn" onclick="downloadIcon('icon192', 'icon-192x192.png')">
+                    Re-download 192×192
+                </button>
+            </div>
+            
+            <div class="icon-card">
+                <h4>Verify: 512×512</h4>
+                <canvas id="icon512" width="96" height="96"></canvas>
+                <button class="download-btn" onclick="downloadIcon('icon512', 'icon-512x512.png')">
+                    Re-download 512×512
+                </button>
+            </div>
+        </div>
+        
+        <button class="download-btn" onclick="downloadAllMissing()" style="font-size: 18px; padding: 15px 30px;">
+            📥 Download All Fixed Icons
+        </button>
+        
+        <div class="alert" style="margin-top: 20px;">
+            <strong>Fix Steps:</strong><br>
+            1. Upload your PrimePWA.jpg above<br>
+            2. Download the missing icon-96x96.png<br>
+            3. Save it in your images/ folder<br>
+            4. Deploy to GitHub Pages<br>
+            5. Test PWA install again
+        </div>
+    </div>
+
+    <script>
+        let customImage = null;
+        
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+        }
+        
+        function processImage() {
+            const fileInput = document.getElementById('imageUpload');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showStatus('❌ Please select your PrimePWA.jpg file first.', 'error');
+                return;
+            }
+            
+            showStatus('📂 Processing your image...', 'success');
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    customImage = img;
+                    showStatus('✅ Image loaded! Generating fixed icons...', 'success');
+                    
+                    // Generate all icons with actual sizes
+                    generateIcon('icon96', 96);
+                    generateIcon('icon192', 192);
+                    generateIcon('icon512', 512);
+                    
+                    showStatus('🎉 All icons generated! Download the missing icon-96x96.png and any others you need.', 'success');
+                };
+                
+                img.onerror = function() {
+                    showStatus('❌ Failed to process the image.', 'error');
+                };
+                
+                img.src = e.target.result;
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        function generateIcon(canvasId, actualSize) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const displaySize = canvas.width; // Display size (96px for preview)
+            
+            // Set actual size for high-quality export
+            canvas.dataset.actualSize = actualSize;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, displaySize, displaySize);
+            
+            if (customImage) {
+                // Create gradient background
+                const gradient = ctx.createRadialGradient(displaySize/2, displaySize/2, 0, displaySize/2, displaySize/2, displaySize/2);
+                gradient.addColorStop(0, '#F8CB2E');
+                gradient.addColorStop(1, '#EE5007');
+                
+                // Draw background circle
+                ctx.beginPath();
+                ctx.arc(displaySize/2, displaySize/2, displaySize/2, 0, 2 * Math.PI);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                
+                // Create circular clipping path
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(displaySize/2, displaySize/2, displaySize/2 - 4, 0, 2 * Math.PI);
+                ctx.clip();
+                
+                // Calculate center crop
+                const minDimension = Math.min(customImage.width, customImage.height);
+                const sourceX = (customImage.width - minDimension) / 2;
+                const sourceY = (customImage.height - minDimension) / 2;
+                
+                // Draw image
+                ctx.drawImage(
+                    customImage,
+                    sourceX, sourceY, minDimension, minDimension,
+                    4, 4, displaySize - 8, displaySize - 8
+                );
+                
+                ctx.restore();
+                
+                // Add borders
+                ctx.beginPath();
+                ctx.arc(displaySize/2, displaySize/2, displaySize/2 - 2, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#EE5007';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.arc(displaySize/2, displaySize/2, displaySize/2 - 4, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#F8CB2E';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+        
+        function downloadIcon(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const actualSize = parseInt(canvas.dataset.actualSize);
+            
+            if (!customImage) {
+                showStatus('❌ Please upload and process an image first.', 'error');
+                return;
+            }
+            
+            // Create a new canvas with actual size for download
+            const downloadCanvas = document.createElement('canvas');
+            downloadCanvas.width = actualSize;
+            downloadCanvas.height = actualSize;
+            const ctx = downloadCanvas.getContext('2d');
+            
+            // Enable high quality
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            
+            // Generate at actual size
+            const gradient = ctx.createRadialGradient(actualSize/2, actualSize/2, 0, actualSize/2, actualSize/2, actualSize/2);
+            gradient.addColorStop(0, '#F8CB2E');
+            gradient.addColorStop(1, '#EE5007');
+            
+            ctx.beginPath();
+            ctx.arc(actualSize/2, actualSize/2, actualSize/2, 0, 2 * Math.PI);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(actualSize/2, actualSize/2, actualSize/2 - 8, 0, 2 * Math.PI);
+            ctx.clip();
+            
+            const minDimension = Math.min(customImage.width, customImage.height);
+            const sourceX = (customImage.width - minDimension) / 2;
+            const sourceY = (customImage.height - minDimension) / 2;
+            
+            ctx.drawImage(
+                customImage,
+                sourceX, sourceY, minDimension, minDimension,
+                8, 8, actualSize - 16, actualSize - 16
+            );
+            
+            ctx.restore();
+            
+            // Borders
+            ctx.beginPath();
+            ctx.arc(actualSize/2, actualSize/2, actualSize/2 - 4, 0, 2 * Math.PI);
+            ctx.strokeStyle = '#EE5007';
+            ctx.lineWidth = 8;
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.arc(actualSize/2, actualSize/2, actualSize/2 - 8, 0, 2 * Math.PI);
+            ctx.strokeStyle = '#F8CB2E';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = downloadCanvas.toDataURL('image/png', 1.0);
+            link.click();
+            
+            showStatus(`📥 Downloaded ${filename} at ${actualSize}×${actualSize}`, 'success');
+        }
+        
+        function downloadAllMissing() {
+            if (!customImage) {
+                showStatus('❌ Please upload and process an image first.', 'error');
+                return;
+            }
+            
+            showStatus('📥 Downloading all fixed icons...', 'success');
+            
+            setTimeout(() => downloadIcon('icon96', 'icon-96x96.png'), 100);
+            setTimeout(() => downloadIcon('icon192', 'icon-192x192.png'), 400);
+            setTimeout(() => downloadIcon('icon512', 'icon-512x512.png'), 700);
+            
+            setTimeout(() => {
+                showStatus('🎉 All icons downloaded! Save them in your images/ folder and deploy.', 'success');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

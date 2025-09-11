@@ -103,24 +103,33 @@ class PWAManager {
 
   async promptInstall() {
     if (!this.deferredPrompt) {
-      console.log('PWA: Install prompt not available');
+      console.log('PWA: Install prompt not available - showing manual instructions');
+      this.showManualInstallInstructions();
       return;
     }
 
     try {
+      console.log('PWA: Triggering install prompt...');
       this.deferredPrompt.prompt();
+      
       const result = await this.deferredPrompt.userChoice;
       console.log('PWA: User choice:', result.outcome);
       
       if (result.outcome === 'accepted') {
         console.log('PWA: User accepted the install prompt');
+        this.hideInstallButton();
       } else {
         console.log('PWA: User dismissed the install prompt');
+        // Show alternative install methods after dismissal
+        setTimeout(() => {
+          this.showManualInstallInstructions();
+        }, 2000);
       }
       
       this.deferredPrompt = null;
     } catch (error) {
       console.error('PWA: Error during install prompt:', error);
+      this.showManualInstallInstructions();
     }
   }
 
