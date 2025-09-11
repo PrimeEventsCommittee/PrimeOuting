@@ -62,7 +62,8 @@
     <h1>Prime Outing 2025 - Icon Generator</h1>
     
     <div class="instructions">
-        <p><strong>Instructions:</strong> Click the download buttons below to save the icons to your images folder. These icons will make your Prime Outing 2025 website installable as a Progressive Web App!</p>
+        <p><strong>Instructions:</strong> Your custom image (PrimePWA.jpg) will be automatically loaded and used to create all PWA icons. The image will be cropped to a circle with your brand colors as borders. Click the download buttons below to save the icons to your images folder.</p>
+        <button class="download-btn" onclick="downloadAllIcons()" style="background: #EE5007; color: white; font-size: 16px; padding: 15px 30px;">📥 Download All Icons</button>
     </div>
     
     <div class="icon-preview">
@@ -101,6 +102,34 @@
     </div>
 
     <script>
+        let customImage = null;
+        
+        // Load the custom image
+        function loadCustomImage() {
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+            img.onload = function() {
+                customImage = img;
+                console.log('Custom image loaded successfully');
+                // Regenerate all icons with the custom image
+                createIcon('icon48');
+                createIcon('icon96');
+                createIcon('icon144');
+                createIcon('icon192');
+                createIcon('icon512');
+            };
+            img.onerror = function() {
+                console.error('Failed to load custom image, using fallback design');
+                // Generate fallback icons
+                createIcon('icon48');
+                createIcon('icon96');
+                createIcon('icon144');
+                createIcon('icon192');
+                createIcon('icon512');
+            };
+            img.src = 'images/PrimePWA.jpg';
+        }
+        
         function createIcon(canvasId) {
             const canvas = document.getElementById(canvasId);
             const ctx = canvas.getContext('2d');
@@ -109,58 +138,99 @@
             // Clear canvas
             ctx.clearRect(0, 0, size, size);
             
-            // Create gradient background
-            const gradient = ctx.createLinearGradient(0, 0, size, size);
-            gradient.addColorStop(0, '#F8CB2E');
-            gradient.addColorStop(1, '#EE5007');
-            
-            // Draw background circle
-            ctx.beginPath();
-            ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
-            ctx.fillStyle = gradient;
-            ctx.fill();
-            
-            // Add border
-            ctx.beginPath();
-            ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 4;
-            ctx.stroke();
-            
-            // Draw text "PO"
-            ctx.fillStyle = '#fff';
-            ctx.font = `bold ${size * 0.35}px Poppins, Arial, sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('PO', size/2, size/2 - size * 0.05);
-            
-            // Draw year "2025"
-            ctx.fillStyle = '#fff';
-            ctx.font = `${size * 0.15}px Poppins, Arial, sans-serif`;
-            ctx.fillText('2025', size/2, size/2 + size * 0.25);
-            
-            // Add subtle shadow to text
-            ctx.shadowColor = 'rgba(0,0,0,0.3)';
-            ctx.shadowBlur = 2;
-            ctx.shadowOffsetX = 1;
-            ctx.shadowOffsetY = 1;
+            if (customImage) {
+                // Use custom image
+                // Create a circular clipping path
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2 - 4, 0, 2 * Math.PI);
+                ctx.clipPath();
+                
+                // Draw the custom image to fit the circle
+                const minDimension = Math.min(customImage.width, customImage.height);
+                const sourceX = (customImage.width - minDimension) / 2;
+                const sourceY = (customImage.height - minDimension) / 2;
+                
+                ctx.drawImage(
+                    customImage,
+                    sourceX, sourceY, minDimension, minDimension,
+                    4, 4, size - 8, size - 8
+                );
+                ctx.restore();
+                
+                // Add a border
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2 - 4, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#EE5007';
+                ctx.lineWidth = 8;
+                ctx.stroke();
+                
+                // Add inner border
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2 - 8, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#F8CB2E';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                
+            } else {
+                // Fallback design with text
+                // Create gradient background
+                const gradient = ctx.createLinearGradient(0, 0, size, size);
+                gradient.addColorStop(0, '#F8CB2E');
+                gradient.addColorStop(1, '#EE5007');
+                
+                // Draw background circle
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                
+                // Add border
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                
+                // Draw text "PO"
+                ctx.fillStyle = '#fff';
+                ctx.font = `bold ${size * 0.35}px Poppins, Arial, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('PO', size/2, size/2 - size * 0.05);
+                
+                // Draw year "2025"
+                ctx.fillStyle = '#fff';
+                ctx.font = `${size * 0.15}px Poppins, Arial, sans-serif`;
+                ctx.fillText('2025', size/2, size/2 + size * 0.25);
+                
+                // Add subtle shadow to text
+                ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                ctx.shadowBlur = 2;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+            }
         }
         
         function downloadIcon(canvasId, filename) {
             const canvas = document.getElementById(canvasId);
             const link = document.createElement('a');
             link.download = filename;
-            link.href = canvas.toDataURL();
+            link.href = canvas.toDataURL('image/png');
             link.click();
+        }
+        
+        function downloadAllIcons() {
+            downloadIcon('icon48', 'icon-48x48.png');
+            setTimeout(() => downloadIcon('icon96', 'icon-96x96.png'), 200);
+            setTimeout(() => downloadIcon('icon144', 'icon-144x144.png'), 400);
+            setTimeout(() => downloadIcon('icon192', 'icon-192x192.png'), 600);
+            setTimeout(() => downloadIcon('icon512', 'icon-512x512.png'), 800);
         }
         
         // Generate all icons when page loads
         window.onload = function() {
-            createIcon('icon48');
-            createIcon('icon96');
-            createIcon('icon144');
-            createIcon('icon192');
-            createIcon('icon512');
+            loadCustomImage();
         };
     </script>
 </body>

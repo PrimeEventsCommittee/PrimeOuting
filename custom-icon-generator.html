@@ -135,6 +135,14 @@
         <div class="instructions">
             <h3>Prime Outing 2025 - Custom Icon Creation</h3>
             <p>Your custom image <strong>PrimePWA.jpg</strong> will be automatically loaded and converted into all required PWA icon sizes. The image will be professionally styled with circular cropping and your brand colors.</p>
+            
+            <div style="margin: 15px 0; padding: 15px; background: rgba(238, 80, 7, 0.1); border-radius: 10px;">
+                <strong>📁 Alternative: Upload Image Manually</strong><br>
+                <input type="file" id="manualUpload" accept="image/*" style="margin: 10px 0; padding: 8px;">
+                <button class="download-btn" onclick="loadManualImage()" style="padding: 8px 15px; font-size: 14px;">
+                    🔄 Use This Image
+                </button>
+            </div>
         </div>
         
         <div id="status" class="status" style="display: none;"></div>
@@ -224,45 +232,130 @@
         }
         
         function loadCustomImage() {
-            showStatus('Loading your custom image...', 'success');
+            showStatus('🔍 Looking for your custom image...', 'success');
             
-            const img = new Image();
-            img.crossOrigin = "anonymous";
+            // Try multiple possible paths for the image
+            const possiblePaths = [
+                './images/PrimePWA.jpg',
+                'images/PrimePWA.jpg',
+                '../images/PrimePWA.jpg',
+                './PrimePWA.jpg',
+                'PrimePWA.jpg'
+            ];
             
-            img.onload = function() {
-                customImage = img;
+            let pathIndex = 0;
+            
+            function tryNextPath() {
+                if (pathIndex >= possiblePaths.length) {
+                    showStatus('❌ Could not find PrimePWA.jpg in any expected location. Please check the file exists in the images/ folder. Using fallback design.', 'error');
+                    createAllFallbackIcons();
+                    return;
+                }
                 
-                // Show original image preview
-                const originalImg = document.getElementById('originalImage');
-                originalImg.src = img.src;
-                originalImg.style.display = 'block';
+                const img = new Image();
+                const currentPath = possiblePaths[pathIndex];
                 
-                showStatus('✅ Custom image loaded successfully! Generating icons...', 'success');
+                img.onload = function() {
+                    customImage = img;
+                    
+                    // Show original image preview
+                    const originalImg = document.getElementById('originalImage');
+                    originalImg.src = img.src;
+                    originalImg.style.display = 'block';
+                    
+                    showStatus(`✅ Found and loaded your image from: ${currentPath}`, 'success');
+                    
+                    // Generate all icons
+                    setTimeout(() => {
+                        createIcon('icon48');
+                        createIcon('icon96');
+                        createIcon('icon144');
+                        createIcon('icon192');
+                        createIcon('icon512');
+                        showStatus('🎉 All icons generated successfully with your custom image!', 'success');
+                    }, 500);
+                };
                 
-                // Generate all icons
-                setTimeout(() => {
-                    createIcon('icon48');
-                    createIcon('icon96');
-                    createIcon('icon144');
-                    createIcon('icon192');
-                    createIcon('icon512');
-                    showStatus('🎉 All icons generated successfully with your custom image!', 'success');
-                }, 500);
+                img.onerror = function() {
+                    console.log(`Failed to load from: ${currentPath}`);
+                    pathIndex++;
+                    tryNextPath();
+                };
+                
+                // Set cross-origin only for external URLs
+                if (currentPath.startsWith('http')) {
+                    img.crossOrigin = "anonymous";
+                }
+                
+                showStatus(`Trying to load from: ${currentPath}...`, 'success');
+                img.src = currentPath;
+            }
+            
+            tryNextPath();
+        }
+        
+        function createAllFallbackIcons() {
+            showStatus('Creating fallback icons with text design...', 'success');
+            createIcon('icon48');
+            createIcon('icon96');
+            createIcon('icon144');
+            createIcon('icon192');
+            createIcon('icon512');
+            showStatus('📝 Fallback icons created. Upload PrimePWA.jpg to images/ folder and refresh to use your custom image.', 'error');
+        }
+        
+        function loadManualImage() {
+            const fileInput = document.getElementById('manualUpload');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showStatus('❌ Please select an image file first.', 'error');
+                return;
+            }
+            
+            if (!file.type.startsWith('image/')) {
+                showStatus('❌ Please select a valid image file.', 'error');
+                return;
+            }
+            
+            showStatus('📂 Loading your uploaded image...', 'success');
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    customImage = img;
+                    
+                    // Show original image preview
+                    const originalImg = document.getElementById('originalImage');
+                    originalImg.src = e.target.result;
+                    originalImg.style.display = 'block';
+                    
+                    showStatus('✅ Your uploaded image loaded successfully! Generating icons...', 'success');
+                    
+                    // Generate all icons
+                    setTimeout(() => {
+                        createIcon('icon48');
+                        createIcon('icon96');
+                        createIcon('icon144');
+                        createIcon('icon192');
+                        createIcon('icon512');
+                        showStatus('🎉 All icons generated successfully with your uploaded image!', 'success');
+                    }, 500);
+                };
+                
+                img.onerror = function() {
+                    showStatus('❌ Failed to process the uploaded image.', 'error');
+                };
+                
+                img.src = e.target.result;
             };
             
-            img.onerror = function() {
-                showStatus('❌ Failed to load PrimePWA.jpg. Creating fallback icons with text design.', 'error');
-                
-                // Generate fallback icons
-                createIcon('icon48');
-                createIcon('icon96');
-                createIcon('icon144');
-                createIcon('icon192');
-                createIcon('icon512');
+            reader.onerror = function() {
+                showStatus('❌ Failed to read the uploaded file.', 'error');
             };
             
-            // Try to load the image
-            img.src = './images/PrimePWA.jpg';
+            reader.readAsDataURL(file);
         }
         
         function createIcon(canvasId) {
