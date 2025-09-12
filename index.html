@@ -60,6 +60,632 @@
     <link href="css/bootstrap-icons.css" rel="stylesheet">
 
     <link href="css/templatemo-festava-live.css" rel="stylesheet">
+    
+    <!-- Custom Photo Album Styles -->
+    <style>
+        /* Smooth scrolling for the entire page */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Scroll offset for navigation sections - reduced for relative navbar */
+        section[id] {
+            scroll-margin-top: 20px;
+        }
+        
+        /* Alternative method for better browser support */
+        #section_2::before,
+        #section_3::before,
+        #section_4::before,
+        #section_5::before,
+        #section_6::before {
+            content: '';
+            display: block;
+            height: 20px;
+            margin-top: -20px;
+            visibility: hidden;
+        }
+        
+        /* Set navbar to dark charcoal background */
+        .navbar {
+            position: relative;
+            background: #2c3e50 !important;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        /* Ensure navbar text is white for visibility */
+        .navbar .navbar-brand,
+        .navbar .nav-link {
+            color: #ffffff !important;
+        }
+        
+        .navbar .navbar-brand:hover,
+        .navbar .nav-link:hover {
+            color: #F8CB2E !important;
+        }
+        
+        /* Optional: Add fixed navbar on scroll */
+        .navbar.navbar-fixed {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 62, 80, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Add top padding to body to account for fixed navbar */
+        body {
+            padding-top: 0;
+        }
+        
+        /* Adjust hero section to account for navbar */
+        .hero-section {
+            margin-top: 0;
+            padding-top: 0;
+        }
+        
+        /* Gallery Section Styles */
+        .gallery-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="gallery-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(248,203,46,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23gallery-dots)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .gallery-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .gallery-title {
+            text-align: center;
+            color: #F8CB2E;
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .gallery-subtitle {
+            text-align: center;
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Photo Album Styles */
+        .album-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 280px;
+            perspective: 1000px;
+        }
+        
+        .closed-album {
+            width: 320px;
+            height: 240px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            border-radius: 10px;
+            box-shadow: 
+                0 0 0 8px #654321,
+                0 0 0 12px #8B4513,
+                0 15px 35px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            pointer-events: auto;
+            z-index: 10;
+        }
+        
+        .closed-album:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 
+                0 0 0 8px #654321,
+                0 0 0 12px #8B4513,
+                0 25px 50px rgba(0,0,0,0.5);
+        }
+        
+        .album-cover {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            border-radius: 8px;
+        }
+        
+        .album-cover::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #F8CB2E;
+            border-radius: 5px;
+            opacity: 0.7;
+        }
+        
+        .album-cover-content {
+            text-align: center;
+            color: #F5F5DC;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .album-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.4rem;
+            margin-bottom: 0.4rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .album-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1.2rem;
+        }
+        
+        .click-to-open {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+        
+        .click-to-open i {
+            font-size: 1.2rem;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .album-spine {
+            position: absolute;
+            left: 0;
+            top: 5%;
+            bottom: 5%;
+            width: 15px;
+            background: linear-gradient(to bottom, #654321, #8B4513, #654321);
+            border-radius: 0 3px 3px 0;
+            box-shadow: inset -2px 0 5px rgba(0,0,0,0.3);
+        }
+        
+        .album-spine::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            bottom: 20%;
+            left: 3px;
+            width: 2px;
+            background: #F8CB2E;
+            border-radius: 1px;
+        }
+        
+        /* Flipbook Album Styles */
+        .flipbook-album {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            min-height: 520px;
+            animation: bookOpen 0.8s ease-out;
+        }
+        
+        @keyframes bookOpen {
+            from {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .book-container {
+            position: relative;
+            width: 720px;
+            height: 480px;
+            perspective: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .book-left-page,
+        .book-right-page {
+            width: 320px;
+            height: 440px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: transform 0.1s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .book-left-page {
+            border-radius: 10px 0 0 10px;
+            transform-origin: right center;
+            margin-right: 5px;
+        }
+        
+        .book-right-page {
+            border-radius: 0 10px 10px 0;
+            transform-origin: left center;
+            margin-left: 5px;
+        }
+        
+        .book-binding {
+            position: absolute;
+            width: 20px;
+            height: 440px;
+            background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            border-radius: 3px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        }
+        
+        .book-binding::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            bottom: 10%;
+            left: 50%;
+            width: 2px;
+            background: #F8CB2E;
+            transform: translateX(-50%);
+        }
+        
+        .page-content {
+            width: 100%;
+            height: 100%;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .page-content img {
+            max-width: 260px;
+            max-height: 320px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 12px;
+        }
+        
+        .page-content h3 {
+            color: #2c3e50;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-content p {
+            color: #34495e;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        .book-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .book-nav-btn {
+            background: linear-gradient(135deg, #F8CB2E, #EE5007);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .book-nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(238, 80, 7, 0.3);
+        }
+        
+        .book-nav-btn:disabled {
+            background: #7f8c8d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .close-book-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+        }
+        
+        .close-book-btn:hover {
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3) !important;
+        }
+        
+        .page-counter {
+            color: #2c3e50;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        /* Page Flip Animation */
+        .page-flip-left {
+            animation: flipLeft 0.8s ease-in-out;
+            transform-style: preserve-3d;
+        }
+        
+        .page-flip-right {
+            animation: flipRight 0.8s ease-in-out;
+            transform-style: preserve-3d;
+        }
+        
+        .page-flip-forward {
+            animation: flipForward 0.8s ease-in-out;
+            transform-style: preserve-3d;
+        }
+        
+        .page-flip-backward {
+            animation: flipBackward 0.8s ease-in-out;
+            transform-style: preserve-3d;
+        }
+        
+        @keyframes flipLeft {
+            0% { 
+                transform: rotateY(0deg);
+                z-index: 2;
+            }
+            25% {
+                transform: rotateY(-45deg);
+                z-index: 3;
+            }
+            50% { 
+                transform: rotateY(-90deg);
+                z-index: 3;
+            }
+            75% {
+                transform: rotateY(-135deg);
+                z-index: 3;
+            }
+            100% { 
+                transform: rotateY(-180deg);
+                z-index: 1;
+            }
+        }
+        
+        @keyframes flipRight {
+            0% { 
+                transform: rotateY(0deg);
+                z-index: 2;
+            }
+            25% {
+                transform: rotateY(45deg);
+                z-index: 3;
+            }
+            50% { 
+                transform: rotateY(90deg);
+                z-index: 3;
+            }
+            75% {
+                transform: rotateY(135deg);
+                z-index: 3;
+            }
+            100% { 
+                transform: rotateY(180deg);
+                z-index: 1;
+            }
+        }
+        
+        @keyframes flipForward {
+            0% { 
+                transform: rotateY(0deg);
+                opacity: 1;
+                z-index: 2;
+            }
+            25% {
+                transform: rotateY(-45deg);
+                z-index: 3;
+            }
+            50% { 
+                transform: rotateY(-90deg);
+                opacity: 0.8;
+                z-index: 3;
+            }
+            51% {
+                opacity: 0;
+            }
+            52% {
+                opacity: 0.8;
+            }
+            75% {
+                transform: rotateY(-135deg);
+                z-index: 3;
+            }
+            100% { 
+                transform: rotateY(-180deg);
+                opacity: 1;
+                z-index: 2;
+            }
+        }
+        
+        @keyframes flipBackward {
+            0% { 
+                transform: rotateY(0deg);
+                opacity: 1;
+                z-index: 2;
+            }
+            25% {
+                transform: rotateY(45deg);
+                z-index: 3;
+            }
+            50% { 
+                transform: rotateY(90deg);
+                opacity: 0.8;
+                z-index: 3;
+            }
+            51% {
+                opacity: 0;
+            }
+            52% {
+                opacity: 0.8;
+            }
+            75% {
+                transform: rotateY(135deg);
+                z-index: 3;
+            }
+            100% { 
+                transform: rotateY(180deg);
+                opacity: 1;
+                z-index: 2;
+            }
+        }
+        
+        /* Cover Page Styles */
+        .cover-page {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+        }
+        
+        .cover-page h2 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #F8CB2E;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .cover-page p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: white !important;
+        }
+        
+        .decorative-border {
+            width: 200px;
+            height: 2px;
+            background: #F8CB2E;
+            margin: 20px auto;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .closed-album {
+                width: 240px;
+                height: 180px;
+            }
+            
+            .album-title {
+                font-size: 1.1rem;
+            }
+            
+            .book-container {
+                width: 100%;
+                max-width: 500px;
+                height: 350px;
+            }
+            
+            .book-left-page,
+            .book-right-page {
+                width: 220px;
+                height: 320px;
+            }
+            
+            .page-content {
+                padding: 15px;
+            }
+            
+            .page-content img {
+                max-width: 180px;
+                max-height: 220px;
+            }
+            
+            .book-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .closed-album {
+                width: 300px;
+                height: 220px;
+            }
+            
+            .album-title {
+                font-size: 1.4rem;
+            }
+            
+            .album-viewer {
+                width: 95vw;
+                height: 90vh;
+            }
+            
+            .photo-display {
+                padding: 20px;
+            }
+            
+            .photo-container img {
+                max-height: 250px;
+            }
+            
+            .photo-thumbnails {
+                gap: 10px;
+            }
+            
+            .thumbnail {
+                width: 60px;
+                height: 45px;
+            }
+            
+            .navigation-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
 
     <!--
 
@@ -112,15 +738,19 @@ https://templatemo.com/tm-583-festava-live
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_3">Location</a>
+                            <a class="nav-link click-scroll" href="#section_3">Gallery</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_4">Schedule</a>
+                            <a class="nav-link click-scroll" href="#section_4">Location</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_5">Contact</a>
+                            <a class="nav-link click-scroll" href="#section_5">Schedule</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_6">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -200,35 +830,23 @@ https://templatemo.com/tm-583-festava-live
 
                     <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
                         <div class="services-info">
-                            <h2 class="text-white mb-4">About Prime Outing 2025</h2>
+                            <h2 class="text-white mb-4">🌄 About Prime Outing 2025</h2>
 
                             <p class="text-white">Join us for an unforgettable team outing experience to the beautiful hills of Dehradun. Prime Outing 2025 is designed to strengthen team bonds, create lasting memories, and provide the perfect break from work routine.</p>
 
-                            <h6 class="text-white mt-4">Team Building & Fun Activities</h6>
+                            <h6 class="text-white mt-4">🤝Team Building & Fun Galore</h6>
 
-                            <p class="text-white">Enjoy exciting team building activities, group games, and interactive sessions designed to bring colleagues closer together.</p>
+                           <p class="text-white">From thrilling team challenges 🧩 to hilarious group games 🎯, every moment is designed to spark joy and build stronger connections. Expect high-energy activities, lots of cheers, and memories that’ll last a lifetime! 🥳</p>
 
-                            <h6 class="text-white mt-4">DJ Night & Entertainment</h6>
+                            <h6 class="text-white mt-4">🎶 DJ Night & Magical Vibes</h6>
 
-                            <p class="text-white">Dance the night away with professional DJ, stargazing under "Taaron ki chaanv", and unforgettable entertainment.</p>
+                            <p class="text-white">As the sun sets 🌅, the party begins! Groove to the beats of our DJ 🎧, dance under the stars ✨, and soak in the magic of “Taaron ki chaanv” 🌌. It’s your night to shine, laugh, and let loose! 💃🕺</p>
                         </div>
                     </div>
 
                     <div class="col-lg-6 col-12">
                         <div class="about-text-wrap">
                             <img src="images/pexels-alexander-suhorucov-6457579.jpg" class="about-image img-fluid">
-
-                            <div class="about-text-info d-flex">
-                                <div class="d-flex">
-                                    <i class="about-text-icon bi-people"></i>
-                                </div>
-
-                                <div class="ms-4">
-                                    <h3>Team Bonding Experience</h3>
-
-                                    <p class="mb-0">Create memories that will last a lifetime with your colleagues</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -237,7 +855,75 @@ https://templatemo.com/tm-583-festava-live
         </section>
 
 
-        <section class="location-section section-padding" id="section_3">
+        <!-- Gallery Section -->
+        <section class="gallery-section section-padding" id="section_3">
+            <div class="container gallery-container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="gallery-title">Memory Lane</h2>
+                        <p class="gallery-subtitle">Team Bonding Experiences & Cherished Moments</p>
+                        
+                        <div class="album-wrapper" id="albumWrapper">
+                            <!-- Closed Album -->
+                            <div class="closed-album" id="closedAlbum">
+                                <div class="album-cover">
+                                    <div class="album-cover-content">
+                                        <h3 class="album-title">Prime Outing 2024</h3>
+                                        <p class="album-subtitle">Team Photo Album</p>
+                                        <div class="click-to-open">
+                                            <i class="bi-hand-index"></i>
+                                            <span>Click to Open Album</span>
+                                        </div>
+                                    </div>
+                                    <div class="album-spine"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Opened Flipbook Album -->
+                            <div class="flipbook-album" id="flipbookAlbum" style="display: none;">
+                                <div class="book-container">
+                                    <!-- Left side of open book -->
+                                    <div class="book-left-page" id="leftPage">
+                                        <div class="page-content" id="leftPageContent">
+                                            <!-- Content will be dynamically loaded -->
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Right side of open book -->
+                                    <div class="book-right-page" id="rightPage">
+                                        <div class="page-content" id="rightPageContent">
+                                            <!-- Content will be dynamically loaded -->
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Book binding in the middle -->
+                                    <div class="book-binding"></div>
+                                </div>
+                                
+                                <!-- Navigation controls -->
+                                <div class="book-controls">
+                                    <button class="book-nav-btn" id="prevPageBtn" onclick="previousPage()">
+                                        <i class="bi-chevron-left"></i> Previous
+                                    </button>
+                                    <span class="page-counter">
+                                        Page <span id="currentPageNum">1</span> of <span id="totalPageNum">12</span>
+                                    </span>
+                                    <button class="book-nav-btn" id="nextPageBtn" onclick="nextPage()">
+                                        Next <i class="bi-chevron-right"></i>
+                                    </button>
+                                    <button class="book-nav-btn close-book-btn" onclick="closeBook()">
+                                        <i class="bi-x-lg"></i> Close Book
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="location-section section-padding" id="section_4">
             <div class="container">
                 <div class="row justify-content-center">
 
@@ -318,7 +1004,7 @@ https://templatemo.com/tm-583-festava-live
         </section>
 
 
-        <section class="schedule-section section-padding" id="section_4">
+        <section class="schedule-section section-padding" id="section_5">
             <div class="container">
                 <div class="row">
 
@@ -337,6 +1023,25 @@ https://templatemo.com/tm-583-festava-live
                                 </thead>
 
                                 <tbody>
+                                    <tr>
+                                        <th scope="row">Morning</th>
+                                        <td style="background-color: #191818">
+                                            <h3>Bagpacking</h3>
+                                            <p class="mb-2">Day Time</p >
+                                            <p>Home</p>
+                                        </td>
+                                        <td>
+                                            <h3>Breakfast & Activities</h3>
+                                            <p class="mb-2">8:00 AM - 1:30 PM</p>
+                                            <p>Team Building</p>
+                                        </td>
+                                        <td>
+                                            <h3>Final Breakfast</h3>
+                                            <p class="mb-2">7:30 - 9:30 AM</p>
+                                            <p>Check-out & Photos</p>
+                                        </td>
+                                    </tr>
+
                                     <tr>
                                         <th scope="row">Evening</th>
                                         <td class="table-background-image-wrap pop-background-image">
@@ -361,7 +1066,7 @@ https://templatemo.com/tm-583-festava-live
                                     <tr>
                                         <th scope="row">Night</th>
                                         <td>
-                                            <h3>Snacks and Loo Break</h3>
+                                            <h3>🍿Snacking & 🚻Freshen-Up</h3>
                                             <p class="mb-2">12:00 AM</p>
                                             <p>On the Way to Dehradun</p>
                                         </td>
@@ -377,25 +1082,6 @@ https://templatemo.com/tm-583-festava-live
                                             <p>Arrival at Stellar IT Park</p>
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <th scope="row">Morning</th>
-                                        <td style="background-color: #F3DCD4">
-                                            <h3>Get Ready Go</h3>
-                                            <p class="mb-2">Check-In</p>
-                                            <p>Noida</p>
-                                        </td>
-                                        <td>
-                                            <h3>Breakfast & Activities</h3>
-                                            <p class="mb-2">8:00 - 10:00 AM</p>
-                                            <p>Team Building</p>
-                                        </td>
-                                        <td>
-                                            <h3>Final Breakfast</h3>
-                                            <p class="mb-2">7:30 - 9:30 AM</p>
-                                            <p>Check-out & Photos</p>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -408,7 +1094,7 @@ https://templatemo.com/tm-583-festava-live
 
 
 
-        <section class="contact-section section-padding" id="section_5">
+        <section class="contact-section section-padding" id="section_6">
             <div class="container">
                 <div class="row">
 
@@ -606,6 +1292,438 @@ T e m p l a t e M o
     <script src="js/jquery.sticky.js"></script>
     <script src="js/click-scroll.js"></script>
     <script src="js/custom.js"></script>
+    
+    <!-- Photo Album JavaScript -->
+    <script>
+        // Album pages data
+        const albumPages = [
+            {
+                type: 'cover',
+                title: 'Prime Outing 2024',
+                subtitle: 'Team Photo Album',
+                description: 'Last Year memories that will last a lifetime'
+            },
+            {   
+                type: 'photo',
+                image: 'images/gallery/Travel 1 POST 27 sep.jpg',
+                title: 'Adventure Begins',
+                description: 'The excitement and anticipation as we started our Prime Outing 2024 journey'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 2  POST 27 sep.jpg',
+                title: 'Team Spirit',
+                description: 'Our team showing amazing enthusiasm and energy'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 3 POST 27 sep.jpg',
+                title: 'Journey Moments',
+                description: 'Capturing precious moments during our travel experience'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 4 POST 27 sep.jpg',
+                title: 'Group Bonding',
+                description: 'Team members connecting and building lasting friendships'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 5 POST 27 sep.jpg',
+                title: 'Team Together',
+                description: 'Our amazing team bonding and creating unforgettable memories'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 6  POST 27 sep.jpg',
+                title: 'Scenic Views',
+                description: 'Beautiful landscapes and breathtaking views during our outing'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 7  POST 27 sep.jpg',
+                title: 'Adventure Time',
+                description: 'Exploring new places and enjoying adventurous activities'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 8 POST 27 sep.jpg',
+                title: 'Team Activities',
+                description: 'Engaging in fun team building exercises and games'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 9 POST 27 sep.jpg',
+                title: 'Happy Moments',
+                description: 'Joyful expressions and laughter filling the air'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 10  POST 27 sep.jpg',
+                title: 'Scenic Moments',
+                description: 'Capturing the beautiful landscapes and moments during our outing'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 11 POST 27 sep.jpg',
+                title: 'Group Photos',
+                description: 'Memorable group pictures with the entire team'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 12 POST 27 sep.jpg',
+                title: 'Outdoor Fun',
+                description: 'Enjoying outdoor activities in the beautiful natural setting'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 13 POST 27 sep.jpg',
+                title: 'Team Collaboration',
+                description: 'Working together and supporting each other during activities'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 14 POST 27 sep.jpg',
+                title: 'Nature Exploration',
+                description: 'Discovering and appreciating the natural beauty around us'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 15 POST 27 sep.jpg',
+                title: 'Fun Activities',
+                description: 'Enjoying team building activities and recreational fun'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 16 POST 27 sep.jpg',
+                title: 'Candid Moments',
+                description: 'Natural and spontaneous moments captured during the trip'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 17 POST 27 sep.jpg',
+                title: 'Team Unity',
+                description: 'Showing the strong bond and unity among team members'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 18 POST 27 sep.jpg',
+                title: 'Adventure Continues',
+                description: 'More exciting adventures and experiences throughout the day'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 20 POST 27 SEP(1).jpg',
+                title: 'Special Moments',
+                description: 'Unique and special moments that made the trip extraordinary'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 20 POST 27 sep.jpg',
+                title: 'Memories Made',
+                description: 'Precious moments that will be cherished forever by our team'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 21 POST 27 sep.jpg',
+                title: 'Final Adventures',
+                description: 'The concluding adventures of our amazing outing experience'
+            },
+            {
+                type: 'photo',
+                image: 'images/gallery/Travel 22 POST 27 sep.jpg',
+                title: 'Journey\'s End',
+                description: 'The perfect ending to our unforgettable Prime Outing 2024'
+            }
+        ];
+            
+        let currentPageIndex = 0;
+        let isAnimating = false;
+        
+        // Generate page content
+        function generatePageContent(page) {
+            if (page.type === 'cover') {
+                return `
+                    <h2>${page.title}</h2>
+                    <p>${page.subtitle}</p>
+                    <div class="decorative-border"></div>
+                    <p style="margin-top: 2rem; opacity: 0.8;">${page.description}</p>
+                `;
+            } else {
+                return `
+                    <img src="${page.image}" alt="${page.title}">
+                    <h3>${page.title}</h3>
+                    <p>${page.description}</p>
+                `;
+            }
+        }
+        
+        // Update page content
+        function updatePages() {
+            const leftPageContent = document.getElementById('leftPageContent');
+            const rightPageContent = document.getElementById('rightPageContent');
+            const currentPageNum = document.getElementById('currentPageNum');
+            const totalPageNum = document.getElementById('totalPageNum');
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+            
+            if (!leftPageContent || !rightPageContent) return;
+            
+            // Update page counter
+            currentPageNum.textContent = Math.floor(currentPageIndex / 2) + 1;
+            totalPageNum.textContent = Math.ceil(albumPages.length / 2);
+            
+            // Update navigation buttons
+            prevBtn.disabled = currentPageIndex === 0;
+            nextBtn.disabled = currentPageIndex >= albumPages.length - 1;
+            
+            // Load left page
+            if (currentPageIndex < albumPages.length) {
+                leftPageContent.innerHTML = generatePageContent(albumPages[currentPageIndex]);
+                leftPageContent.parentElement.className = albumPages[currentPageIndex].type === 'cover' ? 'book-left-page cover-page' : 'book-left-page';
+            }
+            
+            // Load right page
+            if (currentPageIndex + 1 < albumPages.length) {
+                rightPageContent.innerHTML = generatePageContent(albumPages[currentPageIndex + 1]);
+                rightPageContent.parentElement.className = albumPages[currentPageIndex + 1].type === 'cover' ? 'book-right-page cover-page' : 'book-right-page';
+            } else {
+                rightPageContent.innerHTML = '<p style="color: #999; text-align: center; margin-top: 200px;">Thank you for viewing!</p>';
+                rightPageContent.parentElement.className = 'book-right-page';
+            }
+        }
+        
+        // Navigate pages
+        function previousPage() {
+            if (currentPageIndex > 0 && !isAnimating) {
+                isAnimating = true;
+                
+                // Only flip the left page when going backward
+                const leftPage = document.getElementById('leftPage');
+                
+                leftPage.classList.add('page-flip-backward');
+                
+                // Update content after animation starts
+                setTimeout(() => {
+                    currentPageIndex -= 2;
+                    if (currentPageIndex < 0) currentPageIndex = 0;
+                    updatePages();
+                }, 400);
+                
+                // Remove animation classes after animation completes
+                setTimeout(() => {
+                    leftPage.classList.remove('page-flip-backward');
+                    isAnimating = false;
+                }, 800);
+            }
+        }
+        
+        function nextPage() {
+            if (currentPageIndex < albumPages.length - 1 && !isAnimating) {
+                isAnimating = true;
+                
+                // Only flip the right page when going forward
+                const rightPage = document.getElementById('rightPage');
+                
+                rightPage.classList.add('page-flip-forward');
+                
+                // Update content after animation starts
+                setTimeout(() => {
+                    currentPageIndex += 2;
+                    updatePages();
+                }, 400);
+                
+                // Remove animation classes after animation completes
+                setTimeout(() => {
+                    rightPage.classList.remove('page-flip-forward');
+                    isAnimating = false;
+                }, 800);
+            }
+        }
+        
+        function closeBook() {
+            const closedAlbum = document.getElementById('closedAlbum');
+            const flipbookAlbum = document.getElementById('flipbookAlbum');
+            
+            flipbookAlbum.style.display = 'none';
+            closedAlbum.style.display = 'flex';
+        }
+        
+        // Define functions at top level first
+        function openAlbum() {
+            const closedAlbum = document.getElementById('closedAlbum');
+            const flipbookAlbum = document.getElementById('flipbookAlbum');
+            
+            closedAlbum.style.display = 'none';
+            flipbookAlbum.style.display = 'flex';
+            
+            // Initialize flipbook with cover page
+            updatePages();
+        }
+        
+        function closeAlbum() {
+            const closedAlbum = document.getElementById('closedAlbum');
+            const openedAlbum = document.getElementById('openedAlbum');
+            
+            openedAlbum.style.display = 'none';
+            closedAlbum.style.display = 'flex';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Photo gallery data
+        const photoGallery = [
+            {
+                src: 'images/gallery/team-group-photo.jpg',
+                title: 'Our Amazing Team',
+                description: 'Prime Outing 2025 - The complete team ready for an unforgettable journey'
+            },
+            {
+                src: 'images/gallery/team-building-activity.jpg',
+                title: 'Team Building Excellence',
+                description: 'Engaging activities that brought us closer and strengthened our bonds'
+            },
+            {
+                src: 'images/gallery/travel-bus-journey.jpg',
+                title: 'Journey Begins',
+                description: 'The exciting bus journey to Dehradun filled with laughter and anticipation'
+            }
+        ];
+        
+        let currentPhotoIndex = 0;
+        
+        // Show specific photo
+        function showPhoto(index) {
+            if (index < 0 || index >= photoGallery.length) return;
+            
+            currentPhotoIndex = index;
+            const photo = photoGallery[index];
+            
+            // Update main photo
+            document.getElementById('currentPhoto').src = photo.src;
+            document.getElementById('currentPhoto').alt = photo.title;
+            document.getElementById('photoTitle').textContent = photo.title;
+            document.getElementById('photoDescription').textContent = photo.description;
+            
+            // Update photo counter
+            document.getElementById('currentIndex').textContent = index + 1;
+            document.getElementById('totalPhotos').textContent = photoGallery.length;
+            
+            // Update thumbnails
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+            
+            // Update navigation buttons
+            document.getElementById('prevPhotoBtn').disabled = index === 0;
+            document.getElementById('nextPhotoBtn').disabled = index === photoGallery.length - 1;
+        }
+        
+        // Navigate to previous photo
+        function previousPhoto() {
+            if (currentPhotoIndex > 0) {
+                showPhoto(currentPhotoIndex - 1);
+            }
+        }
+        
+        // Navigate to next photo
+        function nextPhoto() {
+            if (currentPhotoIndex < photoGallery.length - 1) {
+                showPhoto(currentPhotoIndex + 1);
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const openedAlbum = document.getElementById('openedAlbum');
+            if (openedAlbum.style.display === 'flex') {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        previousPhoto();
+                        break;
+                    case 'ArrowRight':
+                        nextPhoto();
+                        break;
+                    case 'Escape':
+                        closeAlbum();
+                        break;
+                }
+            }
+        });
+        
+        // Close album when clicking outside
+        document.addEventListener('click', function(e) {
+            const openedAlbum = document.getElementById('openedAlbum');
+            const albumViewer = document.querySelector('.album-viewer');
+            
+            if (openedAlbum.style.display === 'flex' && !albumViewer.contains(e.target)) {
+                closeAlbum();
+            }
+        });
+        
+        // Entrance animation for the closed album
+        $(document).ready(function() {
+            // Add click event listener as backup
+            const closedAlbumElement = document.getElementById('closedAlbum');
+            if (closedAlbumElement) {
+                console.log('Adding event listener to album');
+                
+                // Add multiple event listeners to debug
+                closedAlbumElement.addEventListener('click', function(e) {
+                    console.log('Click event detected on album!');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openAlbum();
+                });
+                
+                closedAlbumElement.addEventListener('mouseenter', function() {
+                    console.log('Mouse entered album area');
+                    closedAlbumElement.style.border = '3px solid #F8CB2E';
+                });
+                
+                closedAlbumElement.addEventListener('mouseleave', function() {
+                    console.log('Mouse left album area');
+                    closedAlbumElement.style.border = 'none';
+                });
+            } else {
+                console.error('Could not find closedAlbum element');
+            }
+            
+            // Add entrance animation when section comes into view
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Animate album entrance
+            $(window).scroll(function() {
+                const $album = $("#closedAlbum")[0];
+                if ($album && isElementInViewport($album) && !$album.classList.contains('animated')) {
+                    $album.classList.add('animated');
+                    $album.style.animation = 'slideUp 1s ease-out';
+                }
+            });
+            
+            // Add slideUp animation
+            $('<style>').text(`
+                @keyframes slideUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(50px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            `).appendTo('head');
+        });
+    </script>
 
     <!-- CHATBOT STYLES AND SCRIPTS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -613,7 +1731,7 @@ T e m p l a t e M o
         /* CHATBOT POPUP STYLES */
         .chatbot-widget {
             position: fixed;
-            bottom: 20px;
+            bottom: 110px;
             right: 20px;
             z-index: 1000;
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -623,12 +1741,12 @@ T e m p l a t e M o
             width: 70px;
             height: 70px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: 3px solid white;
-            color: white;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a1a2e 100%);
+            border: 3px solid #F8CB2E;
+            color: #F8CB2E;
             font-size: 28px;
             cursor: pointer;
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 30px rgba(44, 62, 80, 0.4);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
@@ -654,15 +1772,15 @@ T e m p l a t e M o
         
         .chatbot-toggle:hover {
             transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 12px 40px rgba(44, 62, 80, 0.6);
         }
         
         .chatbot-popup {
-            position: absolute;
-            bottom: 90px;
-            right: 0;
+            position: fixed;
+            bottom: 200px;      
+            right: 20px;
             width: 400px;
-            height: 550px;
+            height: 480px;
             background: white;
             border-radius: 25px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(102, 126, 234, 0.1);
@@ -671,6 +1789,7 @@ T e m p l a t e M o
             overflow: hidden;
             animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
+            z-index: 1001;
         }
         
         .chatbot-popup.active {
@@ -689,8 +1808,8 @@ T e m p l a t e M o
         }
         
         .chatbot-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a1a2e 100%);
+            color: #F8CB2E;
             padding: 20px;
             display: flex;
             align-items: center;
@@ -781,9 +1900,9 @@ T e m p l a t e M o
         }
         
         .close-btn {
-            background: rgba(255,255,255,0.2);
+            background: rgba(248,203,46,0.2);
             border: none;
-            color: white;
+            color: #F8CB2E;
             font-size: 20px;
             cursor: pointer;
             width: 35px;
@@ -1017,13 +2136,13 @@ T e m p l a t e M o
                 width: 95vw;
                 height: 75vh;
                 right: 2.5vw;
-                bottom: 90px;
+                bottom: 190px;
                 border-radius: 20px;
             }
             
             .chatbot-widget {
-                bottom: 15px;
-                right: 15px;
+                bottom: 100px;
+                right: 20px;
             }
             
             .chatbot-toggle {
@@ -1267,7 +2386,7 @@ T e m p l a t e M o
             
             if (!employeeData || employeeData.length === 0) {
                 console.log('No employee data available');
-                return "❌ **Employee data not loaded yet.**\n\nPlease ensure PECData.xlsx is properly loaded. When hosted on GitHub, the file will load automatically.\n\n **Contact:** PrimeEventCommittee@gmail.com for assistance.";
+                return "❌ **Employee data not loaded yet.**\n\nPlease ensure PECData.xlsx is properly loaded. When hosted on GitHub, the file will load automatically.\n\n **Contact:** PrimeEventCommittee for assistance.";
             }
             
             // Clean the employee ID (remove spaces, convert to string, handle case)
@@ -1308,7 +2427,7 @@ T e m p l a t e M o
                     return employee.RoomNumber || employee['Room Number'] || employee.Room || employee.room || employee.roomNumber || 'N/A';
                 };
                 
-                const result = `🎯 **Employee Found!**\n\n👤 **Name:** ${getName()}\n🚌 **Bus Number:** ${getBusNumber()}\n🏠 **Room Number:** ${getRoomNumber()}\n\n📧 **Questions?** PrimeEventCommittee@gmail.com\n\n💡 **Tip:** Save this info for easy reference!`;
+                const result = `🎯 **Employee Found!**\n\n👤 **Name:** ${getName()}\n🚌 **Bus Number:** ${getBusNumber()}\n🏠 **Room Number:** ${getRoomNumber()}\n\n📧 **Questions?** PrimeEventCommittee\n\n💡 **Tip:** Save this info for easy reference!`;
                 console.log('Returning result:', result);
                 return result;
             } else {
