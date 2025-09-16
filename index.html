@@ -789,23 +789,11 @@ https://templatemo.com/tm-583-festava-live
 
                         <div class="social-share">
                             <ul class="social-icon d-flex align-items-center justify-content-center">
-                                <span class="text-white me-3">Share:</span>
+                                <span class="text-white me-3">Join Outing Group:</span>
 
                                 <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link">
-                                        <span class="bi-facebook"></span>
-                                    </a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link">
-                                        <span class="bi-twitter"></span>
-                                    </a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link">
-                                        <span class="bi-instagram"></span>
+                                    <a href="https://chat.whatsapp.com/IzIVy9qQuRZKdaMRhVON6V?mode=ems_wa_t" class="social-icon-link">
+                                        <span class="bi-whatsapp"></span>
                                     </a>
                                 </li>
                             </ul>
@@ -906,7 +894,7 @@ https://templatemo.com/tm-583-festava-live
                                         Next <i class="bi-chevron-right"></i>
                                     </button>
                                     <button class="book-nav-btn close-book-btn" onclick="closeBook()">
-                                        <i class="bi-x-lg"></i> Close Album
+                                        <i class="bi-x-lg"></i> Close Book
                                     </button>
                                 </div>
                             </div>
@@ -1145,35 +1133,7 @@ https://templatemo.com/tm-583-festava-live
 
                     <div class="col-lg-6 col-12 d-flex justify-content-lg-end align-items-center">
                         <ul class="social-icon d-flex justify-content-lg-end">
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link">
-                                    <span class="bi-twitter"></span>
-                                </a>
-                            </li>
 
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link">
-                                    <span class="bi-apple"></span>
-                                </a>
-                            </li>
-
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link">
-                                    <span class="bi-instagram"></span>
-                                </a>
-                            </li>
-
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link">
-                                    <span class="bi-youtube"></span>
-                                </a>
-                            </li>
-
-                            <li class="social-icon-item">
-                                <a href="#" class="social-icon-link">
-                                    <span class="bi-pinterest"></span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -1188,23 +1148,27 @@ https://templatemo.com/tm-583-festava-live
 
                     <ul class="site-footer-links">
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Home</a>
+                            <a href="#section_1" class="site-footer-link">Home</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">About</a>
+                            <a href="#section_2" class="site-footer-link">About</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Location</a>
+                            <a href="#section_3" class="site-footer-link">Gallery</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Schedule</a>
+                            <a href="#section_4" class="site-footer-link">Location</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Contact</a>
+                            <a href="#section_5" class="site-footer-link">Schedule</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#section_6" class="site-footer-link">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -1231,16 +1195,6 @@ https://templatemo.com/tm-583-festava-live
                     <p class="text-white d-flex mt-3 mb-2">
                         Stellar IT Park, Noida</p>
 
-                    <a class="link-fx-1 color-contrast-higher mt-3" href="#">
-                        <span>Our Maps</span>
-                        <svg class="icon" viewBox="0 0 32 32" aria-hidden="true">
-                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="16" cy="16" r="15.5"></circle>
-                                <line x1="10" y1="18" x2="16" y2="12"></line>
-                                <line x1="16" y1="12" x2="22" y2="18"></line>
-                            </g>
-                        </svg>
-                    </a>
                 </div>
             </div>
         </div>
@@ -1539,8 +1493,12 @@ T e m p l a t e M o
             const closedAlbum = document.getElementById('closedAlbum');
             const flipbookAlbum = document.getElementById('flipbookAlbum');
             
-            flipbookAlbum.style.display = 'none';
-            closedAlbum.style.display = 'flex';
+            if (flipbookAlbum) {
+                flipbookAlbum.style.display = 'none';
+            }
+            if (closedAlbum) {
+                closedAlbum.style.display = 'flex';
+            }
         }
         
         // Define functions at top level first
@@ -1548,8 +1506,12 @@ T e m p l a t e M o
             const closedAlbum = document.getElementById('closedAlbum');
             const flipbookAlbum = document.getElementById('flipbookAlbum');
             
-            closedAlbum.style.display = 'none';
-            flipbookAlbum.style.display = 'flex';
+            if (closedAlbum) {
+                closedAlbum.style.display = 'none';
+            }
+            if (flipbookAlbum) {
+                flipbookAlbum.style.display = 'flex';
+            }
             
             // Initialize flipbook with cover page
             updatePages();
@@ -1559,8 +1521,12 @@ T e m p l a t e M o
             const closedAlbum = document.getElementById('closedAlbum');
             const openedAlbum = document.getElementById('openedAlbum');
             
-            openedAlbum.style.display = 'none';
-            closedAlbum.style.display = 'flex';
+            if (openedAlbum) {
+                openedAlbum.style.display = 'none';
+            }
+            if (closedAlbum) {
+                closedAlbum.style.display = 'flex';
+            }
             document.body.style.overflow = 'auto';
         }
         
@@ -1593,14 +1559,30 @@ T e m p l a t e M o
             const photo = photoGallery[index];
             
             // Update main photo
-            document.getElementById('currentPhoto').src = photo.src;
-            document.getElementById('currentPhoto').alt = photo.title;
-            document.getElementById('photoTitle').textContent = photo.title;
-            document.getElementById('photoDescription').textContent = photo.description;
+            const currentPhoto = document.getElementById('currentPhoto');
+            const photoTitle = document.getElementById('photoTitle');
+            const photoDescription = document.getElementById('photoDescription');
+            const currentIndex = document.getElementById('currentIndex');
+            const totalPhotos = document.getElementById('totalPhotos');
+            const prevPhotoBtn = document.getElementById('prevPhotoBtn');
+            const nextPhotoBtn = document.getElementById('nextPhotoBtn');
             
-            // Update photo counter
-            document.getElementById('currentIndex').textContent = index + 1;
-            document.getElementById('totalPhotos').textContent = photoGallery.length;
+            if (currentPhoto) {
+                currentPhoto.src = photo.src;
+                currentPhoto.alt = photo.title;
+            }
+            if (photoTitle) {
+                photoTitle.textContent = photo.title;
+            }
+            if (photoDescription) {
+                photoDescription.textContent = photo.description;
+            }
+            if (currentIndex) {
+                currentIndex.textContent = index + 1;
+            }
+            if (totalPhotos) {
+                totalPhotos.textContent = photoGallery.length;
+            }
             
             // Update thumbnails
             const thumbnails = document.querySelectorAll('.thumbnail');
@@ -1609,8 +1591,12 @@ T e m p l a t e M o
             });
             
             // Update navigation buttons
-            document.getElementById('prevPhotoBtn').disabled = index === 0;
-            document.getElementById('nextPhotoBtn').disabled = index === photoGallery.length - 1;
+            if (prevPhotoBtn) {
+                prevPhotoBtn.disabled = index === 0;
+            }
+            if (nextPhotoBtn) {
+                nextPhotoBtn.disabled = index === photoGallery.length - 1;
+            }
         }
         
         // Navigate to previous photo
@@ -1630,7 +1616,7 @@ T e m p l a t e M o
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
             const openedAlbum = document.getElementById('openedAlbum');
-            if (openedAlbum.style.display === 'flex') {
+            if (openedAlbum && openedAlbum.style.display === 'flex') {
                 switch(e.key) {
                     case 'ArrowLeft':
                         previousPhoto();
@@ -1650,7 +1636,7 @@ T e m p l a t e M o
             const openedAlbum = document.getElementById('openedAlbum');
             const albumViewer = document.querySelector('.album-viewer');
             
-            if (openedAlbum.style.display === 'flex' && !albumViewer.contains(e.target)) {
+            if (openedAlbum && openedAlbum.style.display === 'flex' && albumViewer && !albumViewer.contains(e.target)) {
                 closeAlbum();
             }
         });
@@ -1784,6 +1770,50 @@ T e m p l a t e M o
             animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
             z-index: 1001;
+            resize: both;
+            min-width: 300px;
+            min-height: 300px;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        
+        /* Left resize handle */
+        .left-resize-handle {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 10px;
+            height: 100%;
+            cursor: ew-resize;
+            background: linear-gradient(45deg, transparent 40%, rgba(0,0,0,0.1) 50%, transparent 60%);
+            z-index: 1002;
+            user-select: none;
+        }
+
+        .left-resize-handle:hover {
+            background: linear-gradient(45deg, transparent 30%, rgba(0,0,0,0.2) 50%, transparent 70%);
+        }
+        
+        /* Disable text selection during resize */
+        .chatbot-popup.resizing,
+        .chatbot-popup.resizing * {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        /* Simple resize indicator in bottom-right corner */
+        .chatbot-popup::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(-45deg, transparent 0%, transparent 30%, #667eea 30%, #667eea 40%, transparent 40%, transparent 60%, #667eea 60%, #667eea 70%, transparent 70%);
+            pointer-events: none;
+            border-bottom-right-radius: 20px;
         }
         
         .chatbot-popup.active {
@@ -2426,7 +2456,7 @@ T e m p l a t e M o
                 return result;
             } else {
                 console.log('Employee not found');
-                return `❌ **Employee ID "${employeeId}" not attending Prime Outing.**\n\nPlease verify your Employee ID and try again.\n\n💡 **Try different formats:**\n• Your full employee ID number\n• Without spaces or special characters\n• Check for typos\n\n📧 **Need help?** PrimeEventCommittee@gmail.com`;
+                return `❌ **Employee ID "${employeeId}" not found in PECData.xlsx.**\n\nPlease verify your Employee ID and try again.\n\n💡 **Try different formats:**\n• Your full employee ID number\n• Without spaces or special characters\n• Check for typos\n\n📧 **Need help?** PrimeEventCommittee@gmail.com`;
             }
         }
 
@@ -2485,10 +2515,10 @@ T e m p l a t e M o
             'food': "🍽️ **Food & Dining:**\n\nEnjoy delicious meals at Punarnava Resort!\n\n🥘 **Included:**\n• Welcome refreshments\n• Breakfast, Lunch & Dinner\n• Evening snacks\n• Special event meals\n\n*Variety of vegetarian and non-vegetarian options available!*",
             'departure': "🚌 **Departure Details - October 3:**\n\n🕘 **8:00-9:00 PM:** T-Shirt, Baggage & Attendance\n🕘 **9:30 PM:** Assemble at Stellar IT Park\n🚌 **10:00 PM:** Bus departure for Dehradun\n🍽️ **12:00 AM:** Stop at SukhDev Dhaba\n\n⏰ **Please arrive on time!**",
             'return': "🏠 **Return Details - October 5:**\n\n🕘 **10:30 AM:** Departure from resort\n🍽️ **3:00-4:30 PM:** Lunch break\n🏠 **7:00 PM:** Arrival at Stellar IT Park\n\n🚌 **Safe journey back home!**",
-            'tshirt': "👕 **T-Shirt Collection:**\n\nCollect your custom Prime Outing 2025 T-shirts!\n\n📅 **When:** October 3, 8:00-9:00 PM\n📍 **Where:** Stellar IT Park\n🎯 **Don't forget** to collect during attendance marking!\n\n*Wear it with pride during the Team Building Activity!* 🎉",
+            'tshirt': "👕 **T-Shirt Collection:**\n\nCollect your custom Prime Outing 2025 T-shirts!\n\n📅 **When:** October 3, 8:00-9:00 PM\n📍 **Where:** Stellar IT Park\n🎯 **Don't forget** to collect during attendance marking!\n\n*Wear it with pride during the trip!* 🎉",
             'bring': "🎒 **What to Bring for Prime Outing 2025:**\n\n**👕 Clothing:**\n• Comfortable casual clothes (2-3 sets)\n• Light jacket/sweater for evening\n• Sleepwear and undergarments\n• Extra pair of shoes/slippers\n\n**🧴 Personal Items:**\n• Toiletries (toothbrush, toothpaste, etc.)\n• Personal medications\n• Phone charger and power bank\n• Camera for memories\n\n**📋 Documents:**\n• Valid ID proof\n• Any medical prescriptions\n\n**💡 Optional:**\n• Sunglasses and sunscreen\n• Small backpack for day activities\n• Snacks for the journey\n\n*Pack light and enjoy the trip!* 🌟",
             'packing': "🎒 **Packing Guide for Prime Outing 2025:**\n\n**👕 Clothing Essentials:**\n• 2-3 comfortable outfits\n• Light jacket for cool evenings\n• Comfortable walking shoes\n• Flip-flops/slippers for resort\n\n**🧴 Personal Care:**\n• Toiletries and personal hygiene items\n• Any personal medications\n• Hand sanitizer\n\n**📱 Electronics:**\n• Phone charger (mandatory!)\n• Power bank for long day\n• Camera/phone for photos\n\n**📄 Important:**\n• Valid photo ID\n• Emergency contact details\n\n**💼 Travel Tips:**\n• Pack in a small bag/backpack\n• Keep essentials in carry-on\n• Don't overpack - it's only 2 days!\n\n*Travel light, create memories!* ✨",
-            'dj': "🎵 **DJ Night - Prime Outing 2025:**\n\n*Get ready to dance the night away!*\n\n🕘 **When:** October 4 evening (Saturday)\n📍 **Where:** Punarnava Resort party area\n🎶 **Music:** Latest hits, Bollywood, and your favorites\n💃 **Dress:** Comfortable party wear\n\n**🎉 What to Expect:**\n• Professional DJ with great sound system\n• Dance floor with lighting effects\n• Refreshments and snacks\n• Photo opportunities\n\n**💡 Tips:**\n• Wear comfortable dancing shoes\n• Bring your energy and enthusiasm!\n• Request your favorite songs\n\n*Let's make it a night to remember!* ✨",
+            'dj': "🎵 **DJ Night - Prime Outing 2025:**\n\n*Get ready to dance the night away!*\n\n🕘 **When:** October 4 evening (Saturday)\n📍 **Where:** Punarnava Resort party area\n🎶 **Music:** Latest hits, Bollywood, and your favorites\n💃 **Dress:** Comfortable party wear\n\n**🎉 What to Expect:**\n• Professional DJ with great sound system\n• Dance floor with lighting effects\n• Fun group activities and games\n• Refreshments and snacks\n• Photo opportunities\n\n**💡 Tips:**\n• Wear comfortable dancing shoes\n• Bring your energy and enthusiasm!\n• Request your favorite songs\n\n*Let's make it a night to remember!* ✨",
             'stargazing': "🌟 **Stargazing - \"Taaron ki chaanv\":**\n\n*Experience the magic of the night sky!*\n\n🕘 **When:** October 4 late evening (after DJ session)\n📍 **Where:** Open area at Punarnava Resort\n🌌 **Experience:** Peaceful stargazing session\n\n**✨ What to Expect:**\n• Clear mountain sky views\n• Relaxing atmosphere\n• Perfect for photos\n• Quiet time with colleagues\n• Beautiful Dehradun night views\n\n**💡 Tips:**\n• Bring a light jacket (gets cool at night)\n• Perfect time for group photos\n• Enjoy the peaceful mountain air\n\n*Under the canopy of stars!* 🌠",
             'swimming': "🏊 **Swimming Pool - Punarnava Resort:**\n\n*Relax and unwind in style!*\n\n🕘 **Available:** Throughout your stay\n📍 **Where:** Resort swimming pool area\n🌊 **Type:** Clean, well-maintained pool\n\n**🏊‍♀️ What to Expect:**\n• Refreshing pool water\n• Pool area seating\n• Great for relaxation\n• Perfect for group photos\n• Safe and supervised area\n\n**💡 What to Bring:**\n• Swimming costume/swim wear\n• Towel (or use resort towels)\n• Flip-flops for pool area\n• Waterproof phone case for photos\n\n**⏰ Pool Hours:**\n• Check with resort for specific timings\n• Usually available during day hours\n\n*Dive into fun!* 💦",
             'photography': "📸 **Group Photography Session:**\n\n*Capture memories that last forever!*\n\n🕘 **When:** October 4 (multiple sessions)\n📍 **Where:** Beautiful spots around Punarnava Resort\n📷 **Style:** Professional group photos\n\n**📸 What to Expect:**\n• Professional photographer\n• Multiple group combinations\n• Beautiful resort backdrop\n• Individual and team photos\n• Candid moments capture\n\n**💡 Photo Tips:**\n• Wear your Prime Outing 2025 T-shirt\n• Coordinate colors for group shots\n• Bring props if you want\n• Smile and have fun!\n\n**📱 Sharing:**\n• Photos will be shared with everyone\n• Perfect for social media\n• Great for office memories\n\n*Say cheese and create memories!* 📷✨",
@@ -2505,6 +2535,11 @@ T e m p l a t e M o
             console.log('=== SEND MESSAGE CALLED ===');
             
             const userInput = document.getElementById('userInput');
+            if (!userInput) {
+                console.warn('User input element not found');
+                return;
+            }
+            
             const message = userInput.value.trim();
             
             if (message === '') {
@@ -2688,7 +2723,7 @@ T e m p l a t e M o
                 }
                 // General bus/room request without ID
                 else if (isBusRoomQuery && !foundEmployeeId) {
-                    response = "🚌 **Need your bus and room information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is G12345'\n• 'ID I12345'\n• 'Employee ID 1234567'\n• Or just type your ID number: 'N12345'\n\nI'll look up your bus number and room assignment! 🏠";
+                    response = "🚌 **Need your bus and room information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is 12345'\n• 'ID 12345'\n• 'Employee ID 12345'\n• Or just type your ID number: '12345'\n\nI'll look up your bus number and room assignment! 🏠";
                 }
                 // Use default response for unknown queries
                 else {
@@ -2709,6 +2744,11 @@ T e m p l a t e M o
             const popup = document.getElementById('chatbotPopup');
             const toggleIcon = document.getElementById('toggleIcon');
             const badge = document.getElementById('notificationBadge');
+            
+            if (!popup || !toggleIcon || !badge) {
+                console.warn('Chatbot elements not found');
+                return;
+            }
             
             isOpen = !isOpen;
             
@@ -2731,20 +2771,20 @@ T e m p l a t e M o
 
         function sendQuickQuestion(question) {
             const userInput = document.getElementById('userInput');
-            if (question === 'My employee ID is ') {
-                // For employee lookup, just set the placeholder and focus
-                userInput.value = question;
-                userInput.focus();
-                // Position cursor at the end
-                userInput.setSelectionRange(userInput.value.length, userInput.value.length);
-            } else {
-                userInput.value = question;
-                sendMessage();
-            }
+            userInput.value = question;
+            sendMessage();
         }
 
         function addMessage(message, sender) {
             const chatMessages = document.getElementById('chatMessages');
+            if (!chatMessages) {
+                console.warn('Chat messages container not found');
+                return;
+            }
+            
+            // Store current scroll position before adding message
+            const wasScrolledToBottom = chatMessages.scrollTop >= (chatMessages.scrollHeight - chatMessages.clientHeight - 50);
+            
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}-message`;
             
@@ -2760,7 +2800,11 @@ T e m p l a t e M o
             messageDiv.appendChild(content);
             
             chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Only auto-scroll if user was already at the bottom or if it's a user message
+            if (sender === 'user' || wasScrolledToBottom) {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
             
             // Show notification if chat is closed
             if (!isOpen && sender === 'bot') {
@@ -2815,18 +2859,76 @@ T e m p l a t e M o
             }
         });
 
-        // Auto-resize textarea
-        function autoResize() {
-            const textarea = document.getElementById('userInput');
-            textarea.style.height = 'auto';
-            textarea.style.height = Math.min(textarea.scrollHeight, 100) + 'px';
-        }
+        // Enhanced auto-resize textarea (from popup-chatbot.html)
+        document.getElementById('userInput').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 80) + 'px';
+            
+            // Enable/disable send button based on content
+            const sendBtn = document.getElementById('sendButton');
+            if (sendBtn) {
+                sendBtn.disabled = this.value.trim() === '';
+            }
+        });
 
-        // Initialize auto-resize
+        // Send message on Enter (but not Shift+Enter)
         document.addEventListener('DOMContentLoaded', function() {
             const userInput = document.getElementById('userInput');
             if (userInput) {
-                userInput.addEventListener('input', autoResize);
+                userInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMessage();
+                    }
+                });
+            }
+        });
+
+        // Left resize functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const leftResizeHandle = document.getElementById('leftResizeHandle');
+            const chatbotPopup = document.getElementById('chatbotPopup');
+            
+            if (leftResizeHandle && chatbotPopup) {
+                let isResizing = false;
+                let startX = 0;
+                let startWidth = 0;
+                let startRight = 0;
+
+                leftResizeHandle.addEventListener('mousedown', function(e) {
+                    isResizing = true;
+                    startX = e.clientX;
+                    startWidth = parseInt(window.getComputedStyle(chatbotPopup).width, 10);
+                    startRight = parseInt(window.getComputedStyle(chatbotPopup).right, 10);
+                    
+                    document.addEventListener('mousemove', doResize);
+                    document.addEventListener('mouseup', stopResize);
+                    e.preventDefault();
+                });
+
+                function doResize(e) {
+                    if (!isResizing) return;
+                    
+                    const deltaX = startX - e.clientX; // Reversed for left resize
+                    const newWidth = startWidth + deltaX;
+                    const newRight = startRight + deltaX;
+                    
+                    // Apply constraints
+                    const minWidth = 300;
+                    const maxWidth = Math.min(600, window.innerWidth * 0.9);
+                    const maxRight = window.innerWidth - minWidth;
+                    
+                    if (newWidth >= minWidth && newWidth <= maxWidth && newRight >= 20 && newRight <= maxRight) {
+                        chatbotPopup.style.width = newWidth + 'px';
+                        chatbotPopup.style.right = newRight + 'px';
+                    }
+                }
+
+                function stopResize() {
+                    isResizing = false;
+                    document.removeEventListener('mousemove', doResize);
+                    document.removeEventListener('mouseup', stopResize);
+                }
             }
         });
     </script>
@@ -2838,6 +2940,7 @@ T e m p l a t e M o
             <div class="notification-badge" id="notificationBadge">!</div>
         </button>
         <div class="chatbot-popup" id="chatbotPopup">
+            <div class="left-resize-handle" id="leftResizeHandle"></div>
             <div class="chatbot-header">
                 <div class="header-content">
                     <div class="bot-avatar">🤖</div>
