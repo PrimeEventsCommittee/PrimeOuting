@@ -894,7 +894,7 @@ https://templatemo.com/tm-583-festava-live
                                         Next <i class="bi-chevron-right"></i>
                                     </button>
                                     <button class="book-nav-btn close-book-btn" onclick="closeBook()">
-                                        <i class="bi-x-lg"></i> Close Album
+                                        <i class="bi-x-lg"></i> Close Book
                                     </button>
                                 </div>
                             </div>
@@ -1007,20 +1007,23 @@ https://templatemo.com/tm-583-festava-live
                                 <tbody>
                                     <tr>
                                         <th scope="row">Morning</th>
-                                        <td style="background-color: #191818">
+                                        <td class="table-background-image-wrap country-background-image" style="background-image: url('images/Bagpack.JPG'); background-size: cover; background-position: center; position: relative;">
                                             <h3>Bagpacking</h3>
                                             <p class="mb-2">Day Time</p >
                                             <p>Home</p>
+                                            <div class="section-overlay"></div>
                                         </td>
-                                        <td>
+                                        <td class="table-background-image-wrap country-background-image" style="background-image: url('images/Activity.JPG'); background-size: cover; background-position: center; position: relative;">
                                             <h3>Breakfast & Activities</h3>
                                             <p class="mb-2">8:00 AM - 1:30 PM</p>
                                             <p>Team Building</p>
+                                            <div class="section-overlay"></div>
                                         </td>
-                                        <td>
-                                            <h3>Final Breakfast</h3>
-                                            <p class="mb-2">7:30 - 9:30 AM</p>
+                                        <td class="table-background-image-wrap country-background-image" style="background-image: url('images/LeaderMessage.JPG'); background-size: cover; background-position: center; position: relative;">
+                                            <h3>Leaders Message</h3>
+                                            <p class="mb-2">9:30 AM</p>
                                             <p>Check-out & Photos</p>
+                                            <div class="section-overlay"></div>
                                         </td>
                                     </tr>
 
@@ -1038,19 +1041,21 @@ https://templatemo.com/tm-583-festava-live
                                             <p>Dance & Entertainment</p>
                                             <div class="section-overlay"></div>
                                         </td>
-                                        <td>
+                                        <td class="table-background-image-wrap country-background-image" style="background-image: url('images/Return.JPG'); background-size: cover; background-position: center; position: relative;">
                                             <h3>Return Journey</h3>
                                             <p class="mb-2">3:00 - 4:30 PM</p>
                                             <p>Lunch & Travel</p>
+                                            <div class="section-overlay"></div>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Night</th>
-                                        <td>
-                                            <h3>🍿Snacking & 🚻Freshen-Up</h3>
+                                        <td class="table-background-image-wrap country-background-image" style="background-image: url('images/Snacking.JPG'); background-size: cover; background-position: center; position: relative;">
+                                            <h3>Snacking & Freshen-Up</h3>
                                             <p class="mb-2">12:00 AM</p>
                                             <p>On the Way to Dehradun</p>
+                                            <div class="section-overlay"></div>
                                         </td>
                                         <td class="table-background-image-wrap country-background-image">
                                             <h3>Stargazing</h3>
@@ -1058,10 +1063,11 @@ https://templatemo.com/tm-583-festava-live
                                             <p>Taaron ki chaanv</p>
                                             <div class="section-overlay"></div>
                                         </td>
-                                        <td>
+                                        <td class="table-background-image-wrap country-background-image" style="background-image: url('images/Stellar.jpg'); background-size: cover; background-position: center; position: relative;">
                                             <h3>Back Home</h3>
                                             <p class="mb-2">7:00 PM</p>
                                             <p>Arrival at Stellar IT Park</p>
+                                            <div class="section-overlay"></div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -2801,10 +2807,7 @@ T e m p l a t e M o
             
             chatMessages.appendChild(messageDiv);
             
-            // Only auto-scroll if user was already at the bottom or if it's a user message
-            if (sender === 'user' || wasScrolledToBottom) {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
+            // No auto-scroll. User controls scroll position.
             
             // Show notification if chat is closed
             if (!isOpen && sender === 'bot') {
