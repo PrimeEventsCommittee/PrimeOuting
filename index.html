@@ -2407,7 +2407,7 @@ T e m p l a t e M o
             
             if (!employeeData || employeeData.length === 0) {
                 console.log('No employee data available');
-                return "❌ **Employee data not loaded yet.**\n\nPlease ensure PECData.xlsx is properly loaded. When hosted on GitHub, the file will load automatically.\n\n **Contact:** PrimeEventCommittee for assistance.";
+                return "❌ **Employee data not loaded yet.**\n\n **Contact:** PrimeEventCommittee for assistance.";
             }
             
             // Clean the employee ID (remove spaces, convert to string, handle case)
@@ -2453,8 +2453,85 @@ T e m p l a t e M o
                 return result;
             } else {
                 console.log('Employee not found');
-                return `❌ **Employee ID "${employeeId}" not found in PECData.xlsx.**\n\nPlease verify your Employee ID and try again.\n\n💡 **Try different formats:**\n• Your full employee ID number\n• Without spaces or special characters\n• Check for typos\n\n📧 **Need help?** PrimeEventCommittee@gmail.com`;
+                return `❌ **Employee ID "${employeeId}" not opted for Prime Outing .**\n\nPlease verify your Employee ID and try again.\n\n💡 **Try different formats:**\n• Your full employee ID number\n• Without spaces or special characters\n• Check for typos\n\n📧 **Need help?** PrimeEventCommittee@gmail.com`;
             }
+        }
+
+        // Room partner lookup function for chatbot
+        function lookupRoomPartner(employeeId) {
+            console.log('=== LOOKUP ROOM PARTNER FUNCTION CALLED ===');
+            console.log('Received employeeId parameter:', employeeId);
+            console.log('Employee data length:', employeeData ? employeeData.length : 'undefined');
+            
+            if (!employeeData || employeeData.length === 0) {
+                console.log('No employee data available');
+                return "❌ **Employee data not loaded yet.**\n\nPlease ensure PECData.xlsx is properly loaded. When hosted on GitHub, the file will load automatically.\n\n **Contact:** PrimeEventCommittee for assistance.";
+            }
+            
+            // Clean the employee ID (remove spaces, convert to string, handle case)
+            const cleanId = employeeId.toString().trim().toUpperCase();
+            console.log('Searching for cleaned ID:', cleanId);
+            
+            // First, find the requesting employee
+            const requestingEmployee = employeeData.find(emp => {
+                const possibleIdFields = ['EmployeeID', 'Employee ID', 'ID', 'EmpID', 'id', 'employeeId'];
+                let empId = '';
+                
+                for (const field of possibleIdFields) {
+                    if (emp[field]) {
+                        empId = emp[field].toString().trim().toUpperCase();
+                        break;
+                    }
+                }
+                
+                return empId === cleanId;
+            });
+            
+            if (!requestingEmployee) {
+                console.log('Requesting employee not found');
+                return `❌ **Employee ID "${employeeId}" not found in Prime Outing participants.**\n\nPlease verify your Employee ID and try again.\n\n💡 **Try different formats:**\n• Your full employee ID number\n• Without spaces or special characters\n• Check for typos\n\n📧 **Need help?** PrimeEventCommittee@gmail.com`;
+            }
+            
+            // Get the requesting employee's room number
+            const getRoomNumber = (employee) => {
+                return employee.RoomNumber || employee['Room Number'] || employee.Room || employee.room || employee.roomNumber || 'N/A';
+            };
+            
+            const requestingEmployeeRoom = getRoomNumber(requestingEmployee);
+            
+            if (requestingEmployeeRoom === 'N/A' || !requestingEmployeeRoom) {
+                return `❌ **No room assignment found for your Employee ID.**\n\nRoom assignments may not be finalized yet. Please contact PrimeEventCommittee@gmail.com for the latest room information.`;
+            }
+            
+            // Find all employees in the same room, excluding the requesting employee
+            const getName = (employee) => {
+                return employee.Name || employee['Employee Name'] || employee.name || employee.employeeName || 'N/A';
+            };
+            
+            const requestingEmployeeName = getName(requestingEmployee);
+            
+            const roomPartners = employeeData.filter(emp => {
+                const empRoom = getRoomNumber(emp);
+                const empName = getName(emp);
+                return empRoom === requestingEmployeeRoom && empName !== requestingEmployeeName;
+            });
+            
+            console.log('Found room partners:', roomPartners);
+            
+            if (roomPartners.length === 0) {
+                return `🏠 **Room ${requestingEmployeeRoom}**\n\n👤 **You are currently the only person assigned to this room.**\n\nRoom assignments may still be in progress. Check back later or contact PrimeEventCommittee@gmail.com for updates!\n\n💡 **Your Room:** ${requestingEmployeeRoom}`;
+            }
+            
+            // Build the response with room partner names
+            let partnersList = '';
+            roomPartners.forEach((partner, index) => {
+                const partnerName = getName(partner);
+                partnersList += `👤 **${partnerName}**\n`;
+            });
+            
+            const result = `🏠 **Room ${requestingEmployeeRoom} - Your Room Partner${roomPartners.length > 1 ? 's' : ''}:**\n\n${partnersList}\n📧 **Questions?** PrimeEventCommittee@gmail.com\n\n💡 **Tip:** Save this info for easy reference!`;
+            console.log('Returning room partner result:', result);
+            return result;
         }
 
         // Function to load actual employee data (for administrators)
@@ -2506,7 +2583,7 @@ T e m p l a t e M o
             'when': "Prime Outing 2025 is scheduled for **October 3-5, 2025** to Dehradun!\n\n📅 **Duration:** 2 Days, 1 Night\n🏨 **Destination:** Punarnava Resort, Dehradun\n📧 **Questions?** PrimeEventCommittee@gmail.com",
             'where': "We're going to **Punarnava Resort, Dehradun** for our Prime Outing 2025!\n\n🏔️ **Location:** Dehradun, Uttarakhand\n⏱️ **Journey Time:** About 8 hours from departure\n🚌 **Mode:** Comfortable bus travel",
             'activities': "🎉 **Prime Outing 2025 Activities:**\n\n🎵 **DJ Night** - Dance the night away!\n🏆 **Team Building Activities** - Fun group challenges\n🌟 **Stargazing** - Under \"Taaron ki chaanv\"\n📸 **Group Photography** - Capture memories\n🏊 **Swimming Pool** - Relax and unwind\n🍽️ **Great Food** - Delicious meals\n\n*More surprises planned!* 🎊",
-            'itinerary': "**Complete Prime Outing 2025 Itinerary:**\n\n**🗓️ October 3rd (Friday):**\n• 8:00-9:00 PM: T-shirt & baggage collection\n• 9:30 PM: Lights, camera, Assemble! The cast is ready to roll!\n• 10:00 PM: And the journey begins... cue the road trip playlist!\n\n**🗓️ October 4th (Saturday):**\n• 01:00 AM: Midnight munchies at the iconic dhaba – full desi swag!\n• 2:00 AM: Back on the road – doston ke saath, neend gayi bhaad mein!\n• 5:00-5:30 AM: Quick pit stop – freshen up for the next scene!\n• 6:30 AM: Welcome to the set – nature, peace, and pahadi vibes!\n• 7:00 AM: Rooms mil gaye – ab thoda rest, thoda selfie!\n• 8:00-10:00 AM: Nashta Vaasta Kia jaye – energy reload!\n• 11:30 AM-1:00 PM: Adventure mode ON – stunts, games, and full-on Team Bonding Vibes\n• 1:30-3:00 PM: Khana Peena Ho jaye \n• 5:00-6:00 PM: Chai pe charcha – gossip, giggles, and garma garam snacks!\n• 7:30-10:00 PM: Dance floor dhamaka – lights, beats, and Bollywood thumkas\n• 9:00-11:00 PM: Shaam-e-daawat – Khaana Khilaana\n• 11:00 PM+: Taaron ki chaanv me\n\n**🗓️ October 5th (Sunday):**\n• 7:30-9:30 AM: Last meal together – bittersweet bites and memories\n• 9:45 AM: Pack up the memories – but the story continues…\n• 10:00 AM: Say cheese! Freeze the frame – this one's going in the credits!\n• 10:30 AM: Departure\n• 3:00-4:30 PM: One last feast – filmy farewell with foodie feels!\n• 7:00 PM: Back to base – hearts full, phones full, and souls recharged!",
+            'itinerary': "**Complete Prime Outing 2025 Itinerary:**\n\n**🗓️ October 3rd (Friday):**\n• 8:00-9:00 PM: T-shirt & baggage collection\n• 9:30 PM: Lights, camera, Assemble! The cast is ready to roll!\n• 10:00 PM: And the journey begins... cue the road trip playlist!\n\n**🗓️ October 4th (Saturday):**\n• 01:00 AM: Midnight munchies at the iconic dhaba – full desi swag!\n• 2:00 AM: Back on the road – doston ke saath, neend gayi bhaad mein!\n• 5:00-5:30 AM: Quick pit stop – freshen up for the next scene!\n• 6:30 AM: Welcome to the set – nature, peace, and pahadi vibes!\n• 7:00 AM: Rooms mil gaye – ab thoda rest, thoda selfie!\n• 8:00-10:00 AM: Nashta Vaasta Kia jaye – energy reload!\n• 11:30 AM-1:00 PM: Adventure mode ON – stunts, games, and full-on Team Bonding Vibes\n• 1:30-3:00 PM: Khana Peena Ho jaye \n• 4:00-5:00 PM: Explore the Resort \n• 5:00-6:00 PM: Chai pe charcha – gossip, giggles, and garma garam snacks!\n• 7:30-10:00 PM: Dance floor dhamaka – lights, beats, and Bollywood thumkas\n• 9:00-11:00 PM: Shaam-e-daawat – Khaana Khilaana\n• 11:00 PM+: Taaron ki chaanv me\n\n**🗓️ October 5th (Sunday):**\n• 7:30-9:30 AM: Last meal together – bittersweet bites and memories\n• 9:45 AM: Pack up the memories – but the story continues…\n• 10:00 AM: Say cheese! Freeze the frame – this one's going in the credits!\n• 10:30 AM: Departure\n• 3:00-4:30 PM: One last feast – filmy farewell with foodie feels!\n• 7:00 PM: Back to base – hearts full, phones full, and souls recharged!",
             'schedule': "📅 **Prime Outing 2025 Schedule:**\n\n**October 3 (Friday):**\n🕘 8:00-9:00 PM: T-Shirt & Baggage Collection\n🚌 10:00 PM: Departure from Stellar IT Park\n\n**October 4 (Saturday):**\n🏨 Full day at Punarnava Resort\n🎉 Activities, DJ Night & Fun!\n\n**October 5 (Sunday):**\n🕘 10:30 AM: Departure from resort\n🏠 7:00 PM: Return to Stellar IT Park",
             'resort': "🏨 **Punarnava Resort & Spa, Dehradun**\n\nOur accommodation for Prime Outing 2025!\n\n✨ **Features:**\n🏊 Swimming pool access\n🌿 Beautiful natural surroundings\n🍽️ Great dining facilities\n🏠 Comfortable rooms\n📧 **Questions?** PrimeEventCommittee@gmail.com",
             'food': "🍽️ **Food & Dining:**\n\nEnjoy delicious meals at Punarnava Resort!\n\n🥘 **Included:**\n• Welcome refreshments\n• Breakfast, Lunch & Dinner\n• Evening snacks\n• Special event meals\n\n*Variety of vegetarian and non-vegetarian options available!*",
@@ -2691,7 +2768,12 @@ T e m p l a t e M o
                                      messageText.includes('transport') || messageText.includes('accommodation') ||
                                      messageText.includes('assignment') || messageText.includes('details');
                 
+                const isRoomPartnerQuery = messageText.includes('room partner') || messageText.includes('roommate') || 
+                                         messageText.includes('room mate') || messageText.includes('partner') || 
+                                         messageText.includes('sharing room') || messageText.includes('who is in my room');
+                
                 console.log('Is bus/room query:', isBusRoomQuery);
+                console.log('Is room partner query:', isRoomPartnerQuery);
                 
                 // Try to find employee ID
                 let foundEmployeeId = null;
@@ -2713,10 +2795,19 @@ T e m p l a t e M o
                     }
                 }
                 
+                // Room partner lookup logic (has priority over general employee lookup)
+                if (foundEmployeeId && foundEmployeeId.length >= 3 && isRoomPartnerQuery) {
+                    console.log('=== PERFORMING ROOM PARTNER LOOKUP ===');
+                    response = lookupRoomPartner(foundEmployeeId);
+                }
                 // Employee lookup logic (for specific ID patterns or bus/room queries with valid IDs)
-                if (foundEmployeeId && foundEmployeeId.length >= 3 && (isBusRoomQuery || /^\s*[a-zA-Z0-9]{3,}\s*$/.test(message.trim()))) {
+                else if (foundEmployeeId && foundEmployeeId.length >= 3 && (isBusRoomQuery || /^\s*[a-zA-Z0-9]{3,}\s*$/.test(message.trim()))) {
                     console.log('=== PERFORMING EMPLOYEE LOOKUP ===');
                     response = lookupEmployee(foundEmployeeId);
+                }
+                // General room partner request without ID
+                else if (isRoomPartnerQuery && !foundEmployeeId) {
+                    response = "🏠 **Need your room partner information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is 12345'\n• 'ID 12345'\n• 'Employee ID 12345'\n• Or just type your ID number: '12345'\n\nI'll look up who's sharing the room with you! 👥";
                 }
                 // General bus/room request without ID
                 else if (isBusRoomQuery && !foundEmployeeId) {
@@ -2961,9 +3052,6 @@ T e m p l a t e M o
                 </div>
             </div>
             <div class="quick-questions">
-                <div class="quick-question" onclick="sendQuickQuestion('My bus information')">
-                    <i class="fas fa-bus"></i> Get Bus Info
-                </div>
                 <div class="quick-question" onclick="sendQuickQuestion('When is the trip?')">
                     <i class="fas fa-calendar-alt"></i> Trip Dates
                 </div>
@@ -2988,6 +3076,14 @@ T e m p l a t e M o
                 <div class="quick-question" onclick="sendQuickQuestion('Contact information')">
                     <i class="fas fa-phone"></i> Contact
                 </div>
+                <div class="quick-question" onclick="sendQuickQuestion('My bus information')">
+                    <i class="fas fa-bus"></i> Get Bus Info
+                </div>
+                
+                <div class="quick-question" onclick="sendQuickQuestion('My room partner')">
+                    <i class="fas fa-bed"></i> Room Partner
+                </div>
+                
             </div>
             <div class="chat-input-area">
                 <textarea class="chat-input" id="userInput" placeholder="Type your message here..." rows="1"></textarea>
