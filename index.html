@@ -2313,8 +2313,13 @@ T e m p l a t e M o
             try {
                 console.log('Attempting to load PECData.xlsx...');
                 
-                // Try multiple possible paths for the Excel file
+                // Add cache-busting parameter to avoid GitHub caching issues
+                const timestamp = new Date().getTime();
+                
+                // Try multiple possible paths for the Excel file with cache busting
                 const possiblePaths = [
+                    `./PECData.xlsx?v=${timestamp}`,
+                    `./PECData.xlsx?cache=${timestamp}`,
                     './PECData.xlsx',
                     '../PEC_v2.0/PECData.xlsx',
                     '../../PEC_v2.0/PECData.xlsx'
@@ -2325,19 +2330,35 @@ T e m p l a t e M o
                 
                 for (const path of possiblePaths) {
                     try {
-                        response = await fetch(path);
+                        console.log(`Trying to load from: ${path}`);
+                        response = await fetch(path, {
+                            cache: 'no-cache',  // Force fresh download
+                            headers: {
+                                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                                'Pragma': 'no-cache',
+                                'Expires': '0'
+                            }
+                        });
+                        
+                        console.log(`Response status for ${path}: ${response.status}`);
+                        
                         if (response.ok) {
                             workingPath = path;
-                            console.log(`Found PECData.xlsx at: ${path}`);
+                            console.log(`✅ Found PECData.xlsx at: ${path}`);
                             break;
                         }
                     } catch (error) {
-                        console.log(`Failed to load from ${path}`);
+                        console.log(`❌ Failed to load from ${path}:`, error.message);
                     }
                 }
                 
                 if (!response || !response.ok) {
-                    console.log('PECData.xlsx not found in any expected location');
+                    console.log('❌ PECData.xlsx not found in any expected location');
+                    console.log('This might be due to:');
+                    console.log('- File not uploaded to GitHub yet');
+                    console.log('- GitHub Pages not updated');
+                    console.log('- Browser caching old version');
+                    console.log('- File path mismatch');
                     return false;
                 }
                 
@@ -2376,23 +2397,52 @@ T e m p l a t e M o
 
         // Initialize with Excel data only
         async function initializeEmployeeData() {
+            console.log('🔄 Initializing employee data...');
+            
             // First try to load from storage
             const hasStoredData = loadEmployeeDataFromStorage();
             
             if (hasStoredData) {
-                console.log('Using stored employee data from PECData.xlsx');
+                console.log('✅ Using stored employee data from PECData.xlsx');
                 return;
             }
             
             // Try to load PECData.xlsx
-            console.log('No stored data found, attempting to load PECData.xlsx...');
+            console.log('📄 No stored data found, attempting to load PECData.xlsx...');
             const excelLoaded = await loadPECDataFile();
             
             if (!excelLoaded) {
-                console.log('❌ PECData.xlsx could not be loaded. Employee lookup will not be available.');
+                console.log('❌ PECData.xlsx could not be loaded.');
+                console.log('💡 This is common when:');
+                console.log('   - GitHub Pages is still updating after file upload');
+                console.log('   - Browser cache needs clearing');
+                console.log('   - File was recently re-uploaded');
+                console.log('🔄 Try refreshing the page in a few minutes');
+                
                 employeeData = [];
             }
         }
+
+        // Add a manual retry function for GitHub issues
+        window.retryDataLoad = async function() {
+            console.log('🔄 Manual retry: Clearing cache and reloading data...');
+            
+            // Clear localStorage to force fresh load
+            clearEmployeeDataFromStorage();
+            
+            // Clear browser cache by adding timestamp
+            const timestamp = new Date().getTime();
+            console.log(`🕒 Cache bust timestamp: ${timestamp}`);
+            
+            // Try to load fresh data
+            const success = await loadPECDataFile();
+            
+            if (success) {
+                return `✅ PECData.xlsx loaded successfully: ${employeeData.length} records`;
+            } else {
+                return '❌ Still unable to load PECData.xlsx. Check GitHub Pages deployment status.';
+            }
+        };
 
         // Load data when page loads
         window.addEventListener('DOMContentLoaded', function() {
@@ -2407,7 +2457,7 @@ T e m p l a t e M o
             
             if (!employeeData || employeeData.length === 0) {
                 console.log('No employee data available');
-                return "❌ **Employee data not loaded yet.**\n\n **Contact:** PrimeEventCommittee for assistance.";
+                return "❌ **Employee data not loaded yet.**\n\n**Possible causes:**\n• GitHub Pages still updating after file re-upload\n• Browser cache showing old version\n• File upload still processing\n\n**Solutions:**\n• Wait 2-3 minutes and refresh page\n• Clear browser cache (Ctrl+F5)\n• Try in incognito/private window\n\n📧 **Contact:** PrimeEventCommittee@gmail.com\n\n💡 **Dev tip:** Open browser console (F12) for detailed loading info";
             }
             
             // Clean the employee ID (remove spaces, convert to string, handle case)
@@ -2465,7 +2515,7 @@ T e m p l a t e M o
             
             if (!employeeData || employeeData.length === 0) {
                 console.log('No employee data available');
-                return "❌ **Employee data not loaded yet.**\n\nPlease ensure PECData.xlsx is properly loaded. When hosted on GitHub, the file will load automatically.\n\n **Contact:** PrimeEventCommittee for assistance.";
+                return "❌ **Employee data not loaded yet.**\n\n**Possible causes:**\n• GitHub Pages still updating after file re-upload\n• Browser cache showing old version\n• File upload still processing\n\n**Solutions:**\n• Wait 2-3 minutes and refresh page\n• Clear browser cache (Ctrl+F5)\n• Try in incognito/private window\n\n📧 **Contact:** PrimeEventCommittee@gmail.com\n\n💡 **Dev tip:** Open browser console (F12) for detailed loading info";
             }
             
             // Clean the employee ID (remove spaces, convert to string, handle case)
@@ -2565,6 +2615,33 @@ T e m p l a t e M o
             }
             
             return `Using data from PECData.xlsx (${employeeData.length} records)`;
+        };
+
+        // Debug function to check GitHub file status
+        window.debugGitHubFile = async function() {
+            console.log('🔍 Debugging GitHub file access...');
+            
+            const timestamp = new Date().getTime();
+            const testUrl = `./PECData.xlsx?debug=${timestamp}`;
+            
+            try {
+                const response = await fetch(testUrl, {
+                    method: 'HEAD', // Just check if file exists
+                    cache: 'no-cache'
+                });
+                
+                console.log(`📊 GitHub file status: ${response.status}`);
+                console.log(`📊 Response headers:`, response.headers);
+                
+                if (response.ok) {
+                    return `✅ PECData.xlsx is accessible on GitHub (Status: ${response.status})`;
+                } else {
+                    return `❌ PECData.xlsx not accessible (Status: ${response.status})`;
+                }
+            } catch (error) {
+                console.error('Debug error:', error);
+                return `❌ Error accessing file: ${error.message}`;
+            }
         };
 
         // Function to clear employee data
@@ -3047,7 +3124,6 @@ T e m p l a t e M o
                         <br><br>
                         <i class="fas fa-id-card" style="color: #667eea;"></i> <strong>Type your Employee ID</strong> to get your bus and room assignments!
                         <br><br>
-                        <i class="fas fa-lightbulb" style="color: #667eea;"></i> <small><em>When hosted on GitHub, actual employee data loads from PECData.xlsx. For local testing, try sample IDs: N79226, 12345, A1234</em></small>
                     </div>
                 </div>
             </div>
