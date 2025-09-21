@@ -1053,7 +1053,7 @@ https://templatemo.com/tm-583-festava-live
                                         <th scope="row">Night</th>
                                         <td class="table-background-image-wrap country-background-image" style="background-image: url('images/Snacking.JPG'); background-size: cover; background-position: center; position: relative;">
                                             <h3>Snacking & Freshen-Up</h3>
-                                            <p class="mb-2">01:00 AM</p>
+                                            <p class="mb-2">12:00 AM</p>
                                             <p>On the Way to Dehradun</p>
                                             <div class="section-overlay"></div>
                                         </td>
@@ -2872,19 +2872,21 @@ T e m p l a t e M o
                     }
                 }
                 
+                console.log('Final foundEmployeeId:', foundEmployeeId);
+                
                 // Room partner lookup logic (has priority over general employee lookup)
                 if (foundEmployeeId && foundEmployeeId.length >= 3 && isRoomPartnerQuery) {
                     console.log('=== PERFORMING ROOM PARTNER LOOKUP ===');
                     response = lookupRoomPartner(foundEmployeeId);
                 }
-                // Employee lookup logic (for specific ID patterns or bus/room queries with valid IDs)
-                else if (foundEmployeeId && foundEmployeeId.length >= 3 && (isBusRoomQuery || /^\s*[a-zA-Z0-9]{3,}\s*$/.test(message.trim()))) {
+                // Employee lookup logic - ENHANCED: If we found an Employee ID, perform lookup regardless of other conditions
+                else if (foundEmployeeId && foundEmployeeId.length >= 3) {
                     console.log('=== PERFORMING EMPLOYEE LOOKUP ===');
                     response = lookupEmployee(foundEmployeeId);
                 }
                 // General room partner request without ID
                 else if (isRoomPartnerQuery && !foundEmployeeId) {
-                    response = "🏠 **Need your room partner information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is 12345'\n• 'ID 12345'\n• 'Employee ID 12345'\n• Or just type your ID number: '12345'\n\nI'll look up who's sharing the room with you! 👥";
+                    response = "🏠 **Need your room partner information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is 123456'\n• 'ID N12345'\n• 'Employee ID 12345'\n• Or just type your ID number: '12345'\n\nI'll look up who's sharing the room with you! 👥";
                 }
                 // General bus/room request without ID
                 else if (isBusRoomQuery && !foundEmployeeId) {
@@ -3156,10 +3158,11 @@ T e m p l a t e M o
                     <i class="fas fa-bus"></i> Get Bus Info
                 </div>
                 
-              <!--  <div class="quick-question" onclick="sendQuickQuestion('My room partner')">
+                <!---
+                <div class="quick-question" onclick="sendQuickQuestion('My room partner')">
                     <i class="fas fa-bed"></i> Room Partner
                 </div>
-               --> 
+                -->
             </div>
             <div class="chat-input-area">
                 <textarea class="chat-input" id="userInput" placeholder="Type your message here..." rows="1"></textarea>
