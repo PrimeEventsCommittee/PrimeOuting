@@ -704,10 +704,14 @@ https://templatemo.com/tm-583-festava-live
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-12 col-12 d-flex flex-wrap">
+                    <div class="col-lg-12 col-12 d-flex flex-wrap justify-content-between">
                         <p class="d-flex me-4 mb-0">
                             <i class="bi-person custom-icon me-2"></i>
                             <strong class="text-dark">Welcome to Prime Outing 2025</strong>
+                        </p>
+                        <p class="d-flex mb-0">
+                            <i class="bi-eye custom-icon me-2"></i>
+                            <strong class="text-dark">Visitors: <span id="hitCounter">0</span></strong>
                         </p>
                     </div>
 
@@ -1053,7 +1057,7 @@ https://templatemo.com/tm-583-festava-live
                                         <th scope="row">Night</th>
                                         <td class="table-background-image-wrap country-background-image" style="background-image: url('images/Snacking.JPG'); background-size: cover; background-position: center; position: relative;">
                                             <h3>Snacking & Freshen-Up</h3>
-                                            <p class="mb-2">01:00 AM</p>
+                                            <p class="mb-2">12:00 AM</p>
                                             <p>On the Way to Dehradun</p>
                                             <div class="section-overlay"></div>
                                         </td>
@@ -2255,8 +2259,1282 @@ T e m p l a t e M o
     <!-- Include XLSX library for Excel processing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
-        // Employee data storage with localStorage persistence
-        let employeeData = [];
+        // Employee data storage - NOW EMBEDDED DIRECTLY IN HTML
+    let employeeData = [
+    {
+        "EmployeeID": "N79025",
+        "Name": "Aashima Kapoor",
+        "BusNumber": "1",
+        "RoomNumber": "3001"
+    },
+    {
+        "EmployeeID": "N79407",
+        "Name": "Manisha",
+        "BusNumber": "1",
+        "RoomNumber": "3001"
+    },
+    {
+        "EmployeeID": "G1063502",
+        "Name": "Amolika Agrawal",
+        "BusNumber": "3",
+        "RoomNumber": "3001"
+    },
+    {
+        "EmployeeID": "111409",
+        "Name": "Ayushi Panwar",
+        "BusNumber": "1",
+        "RoomNumber": "3002"
+    },
+    {
+        "EmployeeID": "109517",
+        "Name": "Bharati kukkar Walia",
+        "BusNumber": "1",
+        "RoomNumber": "3002"
+    },
+    {
+        "EmployeeID": "108747",
+        "Name": "Shefali Upadhyay",
+        "BusNumber": "1",
+        "RoomNumber": "3002"
+    },
+    {
+        "EmployeeID": "G1037652",
+        "Name": "Haritika Pandit",
+        "BusNumber": "1",
+        "RoomNumber": "3003"
+    },
+    {
+        "EmployeeID": "G1030017",
+        "Name": "Shweta Priyadarshani",
+        "BusNumber": "1",
+        "RoomNumber": "3003"
+    },
+    {
+        "EmployeeID": "116256",
+        "Name": "Anu Asija",
+        "BusNumber": "2",
+        "RoomNumber": "3003"
+    },
+    {
+        "EmployeeID": "G1063503",
+        "Name": "KANISHKA SHARMA",
+        "BusNumber": "3",
+        "RoomNumber": "3004"
+    },
+    {
+        "EmployeeID": "I1088",
+        "Name": "Jasveen Kaur",
+        "BusNumber": "4",
+        "RoomNumber": "3004"
+    },
+    {
+        "EmployeeID": "TEMP001",
+        "Name": "Manya Jain",
+        "BusNumber": "2",
+        "RoomNumber": "3004"
+    },
+    {
+        "EmployeeID": "G1068397",
+        "Name": "DIVNEET KAUR",
+        "BusNumber": "5",
+        "RoomNumber": "3005"
+    },
+    {
+        "EmployeeID": "G1066378",
+        "Name": "Maryada Goswami",
+        "BusNumber": "5",
+        "RoomNumber": "3005"
+    },
+    {
+        "EmployeeID": "G1065076",
+        "Name": "Srishti Pandey",
+        "BusNumber": "5",
+        "RoomNumber": "3005"
+    },
+    {
+        "EmployeeID": "105739",
+        "Name": "Bhagyashri Wavare",
+        "BusNumber": "2",
+        "RoomNumber": "3006"
+    },
+    {
+        "EmployeeID": "G1044744",
+        "Name": "Mili Govil",
+        "BusNumber": "2",
+        "RoomNumber": "3006"
+    },
+    {
+        "EmployeeID": "G1043763",
+        "Name": "Savita Rai",
+        "BusNumber": "2",
+        "RoomNumber": "3006"
+    },
+    {
+        "EmployeeID": "N50073",
+        "Name": "Archana Munshi",
+        "BusNumber": "4",
+        "RoomNumber": "3007"
+    },
+    {
+        "EmployeeID": "N50750",
+        "Name": "Deep Shikha",
+        "BusNumber": "4",
+        "RoomNumber": "3007"
+    },
+    {
+        "EmployeeID": "G1065638",
+        "Name": "Manisha Kumari",
+        "BusNumber": "5",
+        "RoomNumber": "3007"
+    },
+    {
+        "EmployeeID": "G1040242",
+        "Name": "Ambika Chaurasia",
+        "BusNumber": "3",
+        "RoomNumber": "3008"
+    },
+    {
+        "EmployeeID": "G1044982",
+        "Name": "ANCHAL BHASIN",
+        "BusNumber": "3",
+        "RoomNumber": "3008"
+    },
+    {
+        "EmployeeID": "G1046563",
+        "Name": "Shilpi Jain",
+        "BusNumber": "3",
+        "RoomNumber": "3008"
+    },
+    {
+        "EmployeeID": "115545",
+        "Name": "Garima Singh",
+        "BusNumber": "2",
+        "RoomNumber": "3009"
+    },
+    {
+        "EmployeeID": "N50456",
+        "Name": "Arpana Baranwal",
+        "BusNumber": "3",
+        "RoomNumber": "3009"
+    },
+    {
+        "EmployeeID": "G1063354",
+        "Name": "Priyanka Yadav",
+        "BusNumber": "4",
+        "RoomNumber": "3009"
+    },
+    {
+        "EmployeeID": "G1070818",
+        "Name": "Chanchal Sanghai",
+        "BusNumber": "2",
+        "RoomNumber": "3010"
+    },
+    {
+        "EmployeeID": "G1046207",
+        "Name": "Himani Sirohi",
+        "BusNumber": "2",
+        "RoomNumber": "3010"
+    },
+    {
+        "EmployeeID": "G1037828",
+        "Name": "Monika Dogra",
+        "BusNumber": "2",
+        "RoomNumber": "3010"
+    },
+    {
+        "EmployeeID": "I1065",
+        "Name": "Shampy Gupta",
+        "BusNumber": "1",
+        "RoomNumber": "3011"
+    },
+    {
+        "EmployeeID": "119121",
+        "Name": "Swati Tyagi",
+        "BusNumber": "1",
+        "RoomNumber": "3011"
+    },
+    {
+        "EmployeeID": "116497",
+        "Name": "Swati Mittal",
+        "BusNumber": "4",
+        "RoomNumber": "3011"
+    },
+    {
+        "EmployeeID": "109632",
+        "Name": "Jayshree Satheesan",
+        "BusNumber": "4",
+        "RoomNumber": "3012"
+    },
+    {
+        "EmployeeID": "112493",
+        "Name": "Khyati Rawat",
+        "BusNumber": "4",
+        "RoomNumber": "3012"
+    },
+    {
+        "EmployeeID": "N50296",
+        "Name": "Neha Arora",
+        "BusNumber": "4",
+        "RoomNumber": "3012"
+    },
+    {
+        "EmployeeID": "N79016",
+        "Name": "Navneet Kaur Chopra",
+        "BusNumber": "1",
+        "RoomNumber": "3014"
+    },
+    {
+        "EmployeeID": "N50309",
+        "Name": "Neha Sachdeva",
+        "BusNumber": "1",
+        "RoomNumber": "3014"
+    },
+    {
+        "EmployeeID": "C1044276",
+        "Name": "Anjali Yadav",
+        "BusNumber": "5",
+        "RoomNumber": "3014"
+    },
+    {
+        "EmployeeID": "G1040462",
+        "Name": "Ananya Kaul",
+        "BusNumber": "5",
+        "RoomNumber": "3015"
+    },
+    {
+        "EmployeeID": "G1070539",
+        "Name": "Anshika Pathak",
+        "BusNumber": "5",
+        "RoomNumber": "3015"
+    },
+    {
+        "EmployeeID": "116340",
+        "Name": "Rashi Garg",
+        "BusNumber": "6",
+        "RoomNumber": "3015"
+    },
+    {
+        "EmployeeID": "I1047",
+        "Name": "Parveen Kumar",
+        "BusNumber": "4",
+        "RoomNumber": "4022"
+    },
+    {
+        "EmployeeID": "N1542",
+        "Name": "Bhupesh Dogra",
+        "BusNumber": "4",
+        "RoomNumber": "4023"
+    },
+    {
+        "EmployeeID": "N1184",
+        "Name": "DEVENDRA PANWAR",
+        "BusNumber": "3",
+        "RoomNumber": "4023"
+    },
+    {
+        "EmployeeID": "N50096",
+        "Name": "Sunandan Gakhar",
+        "BusNumber": "4",
+        "RoomNumber": "4024"
+    },
+    {
+        "EmployeeID": "I1079",
+        "Name": "Shwetamber Kaushik",
+        "BusNumber": "4",
+        "RoomNumber": "4024"
+    },
+    {
+        "EmployeeID": "N79556",
+        "Name": "Sajeesh Satyan",
+        "BusNumber": "2",
+        "RoomNumber": "4025"
+    },
+    {
+        "EmployeeID": "N1534",
+        "Name": "Amit Srivastava",
+        "BusNumber": "4",
+        "RoomNumber": "4025"
+    },
+    {
+        "EmployeeID": "N79117",
+        "Name": "Himanshu Sachdeva",
+        "BusNumber": "5",
+        "RoomNumber": "4027"
+    },
+    {
+        "EmployeeID": "I1104",
+        "Name": "Raman Dua",
+        "BusNumber": "1",
+        "RoomNumber": "4027"
+    },
+    {
+        "EmployeeID": "106020",
+        "Name": "Kumar Ajit",
+        "BusNumber": "4",
+        "RoomNumber": "4029"
+    },
+    {
+        "EmployeeID": "N79062",
+        "Name": "Prashant Pandey",
+        "BusNumber": "4",
+        "RoomNumber": "4029"
+    },
+    {
+        "EmployeeID": "N79226",
+        "Name": "Pratyush Saxena",
+        "BusNumber": "4",
+        "RoomNumber": "4029"
+    },
+    {
+        "EmployeeID": "G1044612",
+        "Name": "Hitesh Gupta",
+        "BusNumber": "1",
+        "RoomNumber": "6001"
+    },
+    {
+        "EmployeeID": "G1044606",
+        "Name": "paritosh krishan",
+        "BusNumber": "1",
+        "RoomNumber": "6001"
+    },
+    {
+        "EmployeeID": "G1046706",
+        "Name": "Pushpesh Kriti",
+        "BusNumber": "1",
+        "RoomNumber": "6001"
+    },
+    {
+        "EmployeeID": "G1045226",
+        "Name": "Shreyansh Shandilya",
+        "BusNumber": "1",
+        "RoomNumber": "6002"
+    },
+    {
+        "EmployeeID": "G1071269",
+        "Name": "Ujjawal Jain",
+        "BusNumber": "1",
+        "RoomNumber": "6002"
+    },
+    {
+        "EmployeeID": "N79656",
+        "Name": "Chirag Kukreja",
+        "BusNumber": "1",
+        "RoomNumber": "6002"
+    },
+    {
+        "EmployeeID": "G1037714",
+        "Name": "Aman Chauhan",
+        "BusNumber": "4",
+        "RoomNumber": "6003"
+    },
+    {
+        "EmployeeID": "G1036117",
+        "Name": "Anupam Manori",
+        "BusNumber": "4",
+        "RoomNumber": "6003"
+    },
+    {
+        "EmployeeID": "G1045134",
+        "Name": "Janu Ladkani",
+        "BusNumber": "3",
+        "RoomNumber": "6003"
+    },
+    {
+        "EmployeeID": "G1052056",
+        "Name": "Varsha Srivastav",
+        "BusNumber": "4",
+        "RoomNumber": "6004"
+    },
+    {
+        "EmployeeID": "G1037650",
+        "Name": "Urvashi Tyagi",
+        "BusNumber": "4",
+        "RoomNumber": "6004"
+    },
+    {
+        "EmployeeID": "G1062184",
+        "Name": "Arpita Soni",
+        "BusNumber": "3",
+        "RoomNumber": "6004"
+    },
+    {
+        "EmployeeID": "G1070943",
+        "Name": "Reeti Verma",
+        "BusNumber": "3",
+        "RoomNumber": "6005"
+    },
+    {
+        "EmployeeID": "G1062913",
+        "Name": "Neha Jha",
+        "BusNumber": "5",
+        "RoomNumber": "6005"
+    },
+    {
+        "EmployeeID": "G1063055",
+        "Name": "Sonali Ghosh",
+        "BusNumber": "5",
+        "RoomNumber": "6005"
+    },
+    {
+        "EmployeeID": "N79082",
+        "Name": "Abhishek Singh",
+        "BusNumber": "1",
+        "RoomNumber": "6006"
+    },
+    {
+        "EmployeeID": "G1070942",
+        "Name": "Anupam Singh Chauhan",
+        "BusNumber": "1",
+        "RoomNumber": "6006"
+    },
+    {
+        "EmployeeID": "109824",
+        "Name": "Vijayant Singh",
+        "BusNumber": "1",
+        "RoomNumber": "6006"
+    },
+    {
+        "EmployeeID": "G1071155",
+        "Name": "Varun Pradhan",
+        "BusNumber": "1",
+        "RoomNumber": "6007"
+    },
+    {
+        "EmployeeID": "G1043762",
+        "Name": "Abhijeet Upadhyay",
+        "BusNumber": "2",
+        "RoomNumber": "6007"
+    },
+    {
+        "EmployeeID": "g1051393",
+        "Name": "Amit Kumar Tiwari",
+        "BusNumber": "2",
+        "RoomNumber": "6007"
+    },
+    {
+        "EmployeeID": "g1037449",
+        "Name": "ABHISHEK KUMAR",
+        "BusNumber": "4",
+        "RoomNumber": "6008"
+    },
+    {
+        "EmployeeID": "G1035121",
+        "Name": "Dharmesh Kumar Sharma",
+        "BusNumber": "4",
+        "RoomNumber": "6008"
+    },
+    {
+        "EmployeeID": "G1039601",
+        "Name": "Prashant Awasthi",
+        "BusNumber": "4",
+        "RoomNumber": "6008"
+    },
+    {
+        "EmployeeID": "N50312",
+        "Name": "Amit Sharma",
+        "BusNumber": "3",
+        "RoomNumber": "6009"
+    },
+    {
+        "EmployeeID": "N50134",
+        "Name": "Sanjeev Srivastava",
+        "BusNumber": "3",
+        "RoomNumber": "6009"
+    },
+    {
+        "EmployeeID": "N50113",
+        "Name": "Vishal Verma",
+        "BusNumber": "3",
+        "RoomNumber": "6009"
+    },
+    {
+        "EmployeeID": "N51490",
+        "Name": "AJAY KAUSHIK",
+        "BusNumber": "3",
+        "RoomNumber": "6010"
+    },
+    {
+        "EmployeeID": "G1044295",
+        "Name": "Tarang Jain",
+        "BusNumber": "3",
+        "RoomNumber": "6010"
+    },
+    {
+        "EmployeeID": "119523",
+        "Name": "Pankaj Lohumi",
+        "BusNumber": "3",
+        "RoomNumber": "6010"
+    },
+    {
+        "EmployeeID": "G1054061",
+        "Name": "Adhish Rai",
+        "BusNumber": "1",
+        "RoomNumber": "6011"
+    },
+    {
+        "EmployeeID": "N79044",
+        "Name": "Amit Tyagi",
+        "BusNumber": "1",
+        "RoomNumber": "6011"
+    },
+    {
+        "EmployeeID": "111639",
+        "Name": "NITISH GAURAV",
+        "BusNumber": "1",
+        "RoomNumber": "6011"
+    },
+    {
+        "EmployeeID": "G1072206",
+        "Name": "Abhinav Sikri",
+        "BusNumber": "1",
+        "RoomNumber": "6015"
+    },
+    {
+        "EmployeeID": "G1070702",
+        "Name": "Rahul Kumar",
+        "BusNumber": "1",
+        "RoomNumber": "6015"
+    },
+    {
+        "EmployeeID": "G1072174",
+        "Name": "Sushant Bhatt",
+        "BusNumber": "1",
+        "RoomNumber": "6015"
+    },
+    {
+        "EmployeeID": "G1045322",
+        "Name": "AKSHAY TYAGI",
+        "BusNumber": "1",
+        "RoomNumber": "6016"
+    },
+    {
+        "EmployeeID": "G1039731",
+        "Name": "TAFHEEM CHAUHAN",
+        "BusNumber": "1",
+        "RoomNumber": "6016"
+    },
+    {
+        "EmployeeID": "G1045323",
+        "Name": "YASH SRIVASTAVA",
+        "BusNumber": "1",
+        "RoomNumber": "6016"
+    },
+    {
+        "EmployeeID": "120093",
+        "Name": "Vikas Jain",
+        "BusNumber": "1",
+        "RoomNumber": "6017"
+    },
+    {
+        "EmployeeID": "I1099",
+        "Name": "Vikram Krishan Kulshrestha",
+        "BusNumber": "1",
+        "RoomNumber": "6017"
+    },
+    {
+        "EmployeeID": "N79517",
+        "Name": "Ankit Kumar",
+        "BusNumber": "1",
+        "RoomNumber": "6018"
+    },
+    {
+        "EmployeeID": "N79521",
+        "Name": "Himanshu",
+        "BusNumber": "1",
+        "RoomNumber": "6018"
+    },
+    {
+        "EmployeeID": "N79408",
+        "Name": "Vishal Saxena",
+        "BusNumber": "1",
+        "RoomNumber": "6018"
+    },
+    {
+        "EmployeeID": "119163",
+        "Name": "Akshay Kumar",
+        "BusNumber": "1",
+        "RoomNumber": "6019"
+    },
+    {
+        "EmployeeID": "115954",
+        "Name": "Arun Rathi",
+        "BusNumber": "1",
+        "RoomNumber": "6019"
+    },
+    {
+        "EmployeeID": "G1034215",
+        "Name": "Nikhil Oberoi",
+        "BusNumber": "1",
+        "RoomNumber": "6019"
+    },
+    {
+        "EmployeeID": "I1061",
+        "Name": "Rupesh Singh",
+        "BusNumber": "3",
+        "RoomNumber": "7001"
+    },
+    {
+        "EmployeeID": "G1030554",
+        "Name": "Arjun Gaur",
+        "BusNumber": "3",
+        "RoomNumber": "7001"
+    },
+    {
+        "EmployeeID": "G1042607",
+        "Name": "SUDIP SINGH",
+        "BusNumber": "3",
+        "RoomNumber": "7001"
+    },
+    {
+        "EmployeeID": "G1037215",
+        "Name": "Vishal singh",
+        "BusNumber": "3",
+        "RoomNumber": "7002"
+    },
+    {
+        "EmployeeID": "G1041214",
+        "Name": "Abhishek Kumar Verma",
+        "BusNumber": "3",
+        "RoomNumber": "7002"
+    },
+    {
+        "EmployeeID": "G1033624",
+        "Name": "Abhishek Negi",
+        "BusNumber": "3",
+        "RoomNumber": "7002"
+    },
+    {
+        "EmployeeID": "G1051579",
+        "Name": "Gangavaram Raja Mohan Reddy",
+        "BusNumber": "2",
+        "RoomNumber": "7003"
+    },
+    {
+        "EmployeeID": "G1045181",
+        "Name": "Himanshu Koranga",
+        "BusNumber": "2",
+        "RoomNumber": "7003"
+    },
+    {
+        "EmployeeID": "G1034601",
+        "Name": "Rohit Singh",
+        "BusNumber": "2",
+        "RoomNumber": "7003"
+    },
+    {
+        "EmployeeID": "108386",
+        "Name": "Gyanendra Singh Rathaur",
+        "BusNumber": "2",
+        "RoomNumber": "7004"
+    },
+    {
+        "EmployeeID": "106052",
+        "Name": "Bhavneesh",
+        "BusNumber": "2",
+        "RoomNumber": "7004"
+    },
+    {
+        "EmployeeID": "115885",
+        "Name": "Deepak Tyagi",
+        "BusNumber": "2",
+        "RoomNumber": "7004"
+    },
+    {
+        "EmployeeID": "106817",
+        "Name": "Bharat Gandhi",
+        "BusNumber": "2",
+        "RoomNumber": "7005"
+    },
+    {
+        "EmployeeID": "N50565",
+        "Name": "Narender Sharma",
+        "BusNumber": "2",
+        "RoomNumber": "7005"
+    },
+    {
+        "EmployeeID": "114164",
+        "Name": "Shamit Agarwal",
+        "BusNumber": "2",
+        "RoomNumber": "7005"
+    },
+    {
+        "EmployeeID": "105901",
+        "Name": "Naveen Kumar",
+        "BusNumber": "2",
+        "RoomNumber": "7006"
+    },
+    {
+        "EmployeeID": "I1092",
+        "Name": "Satikanta Tripathy",
+        "BusNumber": "2",
+        "RoomNumber": "7006"
+    },
+    {
+        "EmployeeID": "I1011",
+        "Name": "Umesh Pratap Singh",
+        "BusNumber": "2",
+        "RoomNumber": "7006"
+    },
+    {
+        "EmployeeID": "120720",
+        "Name": "Ankit Gumber",
+        "BusNumber": "3",
+        "RoomNumber": "7007"
+    },
+    {
+        "EmployeeID": "G1072034",
+        "Name": "Anoop Pandey",
+        "BusNumber": "3",
+        "RoomNumber": "7007"
+    },
+    {
+        "EmployeeID": "G1063950",
+        "Name": "shivam patel",
+        "BusNumber": "3",
+        "RoomNumber": "7007"
+    },
+    {
+        "EmployeeID": "G1055036",
+        "Name": "Ravi Uttreja",
+        "BusNumber": "2",
+        "RoomNumber": "7008"
+    },
+    {
+        "EmployeeID": "G1071914",
+        "Name": "Subhajit Kar",
+        "BusNumber": "2",
+        "RoomNumber": "7008"
+    },
+    {
+        "EmployeeID": "G1037715",
+        "Name": "Vijay Kumar",
+        "BusNumber": "2",
+        "RoomNumber": "7008"
+    },
+    {
+        "EmployeeID": "I1070",
+        "Name": "Govind Kumar",
+        "BusNumber": "4",
+        "RoomNumber": "7009"
+    },
+    {
+        "EmployeeID": "I1094",
+        "Name": "Rakesh Laler",
+        "BusNumber": "4",
+        "RoomNumber": "7009"
+    },
+    {
+        "EmployeeID": "N1486",
+        "Name": "Vipin Mukesh",
+        "BusNumber": "4",
+        "RoomNumber": "7009"
+    },
+    {
+        "EmployeeID": "G1030174",
+        "Name": "Harsh Trivedi",
+        "BusNumber": "4",
+        "RoomNumber": "7010"
+    },
+    {
+        "EmployeeID": "N79013",
+        "Name": "Kashif Husain",
+        "BusNumber": "4",
+        "RoomNumber": "7010"
+    },
+    {
+        "EmployeeID": "G1063242",
+        "Name": "Akash Pratik",
+        "BusNumber": "2",
+        "RoomNumber": "7010"
+    },
+    {
+        "EmployeeID": "G1062189",
+        "Name": "Ayush Kumar",
+        "BusNumber": "3",
+        "RoomNumber": "7011"
+    },
+    {
+        "EmployeeID": "G1034113",
+        "Name": "Manish Shukla",
+        "BusNumber": "3",
+        "RoomNumber": "7011"
+    },
+    {
+        "EmployeeID": "121061",
+        "Name": "Sahilpreet Singh",
+        "BusNumber": "3",
+        "RoomNumber": "7011"
+    },
+    {
+        "EmployeeID": "G1062641",
+        "Name": "Akshay Bhardwaj",
+        "BusNumber": "3",
+        "RoomNumber": "7012"
+    },
+    {
+        "EmployeeID": "G1061987",
+        "Name": "Sarthak Uniyal",
+        "BusNumber": "3",
+        "RoomNumber": "7012"
+    },
+    {
+        "EmployeeID": "G1062187",
+        "Name": "Sunil Kumar Palariya",
+        "BusNumber": "3",
+        "RoomNumber": "7012"
+    },
+    {
+        "EmployeeID": "G1071337",
+        "Name": "VISHESH JASSAL",
+        "BusNumber": "3",
+        "RoomNumber": "7014"
+    },
+    {
+        "EmployeeID": "G1071220",
+        "Name": "Aaryan Sharma",
+        "BusNumber": "2",
+        "RoomNumber": "7014"
+    },
+    {
+        "EmployeeID": "g1071159",
+        "Name": "Hardeep Singh",
+        "BusNumber": "2",
+        "RoomNumber": "7014"
+    },
+    {
+        "EmployeeID": "G1039236",
+        "Name": "PAPPU YADAW",
+        "BusNumber": "2",
+        "RoomNumber": "7015"
+    },
+    {
+        "EmployeeID": "G1037292",
+        "Name": "Rishabh Singh",
+        "BusNumber": "2",
+        "RoomNumber": "7015"
+    },
+    {
+        "EmployeeID": "G1051888",
+        "Name": "SUMIT PAL",
+        "BusNumber": "2",
+        "RoomNumber": "7015"
+    },
+    {
+        "EmployeeID": "G1064770",
+        "Name": "Pankaj Sharma",
+        "BusNumber": "3",
+        "RoomNumber": "7016"
+    },
+    {
+        "EmployeeID": "G1047993",
+        "Name": "Abhinav Rastogi",
+        "BusNumber": "3",
+        "RoomNumber": "7016"
+    },
+    {
+        "EmployeeID": "G1037717",
+        "Name": "Abhishek Verma",
+        "BusNumber": "3",
+        "RoomNumber": "7016"
+    },
+    {
+        "EmployeeID": "G1071436",
+        "Name": "Abhishek Baghel",
+        "BusNumber": "2",
+        "RoomNumber": "7017"
+    },
+    {
+        "EmployeeID": "G1069856",
+        "Name": "Prajwal Kumar",
+        "BusNumber": "2",
+        "RoomNumber": "7017"
+    },
+    {
+        "EmployeeID": "G1071528",
+        "Name": "Rahul Kumar",
+        "BusNumber": "2",
+        "RoomNumber": "7017"
+    },
+    {
+        "EmployeeID": "G1030016",
+        "Name": "Ankur Singh",
+        "BusNumber": "6",
+        "RoomNumber": "7018"
+    },
+    {
+        "EmployeeID": "112492",
+        "Name": "Ankush Jagga",
+        "BusNumber": "6",
+        "RoomNumber": "7018"
+    },
+    {
+        "EmployeeID": "G1043765",
+        "Name": "Brijesh Nain",
+        "BusNumber": "6",
+        "RoomNumber": "7018"
+    },
+    {
+        "EmployeeID": "G1031372",
+        "Name": "Ashish Mandal",
+        "BusNumber": "3",
+        "RoomNumber": "7019"
+    },
+    {
+        "EmployeeID": "114078",
+        "Name": "Ankit Vedwal",
+        "BusNumber": "3",
+        "RoomNumber": "7019"
+    },
+    {
+        "EmployeeID": "G1049510",
+        "Name": "Anuj Kumar",
+        "BusNumber": "4",
+        "RoomNumber": "7019"
+    },
+    {
+        "EmployeeID": "G1070893",
+        "Name": "Rajat Pandey",
+        "BusNumber": "3",
+        "RoomNumber": "7020"
+    },
+    {
+        "EmployeeID": "G1070251",
+        "Name": "Man Mohan Singh",
+        "BusNumber": "3",
+        "RoomNumber": "7020"
+    },
+    {
+        "EmployeeID": "G1070827",
+        "Name": "Rishabh Saxena",
+        "BusNumber": "3",
+        "RoomNumber": "7020"
+    },
+    {
+        "EmployeeID": "I1163",
+        "Name": "Sandeep Singla",
+        "BusNumber": "4",
+        "RoomNumber": "7021"
+    },
+    {
+        "EmployeeID": "I1090",
+        "Name": "Ratin Choudhary",
+        "BusNumber": "3",
+        "RoomNumber": "7021"
+    },
+    {
+        "EmployeeID": "I1162",
+        "Name": "Shailesh Verma",
+        "BusNumber": "4",
+        "RoomNumber": "7021"
+    },
+    {
+        "EmployeeID": "N79010",
+        "Name": "suneel kumar",
+        "BusNumber": "2",
+        "RoomNumber": "7022"
+    },
+    {
+        "EmployeeID": "G1036429",
+        "Name": "Vishnu Varshney",
+        "BusNumber": "2",
+        "RoomNumber": "7022"
+    },
+    {
+        "EmployeeID": "G1047197",
+        "Name": "Vipin Kumar Mishra",
+        "BusNumber": "3",
+        "RoomNumber": "7022"
+    },
+    {
+        "EmployeeID": "121243",
+        "Name": "Ganesh Singh",
+        "BusNumber": "4",
+        "RoomNumber": "7023"
+    },
+    {
+        "EmployeeID": "N50717",
+        "Name": "Vivek Bhadauriya",
+        "BusNumber": "4",
+        "RoomNumber": "7023"
+    },
+    {
+        "EmployeeID": "114737",
+        "Name": "Parveen Sheoran",
+        "BusNumber": "4",
+        "RoomNumber": "7023"
+    },
+    {
+        "EmployeeID": "n50085",
+        "Name": "Piyush Gupta",
+        "BusNumber": "4",
+        "RoomNumber": "7024"
+    },
+    {
+        "EmployeeID": "G1034287",
+        "Name": "Rohan Jain",
+        "BusNumber": "4",
+        "RoomNumber": "7024"
+    },
+    {
+        "EmployeeID": "G1062183",
+        "Name": "Shubham Kesarwani",
+        "BusNumber": "4",
+        "RoomNumber": "7024"
+    },
+    {
+        "EmployeeID": "I1043",
+        "Name": "Rohit Gupta",
+        "BusNumber": "4",
+        "RoomNumber": "7025"
+    },
+    {
+        "EmployeeID": "I1010",
+        "Name": "Hariprakash Sharma",
+        "BusNumber": "4",
+        "RoomNumber": "7025"
+    },
+    {
+        "EmployeeID": "I1195",
+        "Name": "SUNIL RAYAL",
+        "BusNumber": "4",
+        "RoomNumber": "7025"
+    },
+    {
+        "EmployeeID": "N50722",
+        "Name": "Abhishek Chandan",
+        "BusNumber": "4",
+        "RoomNumber": "7026"
+    },
+    {
+        "EmployeeID": "N50681",
+        "Name": "Shailendra Gangwar",
+        "BusNumber": "4",
+        "RoomNumber": "7026"
+    },
+    {
+        "EmployeeID": "G1047202",
+        "Name": "Meghraj Singh",
+        "BusNumber": "4",
+        "RoomNumber": "7026"
+    },
+    {
+        "EmployeeID": "G1054133",
+        "Name": "Arpan Srivastava",
+        "BusNumber": "6",
+        "RoomNumber": "7027"
+    },
+    {
+        "EmployeeID": "G1073197",
+        "Name": "Samarth Sharma",
+        "BusNumber": "5",
+        "RoomNumber": "7027"
+    },
+    {
+        "EmployeeID": "G1068651",
+        "Name": "Ayush Jain",
+        "BusNumber": "5",
+        "RoomNumber": "7027"
+    },
+    {
+        "EmployeeID": "G1031572",
+        "Name": "Ayush Rastogi",
+        "BusNumber": "3",
+        "RoomNumber": "7028"
+    },
+    {
+        "EmployeeID": "119937",
+        "Name": "Umesh Chandra",
+        "BusNumber": "3",
+        "RoomNumber": "7028"
+    },
+    {
+        "EmployeeID": "G1073174",
+        "Name": "Jatin Patwal",
+        "BusNumber": "5",
+        "RoomNumber": "7028"
+    },
+    {
+        "EmployeeID": "G1063951",
+        "Name": "Pankaj Kumar",
+        "BusNumber": "5",
+        "RoomNumber": "7029"
+    },
+    {
+        "EmployeeID": "G1032286",
+        "Name": "Sumit M",
+        "BusNumber": "5",
+        "RoomNumber": "7029"
+    },
+    {
+        "EmployeeID": "G1039080",
+        "Name": "Sunny Mann",
+        "BusNumber": "5",
+        "RoomNumber": "7029"
+    },
+    {
+        "EmployeeID": "G1043503",
+        "Name": "Mohit Agarwal",
+        "BusNumber": "5",
+        "RoomNumber": "7030"
+    },
+    {
+        "EmployeeID": "G1063848",
+        "Name": "Priyanshu Choudhary",
+        "BusNumber": "5",
+        "RoomNumber": "7030"
+    },
+    {
+        "EmployeeID": "N51485",
+        "Name": "Vivek Sheel",
+        "BusNumber": "5",
+        "RoomNumber": "7030"
+    },
+    {
+        "EmployeeID": "G1035856",
+        "Name": "Abhishek Shukla",
+        "BusNumber": "5",
+        "RoomNumber": "7031"
+    },
+    {
+        "EmployeeID": "N79107",
+        "Name": "MAHENDRA GANDHI",
+        "BusNumber": "5",
+        "RoomNumber": "7031"
+    },
+    {
+        "EmployeeID": "G1047942",
+        "Name": "Raman Kumar Jain",
+        "BusNumber": "6",
+        "RoomNumber": "7031"
+    },
+    {
+        "EmployeeID": "G1036606",
+        "Name": "Piyush Singh",
+        "BusNumber": "2",
+        "RoomNumber": "7032"
+    },
+    {
+        "EmployeeID": "G1036115",
+        "Name": "Sagar Raheja",
+        "BusNumber": "2",
+        "RoomNumber": "7032"
+    },
+    {
+        "EmployeeID": "N79292",
+        "Name": "PUNEET SHARMA",
+        "BusNumber": "5",
+        "RoomNumber": "7032"
+    },
+    {
+        "EmployeeID": "G1064232",
+        "Name": "Adarsh Chauhan",
+        "BusNumber": "5",
+        "RoomNumber": "7033"
+    },
+    {
+        "EmployeeID": "G1065689",
+        "Name": "Gagandeep Singh Grewal",
+        "BusNumber": "5",
+        "RoomNumber": "7033"
+    },
+    {
+        "EmployeeID": "G1064543",
+        "Name": "JAGADISH GHATE",
+        "BusNumber": "5",
+        "RoomNumber": "7033"
+    },
+    {
+        "EmployeeID": "G1066310",
+        "Name": "Akash Dixit",
+        "BusNumber": "5",
+        "RoomNumber": "7034"
+    },
+    {
+        "EmployeeID": "G1065330",
+        "Name": "Chinmay Parab",
+        "BusNumber": "5",
+        "RoomNumber": "7034"
+    },
+    {
+        "EmployeeID": "G1065690",
+        "Name": "Divyanshu Shukla",
+        "BusNumber": "5",
+        "RoomNumber": "7034"
+    },
+    {
+        "EmployeeID": "G1070540",
+        "Name": "Divyaranjan Swain",
+        "BusNumber": "5",
+        "RoomNumber": "7035"
+    },
+    {
+        "EmployeeID": "G1071335",
+        "Name": "Harsh Jain",
+        "BusNumber": "5",
+        "RoomNumber": "7035"
+    },
+    {
+        "EmployeeID": "G1064129",
+        "Name": "Rajat Saraswat",
+        "BusNumber": "5",
+        "RoomNumber": "7035"
+    },
+    {
+        "EmployeeID": "G1066181",
+        "Name": "Digvijay Rajput",
+        "BusNumber": "5",
+        "RoomNumber": "7036"
+    },
+    {
+        "EmployeeID": "G1064542",
+        "Name": "Dinesh Haish Bhatlavande",
+        "BusNumber": "5",
+        "RoomNumber": "7036"
+    },
+    {
+        "EmployeeID": "G1066147",
+        "Name": "Hemansh Bhagtani",
+        "BusNumber": "5",
+        "RoomNumber": "7036"
+    },
+    {
+        "EmployeeID": "I1117",
+        "Name": "Amit Sinha",
+        "BusNumber": "5",
+        "RoomNumber": "7037"
+    },
+    {
+        "EmployeeID": "G1065434",
+        "Name": "Puneet Jamnal",
+        "BusNumber": "5",
+        "RoomNumber": "7037"
+    },
+    {
+        "EmployeeID": "G1062788",
+        "Name": "Naman Gupta",
+        "BusNumber": "2",
+        "RoomNumber": "7037"
+    },
+    {
+        "EmployeeID": "G1068176",
+        "Name": "Kamesh Saraswat",
+        "BusNumber": "5",
+        "RoomNumber": "7038"
+    },
+    {
+        "EmployeeID": "G1065637",
+        "Name": "parth neeraj modi",
+        "BusNumber": "5",
+        "RoomNumber": "7038"
+    },
+    {
+        "EmployeeID": "G1066120",
+        "Name": "Shubham Shrivastava",
+        "BusNumber": "5",
+        "RoomNumber": "7038"
+    }
+];
+        
         let isOpen = false;
         let hasNewMessage = false;
 
@@ -2395,31 +3673,20 @@ T e m p l a t e M o
             }
         }
 
-        // Initialize with Excel data only
-        async function initializeEmployeeData() {
+        // Initialize with embedded JSON data - NO MORE EXCEL LOADING!
+        function initializeEmployeeData() {
             console.log('🔄 Initializing employee data...');
             
-            // First try to load from storage
-            const hasStoredData = loadEmployeeDataFromStorage();
-            
-            if (hasStoredData) {
-                console.log('✅ Using stored employee data from PECData.xlsx');
-                return;
-            }
-            
-            // Try to load PECData.xlsx
-            console.log('📄 No stored data found, attempting to load PECData.xlsx...');
-            const excelLoaded = await loadPECDataFile();
-            
-            if (!excelLoaded) {
-                console.log('❌ PECData.xlsx could not be loaded.');
-                console.log('💡 This is common when:');
-                console.log('   - GitHub Pages is still updating after file upload');
-                console.log('   - Browser cache needs clearing');
-                console.log('   - File was recently re-uploaded');
-                console.log('🔄 Try refreshing the page in a few minutes');
+            if (employeeData && employeeData.length > 0) {
+                console.log(`✅ Employee data loaded from embedded JSON: ${employeeData.length} records`);
+                console.log('Sample data:', employeeData.slice(0, 2));
                 
-                employeeData = [];
+                // Save to localStorage for backup (optional)
+                saveEmployeeDataToStorage(employeeData);
+                return true;
+            } else {
+                console.log('❌ No employee data found in embedded JSON array');
+                return false;
             }
         }
 
@@ -2444,9 +3711,14 @@ T e m p l a t e M o
             }
         };
 
-        // Load data when page loads
+        // Load data when page loads - NOW USING EMBEDDED DATA
         window.addEventListener('DOMContentLoaded', function() {
-            initializeEmployeeData();
+            const success = initializeEmployeeData();
+            if (success) {
+                console.log('🎉 Employee data ready for use!');
+            } else {
+                console.warn('⚠️ Please update the embedded employeeData array with your CSV data');
+            }
         });
 
         // Employee lookup function for chatbot
@@ -2498,7 +3770,35 @@ T e m p l a t e M o
                     return employee.RoomNumber || employee['Room Number'] || employee.Room || employee.room || employee.roomNumber || 'N/A';
                 };
                 
-                const result = `🎯 **Employee Found!**\n\n👤 **Name:** ${getName()}\n🚌 **Bus Number:** ${getBusNumber()}\n🏠 **Room Number:** ${getRoomNumber()}\n\n📧 **Questions?** PrimeEventCommittee\n\n💡 **Tip:** Save this info for easy reference!`;
+                const getRoomPartner = () => {
+                    const employeeRoom = getRoomNumber();
+                    const employeeName = getName();
+                    
+                    if (employeeRoom === 'N/A' || !employeeRoom) {
+                        return 'No room assignment yet';
+                    }
+                    
+                    // Find all employees in the same room, excluding the current employee
+                    const roomPartners = employeeData.filter(emp => {
+                        const empRoom = emp.RoomNumber || emp['Room Number'] || emp.Room || emp.room || emp.roomNumber || 'N/A';
+                        const empName = emp.Name || emp['Employee Name'] || emp.name || emp.employeeName || 'N/A';
+                        return empRoom === employeeRoom && empName !== employeeName;
+                    });
+                    
+                    if (roomPartners.length === 0) {
+                        return 'You are the only person in this room';
+                    }
+                    
+                    // Format with bullets and new lines for better presentation
+                    const partnersList = roomPartners.map(partner => {
+                        const partnerName = partner.Name || partner['Employee Name'] || partner.name || partner.employeeName || 'N/A';
+                        return `• ${partnerName}`;
+                    }).join('\n');
+                    
+                    return partnersList;
+                };
+                
+                const result = `🎯 **Employee Found!**\n\n👤 **Name:** ${getName()}\n🚌 **Bus Number:** ${getBusNumber()}\n🏠 **Room Number:** ${getRoomNumber()}\n👥 **Room Partner(s):\n** ${getRoomPartner()}\n\n📧 **Questions?** PrimeEventCommittee\n\n💡 **Tip:** Save this info for easy reference!`;
                 console.log('Returning result:', result);
                 return result;
             } else {
@@ -2648,8 +3948,49 @@ T e m p l a t e M o
         window.clearEmployeeData = function() {
             clearEmployeeDataFromStorage();
             employeeData = [];
-            console.log('Employee data cleared - will need to reload PECData.xlsx');
-            return 'Employee data cleared - will need to reload PECData.xlsx';
+            console.log('Employee data cleared');
+            return 'Employee data cleared';
+        };
+
+        // HELPER FUNCTION: Convert CSV text to JSON for easy embedding
+        window.csvToJson = function(csvText) {
+            console.log('🔄 Converting CSV to JSON...');
+            
+            const lines = csvText.trim().split('\n');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            
+            const jsonData = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+                const obj = {};
+                
+                headers.forEach((header, index) => {
+                    obj[header] = values[index] || '';
+                });
+                
+                jsonData.push(obj);
+            }
+            
+            console.log(`✅ Converted ${jsonData.length} records from CSV`);
+            console.log('Copy this JSON array and replace the employeeData array in HTML:');
+            console.log(JSON.stringify(jsonData, null, 4));
+            
+            return jsonData;
+        };
+
+        // HELPER FUNCTION: Update embedded data (for testing)
+        window.updateEmployeeData = function(newData) {
+            if (Array.isArray(newData) && newData.length > 0) {
+                employeeData = newData;
+                saveEmployeeDataToStorage(newData);
+                console.log(`✅ Employee data updated: ${newData.length} records`);
+                console.log('⚠️ Note: This is temporary. To make it permanent, update the employeeData array in the HTML file.');
+                return `Successfully updated ${newData.length} employee records!`;
+            } else {
+                console.error('Invalid data format');
+                return 'Please provide a valid array of employee data';
+            }
         };
 
         // Complete responses from working chatbot
@@ -2666,7 +4007,7 @@ T e m p l a t e M o
             'food': "🍽️ **Food & Dining:**\n\nEnjoy delicious meals at Punarnava Resort!\n\n🥘 **Included:**\n• Welcome refreshments\n• Breakfast, Lunch & Dinner\n• Evening snacks\n• Special event meals\n\n*Variety of vegetarian and non-vegetarian options available!*",
             'departure': "🚌 **Departure Details - October 3:**\n\n🕘 **8:00-9:00 PM:** T-Shirt, Baggage & Attendance\n🕘 **9:30 PM:** Assemble at Stellar IT Park\n🚌 **10:00 PM:** Bus departure for Dehradun\n🍽️ **12:00 AM:** Stop at SukhDev Dhaba\n\n⏰ **Please arrive on time!**",
             'return': "🏠 **Return Details - October 5:**\n\n🕘 **10:30 AM:** Departure from resort\n🍽️ **3:00-4:30 PM:** Lunch break\n🏠 **7:00 PM:** Arrival at Stellar IT Park\n\n🚌 **Safe journey back home!**",
-            'tshirt': "👕 **T-Shirt Collection:**\n\nCollect your custom Prime Outing 2025 T-shirts!\n\n📅 **When:** October 3, 8:00-9:00 PM\n📍 **Where:** Stellar IT Park\n🎯 **Don't forget** to collect during attendance marking!\n\n*Wear it with pride during the trip!* 🎉",
+            'tshirt': "👕 **T-Shirt Collection:**\n\nCollect your custom Prime Outing 2025 T-shirts!\n\n📅 **When:** October 3, 8:00-9:00 PM\n📍 **Where:** Stellar IT Park\n🎯 **Don't forget** to collect during attendance marking!\n\n*Mandatory to wear it during the Activity!* 🎉",
             'bring': "🎒 **What to Bring for Prime Outing 2025:**\n\n**👕 Clothing:**\n• Comfortable casual clothes (2-3 sets)\n• Light jacket/sweater for evening\n• Sleepwear and undergarments\n• Extra pair of shoes/slippers\n\n**🧴 Personal Items:**\n• Toiletries (toothbrush, toothpaste, etc.)\n• Personal medications\n• Phone charger and power bank\n• Camera for memories\n\n**📋 Documents:**\n• Valid ID proof\n• Any medical prescriptions\n\n**💡 Optional:**\n• Sunglasses and sunscreen\n• Small backpack for day activities\n• Snacks for the journey\n\n*Pack light and enjoy the trip!* 🌟",
             'packing': "🎒 **Packing Guide for Prime Outing 2025:**\n\n**👕 Clothing Essentials:**\n• 2-3 comfortable outfits\n• Light jacket for cool evenings\n• Comfortable walking shoes\n• Flip-flops/slippers for resort\n\n**🧴 Personal Care:**\n• Toiletries and personal hygiene items\n• Any personal medications\n• Hand sanitizer\n\n**📱 Electronics:**\n• Phone charger (mandatory!)\n• Power bank for long day\n• Camera/phone for photos\n\n**📄 Important:**\n• Valid photo ID\n• Emergency contact details\n\n**💼 Travel Tips:**\n• Pack in a small bag/backpack\n• Keep essentials in carry-on\n• Don't overpack - it's only 2 days!\n\n*Travel light, create memories!* ✨",
             'dj': "🎵 **DJ Night - Prime Outing 2025:**\n\n*Get ready to dance the night away!*\n\n🕘 **When:** October 4 evening (Saturday)\n📍 **Where:** Punarnava Resort party area\n🎶 **Music:** Latest hits, Bollywood, and your favorites\n💃 **Dress:** Comfortable party wear\n\n**🎉 What to Expect:**\n• Professional DJ with great sound system\n• Dance floor with lighting effects\n• Fun group activities and games\n• Refreshments and snacks\n• Photo opportunities\n\n**💡 Tips:**\n• Wear comfortable dancing shoes\n• Bring your energy and enthusiasm!\n• Request your favorite songs\n\n*Let's make it a night to remember!* ✨",
@@ -2886,7 +4227,7 @@ T e m p l a t e M o
                 }
                 // General room partner request without ID
                 else if (isRoomPartnerQuery && !foundEmployeeId) {
-                    response = "🏠 **Need your room partner information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is 123456'\n• 'ID N12345'\n• 'Employee ID 12345'\n• Or just type your ID number: '12345'\n\nI'll look up who's sharing the room with you! 👥";
+                    response = "🏠 **Need your room partner information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is 12345'\n• 'ID 12345'\n• 'Employee ID 12345'\n• Or just type your ID number: '12345'\n\nI'll look up who's sharing the room with you! 👥";
                 }
                 // General bus/room request without ID
                 else if (isBusRoomQuery && !foundEmployeeId) {
@@ -3130,6 +4471,9 @@ T e m p l a t e M o
                 </div>
             </div>
             <div class="quick-questions">
+                <div class="quick-question" onclick="sendQuickQuestion('My bus information')">
+                    <i class="fas fa-bus"></i> Bus and Room Info
+                </div>
                 <div class="quick-question" onclick="sendQuickQuestion('When is the trip?')">
                     <i class="fas fa-calendar-alt"></i> Trip Dates
                 </div>
@@ -3154,9 +4498,7 @@ T e m p l a t e M o
                 <div class="quick-question" onclick="sendQuickQuestion('Contact information')">
                     <i class="fas fa-phone"></i> Contact
                 </div>
-                <div class="quick-question" onclick="sendQuickQuestion('My bus information')">
-                    <i class="fas fa-bus"></i> Get Bus Info
-                </div>
+
                 
                 <!---
                 <div class="quick-question" onclick="sendQuickQuestion('My room partner')">
@@ -3175,6 +4517,65 @@ T e m p l a t e M o
 
     <!-- PWA Simple Install Script -->
     <script src="simple-pwa.js"></script>
+
+    <!-- StatCounter Analytics - Simple & Free -->
+    <script type="text/javascript">
+        var sc_project=13169727; 
+        var sc_invisible=1; 
+        var sc_security="7d1f1de2"; 
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js"
+    async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics"
+    href="https://statcounter.com/" target="_blank"><img
+    class="statcounter"
+    src="https://c.statcounter.com/12345678/0/your-security-code/1/"
+    alt="Web Analytics"
+    referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+
+    <!-- Simple Online Visitor Counter -->
+    <script>
+        // Using CountAPI for simple visitor counting
+        async function updateOnlineHitCounter() {
+            try {
+                const response = await fetch('https://api.countapi.xyz/hit/prime-outing-2025/visits');
+                const data = await response.json();
+                
+                if (data && data.value) {
+                    const hitCounterElement = document.getElementById('hitCounter');
+                    if (hitCounterElement) {
+                        hitCounterElement.textContent = data.value.toLocaleString();
+                    }
+                    console.log('Online visitor count updated:', data.value);
+                } else {
+                    updateLocalHitCounter();
+                }
+            } catch (error) {
+                console.warn('Online counter failed, using local fallback:', error);
+                updateLocalHitCounter();
+            }
+        }
+        
+        // Fallback local counter
+        function updateLocalHitCounter() {
+            let hitCount = localStorage.getItem('primeOuting2025Hits') || 0;
+            hitCount = parseInt(hitCount) + 1;
+            localStorage.setItem('primeOuting2025Hits', hitCount);
+            
+            const hitCounterElement = document.getElementById('hitCounter');
+            if (hitCounterElement) {
+                hitCounterElement.textContent = hitCount.toLocaleString();
+            }
+        }
+        
+        // Initialize counter when page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateOnlineHitCounter);
+        } else {
+            updateOnlineHitCounter();
+        }
+    </script>
 
 </body>
 </html>
