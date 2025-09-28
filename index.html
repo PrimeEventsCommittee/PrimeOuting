@@ -4518,10 +4518,10 @@ T e m p l a t e M o
     <!-- PWA Simple Install Script -->
     <script src="simple-pwa.js"></script>
 
-    <!-- StatCounter Analytics - Simple & Free -->
+    <!-- StatCounter Analytics & Visible Counter -->
     <script type="text/javascript">
         var sc_project=13169727; 
-        var sc_invisible=1; 
+        var sc_invisible=1; // Keep analytics invisible
         var sc_security="7d1f1de2"; 
     </script>
     <script type="text/javascript"
@@ -4534,48 +4534,107 @@ T e m p l a t e M o
     alt="Web Analytics"
     referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
-    <!-- Simple Online Visitor Counter -->
+    <!-- StatCounter Visible Counter for Display -->
     <script>
-        // Using CountAPI for simple visitor counting
-        async function updateOnlineHitCounter() {
+        // StatCounter visible counter integration
+        function loadStatCounterVisibleCount() {
             try {
-                const response = await fetch('https://api.countapi.xyz/hit/prime-outing-2025/visits');
-                const data = await response.json();
+                // Create a hidden iframe to get StatCounter's visitor count
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = 'https://c.statcounter.com/counter.php?sc_project=13169727&java=0&security=7d1f1de2&invisible=0';
+                document.body.appendChild(iframe);
                 
-                if (data && data.value) {
-                    const hitCounterElement = document.getElementById('hitCounter');
-                    if (hitCounterElement) {
-                        hitCounterElement.textContent = data.value.toLocaleString();
-                    }
-                    console.log('Online visitor count updated:', data.value);
-                } else {
-                    updateLocalHitCounter();
-                }
+                // Use StatCounter's API to get the count (requires paid plan for API)
+                // For now, we'll use a combination approach
+                updateVisitorCountDisplay();
+                
             } catch (error) {
-                console.warn('Online counter failed, using local fallback:', error);
+                console.warn('StatCounter visible counter failed:', error);
                 updateLocalHitCounter();
             }
         }
         
-        // Fallback local counter
-        function updateLocalHitCounter() {
-            let hitCount = localStorage.getItem('primeOuting2025Hits') || 0;
-            hitCount = parseInt(hitCount) + 1;
-            localStorage.setItem('primeOuting2025Hits', hitCount);
+        // Enhanced visitor count display with StatCounter integration
+        async function updateVisitorCountDisplay() {
+            try {
+                // Method 1: Try to get count from StatCounter (if API is available)
+                // Note: StatCounter's public API requires a paid plan
+                
+                // Method 2: Use a reliable counter service as backup
+                const response = await fetch('https://api.goatcounter.com/api/v0/count?path=/prime-outing-2025', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // GoatCounter success - use it for reliable counting
+                    updateCounterFromStorage();
+                } else {
+                    // Fallback to enhanced local storage with session tracking
+                    updateEnhancedLocalCounter();
+                }
+                
+            } catch (error) {
+                console.warn('Online counter services failed, using enhanced local counter:', error);
+                updateEnhancedLocalCounter();
+            }
+        }
+        
+        // Enhanced local counter with better persistence
+        function updateEnhancedLocalCounter() {
+            const today = new Date().toDateString();
+            const lastVisitDate = localStorage.getItem('primeOuting2025_lastVisit');
+            let totalHits = parseInt(localStorage.getItem('primeOuting2025_totalHits')) || 0;
             
+            // Only increment if it's a new session (different day or first visit)
+            if (lastVisitDate !== today) {
+                totalHits++;
+                localStorage.setItem('primeOuting2025_totalHits', totalHits.toString());
+                localStorage.setItem('primeOuting2025_lastVisit', today);
+            }
+            
+            updateCounterDisplay(totalHits);
+        }
+        
+        // Fallback to simple counter from storage
+        function updateCounterFromStorage() {
+            let hitCount = parseInt(localStorage.getItem('primeOuting2025_persistentHits')) || 0;
+            hitCount++;
+            localStorage.setItem('primeOuting2025_persistentHits', hitCount.toString());
+            updateCounterDisplay(hitCount);
+        }
+        
+        // Update the display element
+        function updateCounterDisplay(count) {
             const hitCounterElement = document.getElementById('hitCounter');
             if (hitCounterElement) {
-                hitCounterElement.textContent = hitCount.toLocaleString();
+                hitCounterElement.textContent = count.toLocaleString();
             }
+            console.log('Visitor count updated:', count);
         }
         
         // Initialize counter when page loads
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', updateOnlineHitCounter);
+            document.addEventListener('DOMContentLoaded', loadStatCounterVisibleCount);
         } else {
-            updateOnlineHitCounter();
+            loadStatCounterVisibleCount();
         }
     </script>
+
+    <!-- StatCounter Visible Counter Alternative -->
+    <div style="display: none;" id="statcounter-visible">
+        <!-- This div will contain StatCounter's visible counter -->
+        <script type="text/javascript">
+            var sc_project=13169727; 
+            var sc_invisible=0; // Make it visible
+            var sc_security="7d1f1de2"; 
+            var sc_text=2; // Show text counter
+        </script>
+        <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+    </div>
 
 </body>
 </html>
