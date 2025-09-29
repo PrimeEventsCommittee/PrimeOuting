@@ -4598,20 +4598,16 @@ T e m p l a t e M o
         }
         
         function displayFallbackCounter() {
-            // Simple display counter (starts from a reasonable number)
-            let displayCount = parseInt(localStorage.getItem('primeOuting2025_displayCount')) || 400;
+            // Get current count from localStorage (start from 400 if not exists)
+            let displayCount = parseInt(localStorage.getItem('primeOuting2025_simpleCounter')) || 400;
             
-            // Increment on each new page load (simple but effective)
-            const lastVisit = localStorage.getItem('primeOuting2025_lastVisit');
-            const now = Date.now();
+            // Always increment on each page load - simple and reliable
+            displayCount++;
             
-            // Increment if more than 5 minutes since last visit
-            if (!lastVisit || (now - parseInt(lastVisit)) > 300000) {
-                displayCount++;
-                localStorage.setItem('primeOuting2025_displayCount', displayCount.toString());
-                localStorage.setItem('primeOuting2025_lastVisit', now.toString());
-            }
+            // Save the new count
+            localStorage.setItem('primeOuting2025_simpleCounter', displayCount.toString());
             
+            // Display the count
             const hitCounterElement = document.getElementById('hitCounter');
             if (hitCounterElement) {
                 hitCounterElement.textContent = displayCount.toLocaleString();
