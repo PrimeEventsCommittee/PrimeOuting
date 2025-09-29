@@ -4221,11 +4221,11 @@ T e m p l a t e M o
                 }
                 // General room partner request without ID
                 else if (isRoomPartnerQuery && !foundEmployeeId) {
-                    response = "🏠 **Need your room partner information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is 12345'\n• 'ID 12345'\n• 'Employee ID 12345'\n• Or just type your ID number: '12345'\n\nI'll look up who's sharing the room with you! 👥";
+                    response = "🏠 **Need your room partner information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is N12345'\n• 'ID I1234'\n• 'Employee ID 1234567'\n• Or just type your ID number: 'N12345'\n\nI'll look up who's sharing the room with you! 👥";
                 }
                 // General bus/room request without ID
                 else if (isBusRoomQuery && !foundEmployeeId) {
-                    response = "🚌 **Need your bus and room information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is 12345'\n• 'ID 12345'\n• 'Employee ID 12345'\n• Or just type your ID number: '12345'\n\nI'll look up your bus number and room assignment! 🏠";
+                    response = "🚌 **Need your bus and room information?**\n\nPlease provide your Employee ID in one of these formats:\n• 'My employee ID is N12345'\n• 'ID I1234'\n• 'Employee ID 1234567'\n• Or just type your ID number: 'N12345'\n\nI'll look up your bus number and room assignment! 🏠";
                 }
                 // Use default response for unknown queries
                 else {
@@ -4599,7 +4599,7 @@ T e m p l a t e M o
         
         function displayFallbackCounter() {
             // Simple display counter (starts from a reasonable number)
-            let displayCount = parseInt(localStorage.getItem('primeOuting2025_displayCount')) || 150;
+            let displayCount = parseInt(localStorage.getItem('primeOuting2025_displayCount')) || 400;
             
             // Increment on each new page load (simple but effective)
             const lastVisit = localStorage.getItem('primeOuting2025_lastVisit');
