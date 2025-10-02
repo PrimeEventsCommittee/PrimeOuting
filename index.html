@@ -2260,1275 +2260,1246 @@ T e m p l a t e M o
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
         // Employee data storage - NOW EMBEDDED DIRECTLY IN HTML
-    let employeeData = [
+ let employeeData = [
+    {
+        "EmployeeID": "I1090",
+        "Name": "Ratin Choudhary",
+        "BusNumber": "U1",
+        "RoomNumber": "1111"
+    },
+    {
+        "EmployeeID": "I1163",
+        "Name": "Sandeep Singla",
+        "BusNumber": "U1",
+        "RoomNumber": "1111"
+    },
+    {
+        "EmployeeID": "I1162",
+        "Name": "Shailesh Verma",
+        "BusNumber": "U1",
+        "RoomNumber": "1111"
+    },
+    {
+        "EmployeeID": "I1043",
+        "Name": "Rohit Gupta",
+        "BusNumber": "U1",
+        "RoomNumber": "2222"
+    },
+    {
+        "EmployeeID": "I1195",
+        "Name": "SUNIL RAYAL",
+        "BusNumber": "U1",
+        "RoomNumber": "2222"
+    },
     {
         "EmployeeID": "N79025",
         "Name": "Aashima Kapoor",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3001"
     },
     {
         "EmployeeID": "N79407",
         "Name": "Manisha",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3001"
     },
     {
-        "EmployeeID": "G1063502",
-        "Name": "Amolika Agrawal",
-        "BusNumber": "3",
+        "EmployeeID": "G1065638",
+        "Name": "Manisha Kumari",
+        "BusNumber": "B2",
         "RoomNumber": "3001"
     },
     {
         "EmployeeID": "109517",
         "Name": "Bharati kukkar Walia",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3002"
     },
     {
         "EmployeeID": "108747",
         "Name": "Shefali Upadhyay",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3002"
     },
     {
         "EmployeeID": "C1044276",
         "Name": "Anjali Yadav",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "3002"
     },
     {
         "EmployeeID": "109632",
         "Name": "Jayshree Satheesan",
-        "BusNumber": "4",
+        "BusNumber": "Self",
         "RoomNumber": "3003"
     },
     {
         "EmployeeID": "112493",
         "Name": "Khyati Rawat",
-        "BusNumber": "4",
+        "BusNumber": "Self",
         "RoomNumber": "3003"
     },
     {
         "EmployeeID": "N50296",
         "Name": "Neha Arora",
-        "BusNumber": "4",
+        "BusNumber": "Self",
         "RoomNumber": "3003"
     },
     {
         "EmployeeID": "G1063503",
         "Name": "KANISHKA SHARMA",
-        "BusNumber": "3",
-        "RoomNumber": "3004"
-    },
-    {
-        "EmployeeID": "I1088",
-        "Name": "Jasveen Kaur",
-        "BusNumber": "4",
+        "BusNumber": "U7",
         "RoomNumber": "3004"
     },
     {
         "EmployeeID": "G1070943",
         "Name": "Reeti Verma",
-        "BusNumber": "3",
+        "BusNumber": "U7",
+        "RoomNumber": "3004"
+    },
+    {
+        "EmployeeID": "N50456",
+        "Name": "Arpana Baranwal",
+        "BusNumber": "U7",
         "RoomNumber": "3004"
     },
     {
         "EmployeeID": "G1068397",
         "Name": "DIVNEET KAUR",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "3005"
     },
     {
         "EmployeeID": "G1066378",
         "Name": "Maryada Goswami",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "3005"
     },
     {
         "EmployeeID": "G1065076",
         "Name": "Srishti Pandey",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "3005"
     },
     {
         "EmployeeID": "N50073",
         "Name": "Archana Munshi",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "3006"
     },
     {
         "EmployeeID": "N50750",
         "Name": "Deep Shikha",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "3006"
-    },
-    {
-        "EmployeeID": "G1065638",
-        "Name": "Manisha Kumari",
-        "BusNumber": "5",
-        "RoomNumber": "3006"
-    },
-    {
-        "EmployeeID": "105739",
-        "Name": "Bhagyashri Wavare",
-        "BusNumber": "2",
-        "RoomNumber": "3007"
     },
     {
         "EmployeeID": "G1044744",
         "Name": "Mili Govil",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "3007"
     },
     {
         "EmployeeID": "G1043763",
         "Name": "Savita Rai",
-        "BusNumber": "2",
+        "BusNumber": "U4",
+        "RoomNumber": "3007"
+    },
+    {
+        "EmployeeID": "105739",
+        "Name": "Bhagyashri Wavare",
+        "BusNumber": "U5",
         "RoomNumber": "3007"
     },
     {
         "EmployeeID": "G1040242",
         "Name": "Ambika Chaurasia",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "3008"
     },
     {
         "EmployeeID": "G1044982",
         "Name": "ANCHAL BHASIN",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "3008"
     },
     {
         "EmployeeID": "G1046563",
         "Name": "Shilpi Jain",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "3008"
     },
     {
-        "EmployeeID": "N50456",
-        "Name": "Arpana Baranwal",
-        "BusNumber": "3",
+        "EmployeeID": "I1088",
+        "Name": "Jasveen Kaur",
+        "BusNumber": "U1",
+        "RoomNumber": "3009"
+    },
+    {
+        "EmployeeID": "G1063502",
+        "Name": "Amolika Agrawal",
+        "BusNumber": "U2",
         "RoomNumber": "3009"
     },
     {
         "EmployeeID": "G1063354",
         "Name": "Priyanka Yadav",
-        "BusNumber": "4",
+        "BusNumber": "U2",
         "RoomNumber": "3009"
-    },
-    {
-        "EmployeeID": "G1070818",
-        "Name": "Chanchal Sanghai",
-        "BusNumber": "2",
-        "RoomNumber": "3010"
     },
     {
         "EmployeeID": "G1046207",
         "Name": "Himani Sirohi",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "3010"
     },
     {
         "EmployeeID": "G1037828",
         "Name": "Monika Dogra",
-        "BusNumber": "2",
+        "BusNumber": "U5",
+        "RoomNumber": "3010"
+    },
+    {
+        "EmployeeID": "G1070818",
+        "Name": "Chanchal Sanghai",
+        "BusNumber": "U6",
         "RoomNumber": "3010"
     },
     {
         "EmployeeID": "I1065",
         "Name": "Shampy Gupta",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3011"
     },
     {
         "EmployeeID": "119121",
         "Name": "Swati Tyagi",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3011"
     },
     {
         "EmployeeID": "116497",
         "Name": "Swati Mittal",
-        "BusNumber": "4",
+        "BusNumber": "U2",
         "RoomNumber": "3011"
+    },
+    {
+        "EmployeeID": "116256",
+        "Name": "Anu Asija",
+        "BusNumber": "B1",
+        "RoomNumber": "3012"
     },
     {
         "EmployeeID": "G1037652",
         "Name": "Haritika Pandit",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3012"
     },
     {
         "EmployeeID": "G1030017",
         "Name": "Shweta Priyadarshani",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3012"
-    },
-    {
-        "EmployeeID": "116256",
-        "Name": "Anu Asija",
-        "BusNumber": "1",
-        "RoomNumber": "3012"
-    },
-    {
-        "EmployeeID": "111409",
-        "Name": "Ayushi Panwar",
-        "BusNumber": "1",
-        "RoomNumber": "3014"
     },
     {
         "EmployeeID": "N79016",
         "Name": "Navneet Kaur Chopra",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3014"
     },
     {
         "EmployeeID": "N50309",
         "Name": "Neha Sachdeva",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "3014"
     },
     {
         "EmployeeID": "G1040462",
         "Name": "Ananya Kaul",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "3015"
     },
     {
         "EmployeeID": "G1070539",
         "Name": "Anshika Pathak",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "3015"
     },
     {
         "EmployeeID": "116340",
         "Name": "Rashi Garg",
-        "BusNumber": "6",
+        "BusNumber": "Self",
         "RoomNumber": "3015"
     },
     {
         "EmployeeID": "I1047",
         "Name": "Parveen Kumar",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "4022"
     },
     {
         "EmployeeID": "N1542",
         "Name": "Bhupesh Dogra",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "4023"
     },
     {
         "EmployeeID": "N1184",
         "Name": "DEVENDRA PANWAR",
-        "BusNumber": "3",
+        "BusNumber": "U7",
         "RoomNumber": "4023"
     },
     {
         "EmployeeID": "N50096",
         "Name": "Sunandan Gakhar",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "4024"
     },
     {
         "EmployeeID": "I1079",
         "Name": "Shwetamber Kaushik",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "4024"
-    },
-    {
-        "EmployeeID": "N79556",
-        "Name": "Sajeesh Satyan",
-        "BusNumber": "2",
-        "RoomNumber": "4025"
     },
     {
         "EmployeeID": "N1534",
         "Name": "Amit Srivastava",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "4025"
     },
     {
-        "EmployeeID": "N79117",
-        "Name": "Himanshu Sachdeva",
-        "BusNumber": "5",
-        "RoomNumber": "4027"
+        "EmployeeID": "N79556",
+        "Name": "Sajeesh Satyan",
+        "BusNumber": "U4",
+        "RoomNumber": "4025"
     },
     {
         "EmployeeID": "I1104",
         "Name": "Raman Dua",
-        "BusNumber": "1",
+        "BusNumber": "B1",
+        "RoomNumber": "4027"
+    },
+    {
+        "EmployeeID": "N79117",
+        "Name": "Himanshu Sachdeva",
+        "BusNumber": "B2",
         "RoomNumber": "4027"
     },
     {
         "EmployeeID": "106020",
         "Name": "Kumar Ajit",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "4029"
     },
     {
         "EmployeeID": "N79062",
         "Name": "Prashant Pandey",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "4029"
     },
     {
         "EmployeeID": "N79226",
         "Name": "Pratyush Saxena",
-        "BusNumber": "4",
+        "BusNumber": "U1",
         "RoomNumber": "4029"
     },
     {
         "EmployeeID": "G1044612",
         "Name": "Hitesh Gupta",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6001"
     },
     {
         "EmployeeID": "G1044606",
         "Name": "paritosh krishan",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6001"
     },
     {
         "EmployeeID": "G1046706",
         "Name": "Pushpesh Kriti",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6001"
     },
     {
         "EmployeeID": "G1045226",
         "Name": "Shreyansh Shandilya",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6002"
     },
     {
         "EmployeeID": "G1071269",
         "Name": "Ujjawal Jain",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6002"
     },
     {
         "EmployeeID": "G1073026",
         "Name": "Sadhil Chhabra",
-        "BusNumber": "4",
+        "BusNumber": "B1",
         "RoomNumber": "6002"
     },
     {
         "EmployeeID": "G1037714",
         "Name": "Aman Chauhan",
-        "BusNumber": "4",
+        "BusNumber": "U2",
         "RoomNumber": "6003"
     },
     {
         "EmployeeID": "G1036117",
         "Name": "Anupam Manori",
-        "BusNumber": "4",
+        "BusNumber": "U2",
         "RoomNumber": "6003"
     },
     {
         "EmployeeID": "G1045134",
         "Name": "Janu Ladkani",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "6003"
-    },
-    {
-        "EmployeeID": "G1052056",
-        "Name": "Varsha Srivastav",
-        "BusNumber": "4",
-        "RoomNumber": "6004"
     },
     {
         "EmployeeID": "G1037650",
         "Name": "Urvashi Tyagi",
-        "BusNumber": "4",
+        "BusNumber": "U2",
+        "RoomNumber": "6004"
+    },
+    {
+        "EmployeeID": "G1052056",
+        "Name": "Varsha Srivastav",
+        "BusNumber": "U2",
         "RoomNumber": "6004"
     },
     {
         "EmployeeID": "G1062184",
         "Name": "Arpita Soni",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "6004"
-    },
-    {
-        "EmployeeID": "G1073176",
-        "Name": "Manya Jain",
-        "BusNumber": "2",
-        "RoomNumber": "6005"
     },
     {
         "EmployeeID": "G1062913",
         "Name": "Neha Jha",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "6005"
     },
     {
         "EmployeeID": "G1063055",
         "Name": "Sonali Ghosh",
-        "BusNumber": "5",
+        "BusNumber": "B2",
+        "RoomNumber": "6005"
+    },
+    {
+        "EmployeeID": "G1073176",
+        "Name": "Manya Jain",
+        "BusNumber": "U2",
         "RoomNumber": "6005"
     },
     {
         "EmployeeID": "N79082",
         "Name": "Abhishek Singh",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6006"
     },
     {
         "EmployeeID": "G1070942",
         "Name": "Anupam Singh Chauhan",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6006"
     },
     {
         "EmployeeID": "109824",
         "Name": "Vijayant Singh",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6006"
     },
     {
         "EmployeeID": "G1071155",
         "Name": "Varun Pradhan",
-        "BusNumber": "1",
-        "RoomNumber": "6007"
-    },
-    {
-        "EmployeeID": "G1043762",
-        "Name": "Abhijeet Upadhyay",
-        "BusNumber": "2",
+        "BusNumber": "B1",
         "RoomNumber": "6007"
     },
     {
         "EmployeeID": "g1051393",
         "Name": "Amit Kumar Tiwari",
-        "BusNumber": "2",
+        "BusNumber": "U5",
+        "RoomNumber": "6007"
+    },
+    {
+        "EmployeeID": "G1043762",
+        "Name": "Abhijeet Upadhyay",
+        "BusNumber": "U5",
         "RoomNumber": "6007"
     },
     {
         "EmployeeID": "g1037449",
         "Name": "ABHISHEK KUMAR",
-        "BusNumber": "4",
+        "BusNumber": "U2",
         "RoomNumber": "6008"
     },
     {
         "EmployeeID": "G1035121",
         "Name": "Dharmesh Kumar Sharma",
-        "BusNumber": "4",
+        "BusNumber": "U2",
         "RoomNumber": "6008"
     },
     {
         "EmployeeID": "G1039601",
         "Name": "Prashant Awasthi",
-        "BusNumber": "4",
+        "BusNumber": "U2",
         "RoomNumber": "6008"
     },
     {
         "EmployeeID": "N50312",
         "Name": "Amit Sharma",
-        "BusNumber": "3",
+        "BusNumber": "U7",
         "RoomNumber": "6009"
     },
     {
         "EmployeeID": "N50134",
         "Name": "Sanjeev Srivastava",
-        "BusNumber": "3",
+        "BusNumber": "U7",
         "RoomNumber": "6009"
     },
     {
         "EmployeeID": "N50113",
         "Name": "Vishal Verma",
-        "BusNumber": "3",
+        "BusNumber": "U7",
         "RoomNumber": "6009"
     },
     {
         "EmployeeID": "N51490",
         "Name": "AJAY KAUSHIK",
-        "BusNumber": "3",
+        "BusNumber": "U7",
         "RoomNumber": "6010"
     },
     {
         "EmployeeID": "G1044295",
         "Name": "Tarang Jain",
-        "BusNumber": "3",
+        "BusNumber": "U7",
+        "RoomNumber": "6010"
+    },
+    {
+        "EmployeeID": "G1031572",
+        "Name": "Ayush Rastogi",
+        "BusNumber": "U7",
         "RoomNumber": "6010"
     },
     {
         "EmployeeID": "G1054061",
         "Name": "Adhish Rai",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6011"
     },
     {
         "EmployeeID": "N79044",
         "Name": "Amit Tyagi",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6011"
     },
     {
         "EmployeeID": "111639",
         "Name": "NITISH GAURAV",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6011"
     },
     {
         "EmployeeID": "G1072206",
         "Name": "Abhinav Sikri",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6015"
     },
     {
         "EmployeeID": "G1070702",
         "Name": "Rahul Kumar",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6015"
     },
     {
         "EmployeeID": "G1072174",
         "Name": "Sushant Bhatt",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6015"
     },
     {
         "EmployeeID": "G1045322",
         "Name": "AKSHAY TYAGI",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6016"
     },
     {
         "EmployeeID": "G1039731",
         "Name": "TAFHEEM CHAUHAN",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6016"
     },
     {
         "EmployeeID": "G1045323",
         "Name": "YASH SRIVASTAVA",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6016"
     },
     {
         "EmployeeID": "120093",
         "Name": "Vikas Jain",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6017"
     },
     {
         "EmployeeID": "I1099",
         "Name": "Vikram Krishan Kulshrestha",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6017"
     },
     {
         "EmployeeID": "N79517",
         "Name": "Ankit Kumar",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6018"
     },
     {
         "EmployeeID": "N79521",
         "Name": "Himanshu",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6018"
     },
     {
         "EmployeeID": "N79408",
         "Name": "Vishal Saxena",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6018"
     },
     {
         "EmployeeID": "119163",
         "Name": "Akshay Kumar",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6019"
     },
     {
         "EmployeeID": "115954",
         "Name": "Arun Rathi",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6019"
     },
     {
         "EmployeeID": "G1034215",
         "Name": "Nikhil Oberoi",
-        "BusNumber": "1",
+        "BusNumber": "B1",
         "RoomNumber": "6019"
     },
     {
         "EmployeeID": "I1061",
         "Name": "Rupesh Singh",
-        "BusNumber": "3",
+        "BusNumber": "U3",
         "RoomNumber": "7001"
     },
     {
         "EmployeeID": "G1030554",
         "Name": "Arjun Gaur",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "7001"
     },
     {
         "EmployeeID": "G1042607",
         "Name": "SUDIP SINGH",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "7001"
-    },
-    {
-        "EmployeeID": "G1037215",
-        "Name": "Vishal singh",
-        "BusNumber": "3",
-        "RoomNumber": "7002"
     },
     {
         "EmployeeID": "G1041214",
         "Name": "Abhishek Kumar Verma",
-        "BusNumber": "6",
+        "BusNumber": "Self",
         "RoomNumber": "7002"
     },
     {
         "EmployeeID": "G1033624",
         "Name": "Abhishek Negi",
-        "BusNumber": "3",
+        "BusNumber": "U6",
+        "RoomNumber": "7002"
+    },
+    {
+        "EmployeeID": "G1037215",
+        "Name": "Vishal singh",
+        "BusNumber": "U6",
         "RoomNumber": "7002"
     },
     {
         "EmployeeID": "G1051579",
         "Name": "Gangavaram Raja Mohan Reddy",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7003"
     },
     {
         "EmployeeID": "G1045181",
         "Name": "Himanshu Koranga",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7003"
     },
     {
         "EmployeeID": "G1034601",
         "Name": "Rohit Singh",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7003"
     },
     {
         "EmployeeID": "108386",
         "Name": "Gyanendra Singh Rathaur",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7004"
     },
     {
         "EmployeeID": "106052",
         "Name": "Bhavneesh",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7004"
     },
     {
         "EmployeeID": "115885",
         "Name": "Deepak Tyagi",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7004"
     },
     {
         "EmployeeID": "106817",
         "Name": "Bharat Gandhi",
-        "BusNumber": "2",
-        "RoomNumber": "7005"
-    },
-    {
-        "EmployeeID": "N50565",
-        "Name": "Narender Sharma",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7005"
     },
     {
         "EmployeeID": "114164",
         "Name": "Shamit Agarwal",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7005"
     },
     {
         "EmployeeID": "105901",
         "Name": "Naveen Kumar",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "7006"
     },
     {
         "EmployeeID": "I1092",
         "Name": "Satikanta Tripathy",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "7006"
     },
     {
         "EmployeeID": "I1011",
         "Name": "Umesh Pratap Singh",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "7006"
     },
     {
         "EmployeeID": "120720",
         "Name": "Ankit Gumber",
-        "BusNumber": "3",
-        "RoomNumber": "7007"
-    },
-    {
-        "EmployeeID": "G1072034",
-        "Name": "Anoop Pandey",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "7007"
     },
     {
         "EmployeeID": "G1063950",
         "Name": "shivam patel",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "7007"
     },
     {
         "EmployeeID": "G1055036",
         "Name": "Ravi Uttreja",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7008"
     },
     {
         "EmployeeID": "G1071914",
         "Name": "Subhajit Kar",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7008"
     },
     {
         "EmployeeID": "G1037715",
         "Name": "Vijay Kumar",
-        "BusNumber": "2",
+        "BusNumber": "U4",
         "RoomNumber": "7008"
     },
     {
         "EmployeeID": "I1070",
         "Name": "Govind Kumar",
-        "BusNumber": "4",
+        "BusNumber": "Self",
         "RoomNumber": "7009"
     },
     {
         "EmployeeID": "I1094",
         "Name": "Rakesh Laler",
-        "BusNumber": "4",
+        "BusNumber": "Self",
         "RoomNumber": "7009"
     },
     {
         "EmployeeID": "N1486",
         "Name": "Vipin Mukesh",
-        "BusNumber": "4",
+        "BusNumber": "Self",
         "RoomNumber": "7009"
+    },
+    {
+        "EmployeeID": "G1063242",
+        "Name": "Akash Pratik",
+        "BusNumber": "B1",
+        "RoomNumber": "7010"
     },
     {
         "EmployeeID": "G1030174",
         "Name": "Harsh Trivedi",
-        "BusNumber": "4",
+        "BusNumber": "U3",
         "RoomNumber": "7010"
     },
     {
         "EmployeeID": "N79013",
         "Name": "Kashif Husain",
-        "BusNumber": "4",
+        "BusNumber": "U3",
         "RoomNumber": "7010"
-    },
-    {
-        "EmployeeID": "G1063242",
-        "Name": "Akash Pratik",
-        "BusNumber": "2",
-        "RoomNumber": "7010"
-    },
-    {
-        "EmployeeID": "G1062189",
-        "Name": "Ayush Kumar",
-        "BusNumber": "3",
-        "RoomNumber": "7011"
     },
     {
         "EmployeeID": "121061",
         "Name": "Sahilpreet Singh",
-        "BusNumber": "3",
+        "BusNumber": "U2",
         "RoomNumber": "7011"
     },
     {
         "EmployeeID": "G1048713",
         "Name": "Kumar Gaurav",
-        "BusNumber": "4",
+        "BusNumber": "U3",
+        "RoomNumber": "7011"
+    },
+    {
+        "EmployeeID": "G1062189",
+        "Name": "Ayush Kumar",
+        "BusNumber": "U6",
         "RoomNumber": "7011"
     },
     {
         "EmployeeID": "G1062641",
         "Name": "Akshay Bhardwaj",
-        "BusNumber": "3",
+        "BusNumber": "U7",
         "RoomNumber": "7012"
     },
     {
         "EmployeeID": "G1061987",
         "Name": "Sarthak Uniyal",
-        "BusNumber": "3",
+        "BusNumber": "U7",
         "RoomNumber": "7012"
     },
     {
         "EmployeeID": "G1062187",
         "Name": "Sunil Kumar Palariya",
-        "BusNumber": "3",
+        "BusNumber": "U7",
         "RoomNumber": "7012"
     },
     {
         "EmployeeID": "G1071337",
         "Name": "VISHESH JASSAL",
-        "BusNumber": "3",
-        "RoomNumber": "7014"
-    },
-    {
-        "EmployeeID": "G1071220",
-        "Name": "Aaryan Sharma",
-        "BusNumber": "2",
+        "BusNumber": "U2",
         "RoomNumber": "7014"
     },
     {
         "EmployeeID": "g1071159",
         "Name": "Hardeep Singh",
-        "BusNumber": "2",
+        "BusNumber": "U4",
+        "RoomNumber": "7014"
+    },
+    {
+        "EmployeeID": "G1071220",
+        "Name": "Aaryan Sharma",
+        "BusNumber": "U5",
         "RoomNumber": "7014"
     },
     {
         "EmployeeID": "G1039236",
         "Name": "PAPPU YADAW",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "7015"
     },
     {
         "EmployeeID": "G1037292",
         "Name": "Rishabh Singh",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "7015"
     },
     {
         "EmployeeID": "G1051888",
         "Name": "SUMIT PAL",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "7015"
-    },
-    {
-        "EmployeeID": "G1064770",
-        "Name": "Pankaj Sharma",
-        "BusNumber": "3",
-        "RoomNumber": "7016"
     },
     {
         "EmployeeID": "G1047993",
         "Name": "Abhinav Rastogi",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "7016"
     },
     {
         "EmployeeID": "G1037717",
         "Name": "Abhishek Verma",
-        "BusNumber": "3",
+        "BusNumber": "U6",
         "RoomNumber": "7016"
     },
     {
-        "EmployeeID": "G1071436",
-        "Name": "Abhishek Baghel",
-        "BusNumber": "2",
-        "RoomNumber": "7017"
+        "EmployeeID": "G1064770",
+        "Name": "Pankaj Sharma",
+        "BusNumber": "U6",
+        "RoomNumber": "7016"
     },
     {
         "EmployeeID": "G1069856",
         "Name": "Prajwal Kumar",
-        "BusNumber": "2",
+        "BusNumber": "U4",
+        "RoomNumber": "7017"
+    },
+    {
+        "EmployeeID": "G1071436",
+        "Name": "Abhishek Baghel",
+        "BusNumber": "U5",
         "RoomNumber": "7017"
     },
     {
         "EmployeeID": "G1071528",
         "Name": "Rahul Kumar",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "7017"
     },
     {
         "EmployeeID": "G1030016",
         "Name": "Ankur Singh",
-        "BusNumber": "6",
+        "BusNumber": "Self",
         "RoomNumber": "7018"
     },
     {
         "EmployeeID": "112492",
         "Name": "Ankush Jagga",
-        "BusNumber": "6",
+        "BusNumber": "Self",
         "RoomNumber": "7018"
     },
     {
         "EmployeeID": "G1043765",
         "Name": "Brijesh Nain",
-        "BusNumber": "6",
+        "BusNumber": "Self",
         "RoomNumber": "7018"
+    },
+    {
+        "EmployeeID": "G1049510",
+        "Name": "Anuj Kumar",
+        "BusNumber": "U3",
+        "RoomNumber": "7019"
     },
     {
         "EmployeeID": "G1031372",
         "Name": "Ashish Mandal",
-        "BusNumber": "3",
+        "BusNumber": "U7",
         "RoomNumber": "7019"
     },
     {
         "EmployeeID": "114078",
         "Name": "Ankit Vedwal",
-        "BusNumber": "3",
-        "RoomNumber": "7019"
-    },
-    {
-        "EmployeeID": "G1049510",
-        "Name": "Anuj Kumar",
-        "BusNumber": "4",
+        "BusNumber": "U7",
         "RoomNumber": "7019"
     },
     {
         "EmployeeID": "G1070893",
         "Name": "Rajat Pandey",
-        "BusNumber": "3",
-        "RoomNumber": "7020"
-    },
-    {
-        "EmployeeID": "G1070251",
-        "Name": "Man Mohan Singh",
-        "BusNumber": "3",
+        "BusNumber": "U3",
         "RoomNumber": "7020"
     },
     {
         "EmployeeID": "G1070827",
         "Name": "Rishabh Saxena",
-        "BusNumber": "3",
+        "BusNumber": "U3",
         "RoomNumber": "7020"
     },
     {
-        "EmployeeID": "I1163",
-        "Name": "Sandeep Singla",
-        "BusNumber": "4",
+        "EmployeeID": "G1070251",
+        "Name": "Man Mohan Singh",
+        "BusNumber": "U7",
+        "RoomNumber": "7020"
+    },
+    {
+        "EmployeeID": "114737",
+        "Name": "Parveen Sheoran",
+        "BusNumber": "U3",
         "RoomNumber": "7021"
     },
     {
-        "EmployeeID": "I1090",
-        "Name": "Ratin Choudhary",
-        "BusNumber": "3",
-        "RoomNumber": "7021"
-    },
-    {
-        "EmployeeID": "I1162",
-        "Name": "Shailesh Verma",
-        "BusNumber": "4",
+        "EmployeeID": "N50681",
+        "Name": "Shailendra Gangwar",
+        "BusNumber": "U3",
         "RoomNumber": "7021"
     },
     {
         "EmployeeID": "N79010",
         "Name": "suneel kumar",
-        "BusNumber": "2",
-        "RoomNumber": "7022"
-    },
-    {
-        "EmployeeID": "G1036429",
-        "Name": "Vishnu Varshney",
-        "BusNumber": "2",
+        "BusNumber": "U2",
         "RoomNumber": "7022"
     },
     {
         "EmployeeID": "G1047197",
         "Name": "Vipin Kumar Mishra",
-        "BusNumber": "3",
+        "BusNumber": "U2",
+        "RoomNumber": "7022"
+    },
+    {
+        "EmployeeID": "G1036429",
+        "Name": "Vishnu Varshney",
+        "BusNumber": "U2",
         "RoomNumber": "7022"
     },
     {
         "EmployeeID": "121243",
         "Name": "Ganesh Singh",
-        "BusNumber": "4",
+        "BusNumber": "U3",
         "RoomNumber": "7023"
     },
     {
         "EmployeeID": "N50717",
         "Name": "Vivek Bhadauriya",
-        "BusNumber": "4",
-        "RoomNumber": "7023"
-    },
-    {
-        "EmployeeID": "114737",
-        "Name": "Parveen Sheoran",
-        "BusNumber": "4",
+        "BusNumber": "U3",
         "RoomNumber": "7023"
     },
     {
         "EmployeeID": "n50085",
         "Name": "Piyush Gupta",
-        "BusNumber": "4",
+        "BusNumber": "U3",
         "RoomNumber": "7024"
     },
     {
         "EmployeeID": "G1034287",
         "Name": "Rohan Jain",
-        "BusNumber": "4",
+        "BusNumber": "U3",
         "RoomNumber": "7024"
     },
     {
         "EmployeeID": "G1062183",
         "Name": "Shubham Kesarwani",
-        "BusNumber": "4",
+        "BusNumber": "U3",
         "RoomNumber": "7024"
     },
     {
-        "EmployeeID": "I1043",
-        "Name": "Rohit Gupta",
-        "BusNumber": "4",
+        "EmployeeID": "N79047",
+        "Name": "Shailav Gupta",
+        "BusNumber": "Self",
         "RoomNumber": "7025"
     },
     {
-        "EmployeeID": "I1010",
-        "Name": "Hariprakash Sharma",
-        "BusNumber": "4",
-        "RoomNumber": "7025"
-    },
-    {
-        "EmployeeID": "I1195",
-        "Name": "SUNIL RAYAL",
-        "BusNumber": "4",
+        "EmployeeID": "N50565",
+        "Name": "Narender Sharma",
+        "BusNumber": "Self",
         "RoomNumber": "7025"
     },
     {
         "EmployeeID": "N50722",
         "Name": "Abhishek Chandan",
-        "BusNumber": "4",
-        "RoomNumber": "7026"
-    },
-    {
-        "EmployeeID": "N50681",
-        "Name": "Shailendra Gangwar",
-        "BusNumber": "4",
+        "BusNumber": "U3",
         "RoomNumber": "7026"
     },
     {
         "EmployeeID": "G1047202",
         "Name": "Meghraj Singh",
-        "BusNumber": "4",
+        "BusNumber": "U3",
         "RoomNumber": "7026"
-    },
-    {
-        "EmployeeID": "G1054133",
-        "Name": "Arpan Srivastava",
-        "BusNumber": "6",
-        "RoomNumber": "7027"
     },
     {
         "EmployeeID": "G1073197",
         "Name": "Samarth Sharma",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7027"
     },
     {
         "EmployeeID": "G1068651",
         "Name": "Ayush Jain",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7027"
     },
     {
-        "EmployeeID": "G1031572",
-        "Name": "Ayush Rastogi",
-        "BusNumber": "3",
-        "RoomNumber": "7028"
-    },
-    {
-        "EmployeeID": "119937",
-        "Name": "Umesh Chandra",
-        "BusNumber": "3",
-        "RoomNumber": "7028"
+        "EmployeeID": "G1054133",
+        "Name": "Arpan Srivastava",
+        "BusNumber": "Self",
+        "RoomNumber": "7027"
     },
     {
         "EmployeeID": "G1073174",
         "Name": "Jatin Patwal",
-        "BusNumber": "5",
-        "RoomNumber": "7028"
+        "BusNumber": "B2",
+        "RoomNumber": "7029"
     },
     {
         "EmployeeID": "G1063951",
         "Name": "Pankaj Kumar",
-        "BusNumber": "5",
-        "RoomNumber": "7029"
-    },
-    {
-        "EmployeeID": "G1032286",
-        "Name": "Sumit M",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7029"
     },
     {
         "EmployeeID": "G1039080",
         "Name": "Sunny Mann",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7029"
     },
     {
         "EmployeeID": "G1043503",
         "Name": "Mohit Agarwal",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7030"
     },
     {
         "EmployeeID": "G1063848",
         "Name": "Priyanshu Choudhary",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7030"
     },
     {
         "EmployeeID": "G1073097",
         "Name": "Sumit Kumar",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7030"
     },
     {
         "EmployeeID": "G1035856",
         "Name": "Abhishek Shukla",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7031"
     },
     {
         "EmployeeID": "N79107",
         "Name": "MAHENDRA GANDHI",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7031"
     },
     {
         "EmployeeID": "G1047942",
         "Name": "Raman Kumar Jain",
-        "BusNumber": "6",
+        "BusNumber": "Self",
         "RoomNumber": "7031"
+    },
+    {
+        "EmployeeID": "G1062788",
+        "Name": "Naman Gupta",
+        "BusNumber": "U5",
+        "RoomNumber": "7032"
     },
     {
         "EmployeeID": "G1036606",
         "Name": "Piyush Singh",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "7032"
     },
     {
         "EmployeeID": "G1036115",
         "Name": "Sagar Raheja",
-        "BusNumber": "2",
-        "RoomNumber": "7032"
-    },
-    {
-        "EmployeeID": "G1062788",
-        "Name": "Naman Gupta",
-        "BusNumber": "2",
+        "BusNumber": "U5",
         "RoomNumber": "7032"
     },
     {
         "EmployeeID": "G1064232",
         "Name": "Adarsh Chauhan",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7033"
     },
     {
         "EmployeeID": "G1065689",
         "Name": "Gagandeep Singh Grewal",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7033"
     },
     {
         "EmployeeID": "G1064543",
         "Name": "JAGADISH GHATE",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7033"
     },
     {
         "EmployeeID": "G1066310",
         "Name": "Akash Dixit",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7034"
     },
     {
         "EmployeeID": "G1065330",
         "Name": "Chinmay Parab",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7034"
     },
     {
         "EmployeeID": "G1065690",
         "Name": "Divyanshu Shukla",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7034"
     },
     {
         "EmployeeID": "G1070540",
         "Name": "Divyaranjan Swain",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7035"
     },
     {
         "EmployeeID": "G1071335",
         "Name": "Harsh Jain",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7035"
     },
     {
         "EmployeeID": "G1064129",
         "Name": "Rajat Saraswat",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7035"
     },
     {
         "EmployeeID": "G1066181",
         "Name": "Digvijay Rajput",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7036"
     },
     {
         "EmployeeID": "G1064542",
         "Name": "Dinesh Haish Bhatlavande",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7036"
     },
     {
         "EmployeeID": "G1066147",
         "Name": "Hemansh Bhagtani",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7036"
     },
     {
         "EmployeeID": "N79292",
         "Name": "PUNEET SHARMA",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7037"
     },
     {
         "EmployeeID": "I1117",
         "Name": "Amit Sinha",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7037"
     },
     {
         "EmployeeID": "G1065434",
         "Name": "Puneet Jamnal",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7037"
     },
     {
         "EmployeeID": "G1068176",
         "Name": "Kamesh Saraswat",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7038"
     },
     {
         "EmployeeID": "G1065637",
         "Name": "parth neeraj modi",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7038"
     },
     {
         "EmployeeID": "G1066120",
         "Name": "Shubham Shrivastava",
-        "BusNumber": "5",
+        "BusNumber": "B2",
         "RoomNumber": "7038"
-    },
-    {
-        "EmployeeID": "N79047",
-        "Name": "Shailav Gupta",
-        "BusNumber": "6",
-        "RoomNumber": "TBD"
     }
 ];
-        
+ 
+// Copy JSON here 
         let isOpen = false;
         let hasNewMessage = false;
 
